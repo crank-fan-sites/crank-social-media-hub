@@ -1,0 +1,8 @@
+.next
+node_modules
+.vscode
+package.json
+package-lock.json
+dist
+# added bc one liner adds a semicolon
+/components/theme-provider.tsx
