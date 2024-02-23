@@ -16,7 +16,6 @@ const TikTokProfileEmbed = () => {
       };
     }
   }, []); // Empty dependency array ensures this effect runs only once after the initial render
-
   return (
     <blockquote
       ref={tikTokRef}
