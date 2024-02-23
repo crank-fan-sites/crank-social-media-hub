@@ -23,6 +23,8 @@ import useAxios from "@/axios";
 import YT from "@/components/front_page/youtube";
 
 import Row1 from "@/components/front_page/row-1";
+import Row2 from "@/components/front_page/row-2";
+import Row3 from "@/components/front_page/row-3";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -119,8 +121,8 @@ const Home: NextPage = () => {
         </div>
 
         <Row1 />
-        <Row1 />
-        <Row1 />
+        <Row2 />
+        <Row3 />
       </div>
     </MainLayout>
   );
