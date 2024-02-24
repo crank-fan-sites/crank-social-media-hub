@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { TwitchPlayer } from "react-twitch-embed";
+import { TwitchPlayer, TwitchChat, TwitchEmbed } from "react-twitch-embed";
 
 const Twitch = (props: any) => {
   const embed = useRef(); // We use a ref instead of state to avoid rerenders.
@@ -15,17 +15,18 @@ const Twitch = (props: any) => {
 
   return (
     <div className="">
-      <TwitchPlayer
+      <TwitchEmbed
         channel="unelectableairwaves"
         // video={"2063303209"}
         autoplay
         muted
         hideControls={false}
-        onReady={handleReady}
+        // onReady={handleReady}
         height={props.height}
         width={props.width}
-        onOffline={handleOffline}
+        onVideoReady={handleOffline}
         className="lolcopter"
+        withChat={true}
       />
     </div>
   );

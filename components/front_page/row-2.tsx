@@ -10,6 +10,8 @@ import {
   Paragraph,
 } from "@/components/typography";
 
+import TwitterProfile from "@/components/front_page/twitter-profile";
+
 const Row1: NextPage = () => {
   const router = useRouter();
 
@@ -19,14 +21,7 @@ const Row1: NextPage = () => {
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
           Buddyhead the Zine
         </HeadingH3>
-        <Paragraph className="group-hover:text-background group-hover:font-bold"></Paragraph>
-        <Button
-          className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
-          variant="link"
-          onClick={() => router.push("/blog")}
-        >
-          Contribute to the cause
-        </Button>
+        <TwitterProfile />
       </div>
 
       <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
