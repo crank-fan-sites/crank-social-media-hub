@@ -12,11 +12,13 @@ import {
 
 import TwitterProfile from "@/components/front_page/twitter-profile";
 
+import SoundCloudPlayer from "./soundcloud";
+
 const Row1: NextPage = () => {
   const router = useRouter();
 
   return (
-    <div className="grid bg-primary grid-cols-1 md:grid-cols-3 border-t border-stone-400 dark:border-stone-600">
+    <div className="grid bg-primary grid-cols-1 lg:grid-cols-3 border-t border-stone-400 dark:border-stone-600">
       <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
           Buddyhead the Zine
@@ -26,12 +28,13 @@ const Row1: NextPage = () => {
 
       <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Buddyhead Records
+          Crank Records
         </HeadingH3>
         <Paragraph className="group-hover:text-background group-hover:font-bold">
           Yes we&lsquo;re still releasing records. Check out our latest releases
           from Pyramyds, Rathbone, and more.
         </Paragraph>
+        <SoundCloudPlayer trackUrl="https://soundcloud.com/dj-tom-hanks/werepyres-are-coming-down-the-mountain-pt-2" />
         <Button
           className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
           variant="link"

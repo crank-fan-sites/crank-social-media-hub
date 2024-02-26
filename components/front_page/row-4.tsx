@@ -14,26 +14,29 @@ import TwitterProfile from "@/components/front_page/twitter-profile";
 import TwitterLikes from "@/components/front_page/twitter-likes";
 import TwitterButtons from "@/components/front_page/twitter-buttons";
 
-const Row1: NextPage = () => {
+const Row4: NextPage = () => {
   const router = useRouter();
 
   return (
-    <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
+    <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
       <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
           Twitter Profile
         </HeadingH3>
-        <TwitterProfile />
-      </div>
-
-      <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
-        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Twitter Buttons
-        </HeadingH3>
-        <TwitterButtons />
+        <div className="reddit-container">
+          <iframe
+            id="reddit-embed"
+            src="https://www.rxddit.com/r/unelectableairwaves/"
+            sandbox="allow-scripts allow-same-origin allow-popups"
+            // style="border: none;"
+            height="1080"
+            width="1280"
+            scrolling="no"
+          ></iframe>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Row1;
+export default Row4;
