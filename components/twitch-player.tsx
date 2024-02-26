@@ -24,7 +24,7 @@ const Twitch = (props: any) => {
         // onReady={handleReady}
         height={props.height}
         width={props.width}
-        onVideoReady={handleOffline}
+        // onVideoReady={handleOffline}
         className="lolcopter"
         withChat={true}
       />

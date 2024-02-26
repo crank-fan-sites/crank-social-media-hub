@@ -73,4 +73,78 @@
   .hide {
     visibility: hidden;
   }
+
+  /* browser width of 1024px to 1272px give or take have the YT component overlap over into the next div. It's a Youtube iframe embed. How to have the grid go into single column mode at 1024px? */
+  @media (min-width: 1024px) and (max-width: 1272px) {
+    .youtube-embed-overlap {
+      /* position: absolute; */
+      right: -20%; /* Adjust this value based on the desired overlap */
+      bottom: -20%; /* Adjust this value to control vertical overlap */
+      /* width: 120%; Optional: Increase width if needed */
+    }
+  }
+}
+
+.youtube-video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.youtube-video-container::after {
+  display: block;
+  content: "";
+  padding-top: 60.25%;
+  /* padding-bottom: 60.25%; */
+}
+
+.youtube-video-container iframe {
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
+  width: 95%;
+  height: 95%;
+}
+
+.twitch-video-container {
+  position: relative;
+  overflow: hidden;
+  width: 95%;
+}
+
+.twitch-video-container::after {
+  /* display: block; */
+  /* content: ""; */
+  /* padding-top: 6.25%; */
+  /* padding-bottom: 6.25%; */
+}
+
+.twitch-video-container iframe {
+  position: absolute;
+  /* top: 0; */
+  /* left: 0; */
+  width: 99%;
+  height: 99%;
+}
+
+.twitch-player-container {
+  position: relative;
+  overflow: hidden;
+  width: 99%;
+}
+
+.twitch-player-container::after {
+  /* display: block;
+  content: "";
+  padding-top: 6.25%;
+  padding-bottom: 6.25%; */
+}
+
+.twitch-player-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 99%;
+  height: 99%;
+}
 }
