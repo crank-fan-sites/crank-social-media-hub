@@ -1,16 +1,16 @@
-import Link from 'next/link';
-import { siteConfig } from '@/config/site';
-import { Icons } from './icons';
-import { MainNav } from './main-nav';
+import Link from "next/link";
+import { siteConfig } from "@/config/site";
+import { Icons } from "./icons";
+import { MainNav } from "./main-nav";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useTheme } from 'next-themes';
-import { useRouter } from 'next/router';
+} from "@/components/ui/dropdown-menu";
+import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
 
 export function SiteHeader() {
   const { theme } = useTheme();
@@ -20,9 +20,9 @@ export function SiteHeader() {
       <div className="flex p-4 md:px-6 items-center space-x-0 justify-between">
         <span
           className="text-sm uppercase cursor-pointer"
-          onClick={() => router.push('/')}
+          onClick={() => router.push("/")}
         >
-          Buddyhead <span className="text-lg">☭</span>
+          Crank Communism <span className="text-lg">☭</span>
         </span>
         <MainNav items={siteConfig.mainNav} />
         <span className="flex md:hidden">
@@ -34,16 +34,16 @@ export function SiteHeader() {
               </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-stone-50 dark:bg-stone-900 rounded-none border border-stone-400 dark:border-stone-600">
-              <DropdownMenuItem onClick={() => router.push('/')}>
+              <DropdownMenuItem onClick={() => router.push("/")}>
                 Home
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push('/blog')}>
+              <DropdownMenuItem onClick={() => router.push("/blog")}>
                 Zine
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push('/label')}>
+              <DropdownMenuItem onClick={() => router.push("/label")}>
                 Label
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push('/contact')}>
+              <DropdownMenuItem onClick={() => router.push("/contact")}>
                 Contact
               </DropdownMenuItem>
               <DropdownMenuItem>
@@ -53,7 +53,7 @@ export function SiteHeader() {
                   rel="noreferrer"
                   className="flex flex-row align-middle"
                 >
-                  Merch{' '}
+                  Merch{" "}
                   <Icons.arrowUpRight strokeWidth="1.5" className="h-4 w-4" />
                 </Link>
               </DropdownMenuItem>
