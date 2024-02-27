@@ -3,36 +3,40 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import { promises as fs } from "fs";
 
-import RedditPost from "./reddit-post";
-
 const Reddit = (props: any) => {
-  const [extractedPosts, setExtractedPosts] = useState<any[]>([]);
-
-  useEffect(() => {
-    const subreddit = "UnelectableAirwaves"; // Replace with your desired subreddit
-    fetchRedditData(subreddit)
-      .then((data) => {
-        const posts = extractPostDetails(data);
-        setExtractedPosts(posts);
-      })
-      .catch((error) => console.error(error));
-  }, []); // Empty dependency array means this effect runs once on mount
+  const {
+    title,
+    selftext,
+    author,
+    crosspost,
+    ups,
+    created,
+    permalink,
+    url,
+    link_flair_type,
+  } = props;
 
   return (
-    <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-      {extractedPosts.map((post, index) => (
-        <RedditPost
-          title={post.title}
-          selftext={post.selftext}
-          author={post.author}
-          crosspost={post.crosspost}
-          ups={post.ups}
-          created={post.created}
-          permalink={post.permalink}
-          url={post.url}
-          link_flair_type={post.link_flair_path}
-        />
-      ))}
+    <div>
+      <h2>{title}</h2>
+      <p>{selftext}</p>
+      <p>Author: {author}</p>
+      <p>
+        created timestamp: {created} (will turn into a user friendly DateTime)
+      </p>
+      <p>upvotes: {ups}</p>
+      <p>reddit link: {permalink}</p>
+      <p>url: {url}</p>
+      <p>link_flair_type: {link_flair_type}</p>
+      {crosspost &&
+        crosspost.map((cross, crossIndex) => (
+          <div key={crossIndex}>
+            <h3>Crosspost: {cross.title}</h3>
+            {/* <p>{cross.selftext}</p> */}
+            <p>Author: {cross.author}</p>
+          </div>
+        ))}
+      <hr />
     </div>
   );
 };
@@ -78,11 +82,6 @@ function extractPostDetails(posts: any): any[] {
       title: post.title,
       selftext: post.selftext,
       author: post.author,
-      ups: post.ups,
-      created: post.created,
-      permalink: post.permalink,
-      url: post.url,
-      link_flair_type: post.link_flair_type,
       crosspost: null,
     };
 
@@ -93,11 +92,6 @@ function extractPostDetails(posts: any): any[] {
         title: crosspost.title,
         selftext: crosspost.selftext,
         author: crosspost.author,
-        ups: crosspost.ups,
-        created: crosspost.created,
-        permalink: crosspost.permalink,
-        url: post.url,
-        link_flair_type: crosspost.link_flair_type,
       }));
     }
 

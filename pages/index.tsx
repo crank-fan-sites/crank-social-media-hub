@@ -9,8 +9,11 @@ import { TwitchPlayer, TwitchChat } from "react-twitch-embed";
 
 import { MainLayout } from "@/layouts/layout";
 import { Button } from "@/components/ui/button";
+
 import TwitchEmbed from "@/components/twitch-player";
 import TwitchChatBox from "@/components/twitch-chat";
+import Reddit from "@/components/front_page/reddit";
+
 import Link from "next/link";
 import {
   HeadingH1,
@@ -142,6 +145,19 @@ const Home: NextPage = () => {
           <Row3 />
           <Row2 />
           <Row4 />
+          <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
+            <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+                Recent Reddit Posts
+              </HeadingH3>
+              <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
+                <Reddit />
+                <br />
+                <hr />
+                <br />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </MainLayout>

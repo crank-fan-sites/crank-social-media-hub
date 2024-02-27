@@ -147,4 +147,25 @@
   width: 99%;
   height: 99%;
 }
+
+/* reddit */
+.reddit-container {
+  position: relative;
+  /* overflow: hidden; */
+  width: 95%;
+}
+
+.reddit-container::after {
+  display: block;
+  content: "";
+  padding-top: 99.25%;
+  padding-bottom: 99.25%;
+}
+
+.reddit-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 99%;
+  height: 90%;
 }
