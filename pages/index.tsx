@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import TwitchEmbed from "@/components/twitch-player";
 import TwitchChatBox from "@/components/twitch-chat";
 import Reddit from "@/components/front_page/reddit";
+import Patreon from "@/components/front_page/patreon";
 
 import Link from "next/link";
 import {
