@@ -145,6 +145,42 @@ const Home: NextPage = () => {
           <Row3 />
           <Row2 />
           <Row4 />
+
+          <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
+            <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+                Latest Patreon Post
+              </HeadingH3>
+              {/* <div className="youtube-embed-overlap"> */}
+              <div className="patreon-container">
+                <Patreon postUrl="https://www.patreon.com/posts/aaron-good-uncut-96137431?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_fan&utm_content=join_link" />
+              </div>
+              <Button
+                className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
+                variant="link"
+                onClick={() => router.push("/contact")}
+              >
+                Go to YouTube
+              </Button>
+            </div>
+
+            <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
+              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+                Highlighted YouTube Playlist
+              </HeadingH3>
+              <div className="youtube-video-container">
+                <YoutubePlaylist />
+              </div>
+              <Button
+                className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
+                variant="link"
+                onClick={() => router.push("/contact")}
+              >
+                Go to YouTube
+              </Button>
+            </div>
+          </div>
+
           <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
             <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
@@ -152,9 +188,6 @@ const Home: NextPage = () => {
               </HeadingH3>
               <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
                 <Reddit />
-                <br />
-                <hr />
-                <br />
               </div>
             </div>
           </div>
