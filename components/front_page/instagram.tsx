@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Instagram = () => {
-  // Replace the `src` value with the URL provided by LightWidget after generating your widget
-  const src = "https://lightwidget.com/widgets/your-widget-id.html";
+const InstagramPosts = () => {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://cdn.lightwidget.com/widgets/lightwidget.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <iframe
-      src={src}
+      src="//lightwidget.com/widgets/06b958f4d2bd526e891de4723a5bea15.html"
       scrolling="no"
-      allowtransparency="true"
-      className="lightwidget-widget"
-      style={{
-        width: "100%",
-        border: 0,
-        overflow: "hidden",
-      }}
-    ></iframe>
+      allowTransparency="true"
+      className="lightwidget-widget w-full border-0 overflow-hidden"
+    />
   );
 };
 
-export default Instagram;
+export default InstagramPosts;
