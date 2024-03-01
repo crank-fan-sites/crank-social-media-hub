@@ -11,6 +11,8 @@ import {
   TwitterOnAirButton,
 } from "react-twitter-embed";
 
+import { Timeline } from "react-twitter-widgets";
+
 import type { NextPage } from "next";
 
 import { useEffect, useRef } from "react";
@@ -25,14 +27,13 @@ import {
 } from "@/components/typography";
 
 const TwitterProfle: NextPage = () => {
-  const router = useRouter();
-  const yt = useRef(null); // Initialize the ref
-
   return (
-    <TwitterTimelineEmbed
-      sourceType="profile"
-      screenName="djtomhanks"
-      options={{ height: 800 }}
+    <Timeline
+      dataSource={{
+        sourceType: "profile",
+        screenName: "djtomhanks",
+      }}
+      options={{ theme: "dark", height: 800 }}
     />
   );
 };

@@ -23,17 +23,7 @@ const Row4: NextPage = () => {
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
           Twitter Profile
         </HeadingH3>
-        <div className="reddit-container">
-          <iframe
-            id="reddit-embed"
-            src="https://www.rxddit.com/r/unelectableairwaves/"
-            sandbox="allow-scripts allow-same-origin allow-popups"
-            // style="border: none;"
-            height="1080"
-            width="1280"
-            scrolling="no"
-          ></iframe>
-        </div>
+        <div className="reddit-container"></div>
       </div>
     </div>
   );

@@ -148,24 +148,24 @@
   height: 99%;
 }
 
-/* reddit */
-.reddit-container {
+/* Patreon */
+.patreon-container {
   position: relative;
-  /* overflow: hidden; */
-  width: 95%;
+  overflow: hidden;
+  width: 100%;
 }
 
-.reddit-container::after {
+.patreon-container::after {
   display: block;
   content: "";
-  padding-top: 99.25%;
-  padding-bottom: 99.25%;
+  padding-top: 60.25%;
+  /* padding-bottom: 60.25%; */
 }
 
-.reddit-container iframe {
+.patreon-container iframe {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 99%;
-  height: 90%;
+  /* top: 0; */
+  /* left: 0; */
+  width: 95%;
+  height: 95%;
 }

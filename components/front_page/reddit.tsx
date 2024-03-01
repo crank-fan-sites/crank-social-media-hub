@@ -22,6 +22,7 @@ const Reddit = (props: any) => {
     <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
       {extractedPosts.map((post, index) => (
         <RedditPost
+          key={index}
           title={post.title}
           selftext={post.selftext}
           author={post.author}

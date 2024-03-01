@@ -27,18 +27,19 @@ const PatreonLatestPost = () => {
 
   return (
     <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-      {posts.map((post, index) => (
-        <PatreonPost
-          title={post.attributes.title}
-          content={post.attributes.content}
-          embed_data={post.attributes.embed_data}
-          embed_url={post.attributes.embed_url}
-          published_at={post.attributes.published_at}
-          url={post.attributes.url}
-          is_paid={post.attributes.is_paid}
-          is_public={post.attributes.is_public}
-        />
-      ))}
+      {posts &&
+        posts.map((post, index) => (
+          <PatreonPost
+            title={post.attributes.title}
+            content={post.attributes.content}
+            embed_data={post.attributes.embed_data}
+            embed_url={post.attributes.embed_url}
+            published_at={post.attributes.published_at}
+            url={post.attributes.url}
+            is_paid={post.attributes.is_paid}
+            is_public={post.attributes.is_public}
+          />
+        ))}
     </div>
   );
 };

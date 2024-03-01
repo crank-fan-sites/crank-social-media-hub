@@ -14,6 +14,7 @@ import TwitchEmbed from "@/components/twitch-player";
 import TwitchChatBox from "@/components/twitch-chat";
 import Reddit from "@/components/front_page/reddit";
 import Patreon from "@/components/front_page/patreon";
+import InstagramPosts from "@/components/front_page/instagram";
 
 import Link from "next/link";
 import {
@@ -57,12 +58,10 @@ const Home: NextPage = () => {
             quality={10}
           />
         </div>
-
         <div className="grid bg-primary place-items-center py-12 grid-cols-1 border-t border-stone-400 dark:border-stone-600">
           <small>haha oh hell yeah</small>
           <Icons.skull className="h-6 w-6 m-2 opacity-80" strokeWidth="1.5" />
         </div>
-
         <div className="grid bg-primary place-items-center pb-12 grid-cols-1 2xl:grid-cols-2">
           <div className="p-1 w-full h-full grid place-items-center">
             <div className="twitch-video-container">
@@ -70,7 +69,7 @@ const Home: NextPage = () => {
             </div>
           </div>
         </div>
-
+        {/* content */}
         <div className="max-w-7xl mx-auto">
           <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
             <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
@@ -106,7 +105,7 @@ const Home: NextPage = () => {
               kind of my default response.
             </div>
           </div>
-
+          {/* content after top header parts */}
           <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
             <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
@@ -141,47 +140,22 @@ const Home: NextPage = () => {
               </Button>
             </div>
           </div>
-
+          {/* end one row */}
           <Row1 />
           <Row3 />
           <Row2 />
           <Row4 />
-
-          <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
+          <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
             <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
                 Latest Patreon Post
               </HeadingH3>
-              {/* <div className="youtube-embed-overlap"> */}
               <div className="patreon-container">
-                <Patreon postUrl="https://www.patreon.com/posts/aaron-good-uncut-96137431?utm_medium=clipboard_copy&utm_source=copyLink&utm_campaign=postshare_fan&utm_content=join_link" />
+                <Patreon />
               </div>
-              <Button
-                className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
-                variant="link"
-                onClick={() => router.push("/contact")}
-              >
-                Go to YouTube
-              </Button>
-            </div>
-
-            <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
-              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-                Highlighted YouTube Playlist
-              </HeadingH3>
-              <div className="youtube-video-container">
-                <YoutubePlaylist />
-              </div>
-              <Button
-                className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
-                variant="link"
-                onClick={() => router.push("/contact")}
-              >
-                Go to YouTube
-              </Button>
             </div>
           </div>
-
+          {/* end one row */}
           <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
             <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
@@ -192,8 +166,22 @@ const Home: NextPage = () => {
               </div>
             </div>
           </div>
+          {/* end one row */}
+          <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
+            <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+                Recent Instagram Posts
+              </HeadingH3>
+              <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
+                <InstagramPosts lightwidgetHtml="1a2d6c9700de5c6eb43fb26d39765627" />
+              </div>
+            </div>
+          </div>
+          {/* end one row */}
         </div>
+        {/* end .max-w-7xl.mx-auto */}
       </div>
+      {/* overall one */}
     </MainLayout>
   );
 };

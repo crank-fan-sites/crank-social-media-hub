@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 
-const InstagramPosts = () => {
+// What lightwidget.js gave <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/4009c8ca96185db498257afcb4269552.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+const InstagramPosts = ({ lightwidgetHtml }) => {
+  const source = "//lightwidget.com/widgets/" + lightwidgetHtml + ".html";
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://cdn.lightwidget.com/widgets/lightwidget.js";
@@ -14,10 +16,9 @@ const InstagramPosts = () => {
 
   return (
     <iframe
-      src="//lightwidget.com/widgets/06b958f4d2bd526e891de4723a5bea15.html"
+      src={source}
       scrolling="no"
-      allowTransparency="true"
-      className="lightwidget-widget w-full border-0 overflow-hidden"
+      className="lightwidget-widget w-full border-0 overflow-hidden bg-indigo-500"
     />
   );
 };
