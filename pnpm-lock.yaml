@@ -44,6 +44,9 @@ dependencies:
   dlv:
     specifier: ^1.1.3
     version: 1.1.3
+  dompurify:
+    specifier: ^3.0.9
+    version: 3.0.9
   lucide-react:
     specifier: ^0.263.0
     version: 0.263.1(react@18.2.0)
@@ -1815,6 +1818,10 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dompurify@3.0.9:
+    resolution: {integrity: sha512-uyb4NDIvQ3hRn6NiC+SIFaP4mJ/MdXlvtunaqK9Bn6dD3RuB/1S/gasEjDHD8eiaqdSael2vBv+hOs7Y+jhYOQ==}
+    dev: false
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}

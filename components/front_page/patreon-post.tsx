@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import DOMPurify from "dompurify";
 import axios from "axios";
 // import { promises as fs } from "fs";
 
@@ -14,12 +15,13 @@ const PatreonPost = (props: any) => {
     embed_data,
     embed_url,
   } = props;
+  const sanitizedHTML = DOMPurify.sanitize(content);
 
   return (
     <div>
       <h2>{title}</h2>
-      <p>{content}</p>
-      <p>Author: djtomhanks aka daddytankee</p>
+      <p dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></p>
+      <p>Author: djtomhanks/daddytankee</p>
       <p>
         Created timestamp: {published_at} (will turn into a user friendly
         DateTime)
