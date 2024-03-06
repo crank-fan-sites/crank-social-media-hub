@@ -28,5 +28,6 @@
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true
   },
-  "github.copilot.inlineSuggest.enable": true
+  "github.copilot.inlineSuggest.enable": true,
+  "discord.enabled": true
 }

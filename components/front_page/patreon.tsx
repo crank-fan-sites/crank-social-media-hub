@@ -3,32 +3,33 @@ import axios from "axios";
 
 import PatreonPost from "./patreon-post";
 
-const PatreonLatestPost = () => {
+const PatreonLatestPosts = () => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    const accessToken = "9iou4_M2_FhYbAji7AiYQbG8vQhbdIMBICMEe_z5ZRs"; // Replace 'access_token_variable' with your actual access token
-    const campaignId = "10130297"; // Example campaign ID
-    const url = `https://www.patreon.com/api/oauth2/v2/campaigns/${campaignId}/posts?fields[post]=title,content,is_paid,is_public,published_at,url,embed_data,embed_url,app_id,app_status`;
+    // const url = `http://localhost:8000/functions/patreon/crank`;
+    const url = `https://ats-exp-crank.atextbooksituation.com/functions/patreon/crank`;
 
     axios
-      .get(url, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
+      .get(url)
       .then((response) => {
+        console.log("wtf1");
+        console.log(response.data.data.length);
+        // const postsArray = Object.values(response.data);
         setPosts(response.data);
       })
       .catch((error) => {
+        console.log("wtf2");
         console.error("Error fetching Patreon posts:", error);
       });
+    console.log("wtf99");
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
       {posts &&
-        posts.map((post, index) => (
+        // <></>
+        posts.data.map((post, index) => (
           <PatreonPost
             title={post.attributes.title}
             content={post.attributes.content}
@@ -44,4 +45,4 @@ const PatreonLatestPost = () => {
   );
 };
 
-export default PatreonLatestPost;
+export default PatreonLatestPosts;

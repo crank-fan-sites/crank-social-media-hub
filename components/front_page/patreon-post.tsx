@@ -27,9 +27,11 @@ const PatreonPost = (props: any) => {
       <p>Likes: API doesn't show this but we could scrape it</p>
       <p>Post link: {url}</p>
       {embed_url && (
-        <div className="patreon-container">
-          {embed_data.data.html ? (
-            <iframe src={embed_url} className="patreon-embed"></iframe>
+        <div className="patreon-embedding">
+          {embed_data.html ? (
+            <div className="patreon-container">
+              <iframe src={embed_url} className="patreon-embed"></iframe>
+            </div>
           ) : (
             <a href={embed_url}>{embed_data.subject}</a>
           )}
