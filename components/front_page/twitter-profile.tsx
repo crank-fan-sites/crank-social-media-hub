@@ -1,22 +1,8 @@
-import {
-  TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterFollowButton,
-  TwitterHashtagButton,
-  TwitterMentionButton,
-  TwitterTweetEmbed,
-  TwitterMomentShare,
-  TwitterDMButton,
-  TwitterVideoEmbed,
-  TwitterOnAirButton,
-} from "react-twitter-embed";
-
-import { Timeline } from "react-twitter-widgets";
-
 import type { NextPage } from "next";
 
 import { useEffect, useRef } from "react";
-import { useRouter } from "next/router";
+
+import { Timeline } from "react-twitter-widgets";
 
 import { Button } from "@/components/ui/button";
 import {

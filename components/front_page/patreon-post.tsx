@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 
 import DOMPurify from "dompurify";
 import axios from "axios";
 // import { promises as fs } from "fs";
 
-const PatreonPost = (props: any) => {
+import Link from "next/link";
+
+const PatreonPost: NextPage = (props: any) => {
   const {
     title,
     content,
@@ -16,26 +19,37 @@ const PatreonPost = (props: any) => {
     embed_url,
   } = props;
   const sanitizedHTML = DOMPurify.sanitize(content);
+  const date = new Date(published_at);
+  const readableDate = `${date.toLocaleDateString()}, ${date.toLocaleTimeString()}`;
+  // const patreonHandle = "unelectableairwaves";
+  const patreonHandle = "chase_saddy";
 
   return (
     <div>
       <h2>{title}</h2>
       <p dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></p>
       <p>Author: djtomhanks/daddytankee</p>
+      <p>Created: {readableDate}</p>
       <p>
-        Created timestamp: {published_at} (will turn into a user friendly
-        DateTime)
+        <Link
+          href={`https://patreon.com/${patreonHandle}${url}`}
+          target="_blank"
+        >
+          Post Link
+        </Link>
       </p>
-      <p>Likes: API doesn't show this but we could scrape it</p>
-      <p>Post link: {url}</p>
+      <br />
       {embed_url && (
         <div className="patreon-embedding">
-          {embed_data.html ? (
-            <div className="patreon-container">
-              <iframe src={embed_url} className="patreon-embed"></iframe>
-            </div>
-          ) : (
-            <a href={embed_url}>{embed_data.subject}</a>
+          {embed_data.html && (
+            <>
+              <h4>
+                <i>Embedded Content</i>
+              </h4>
+              <Link href={embed_url} target="_blank">
+                {embed_data.subject}
+              </Link>
+            </>
           )}
         </div>
       )}

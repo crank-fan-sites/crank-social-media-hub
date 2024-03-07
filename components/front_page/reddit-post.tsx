@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 
 import axios from "axios";
 // import { promises as fs } from "fs";
 
-const Reddit = (props: any) => {
+const Reddit: NextPage = (props: any) => {
   const {
     title,
     selftext,

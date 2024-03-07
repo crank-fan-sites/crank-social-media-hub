@@ -11,7 +11,7 @@ import {
   Paragraph,
 } from "@/components/typography";
 
-const Row1: NextPage = () => {
+const YouTube: NextPage = () => {
   const router = useRouter();
   const yt = useRef(null); // Initialize the ref
   const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
@@ -66,4 +66,4 @@ const Row1: NextPage = () => {
   );
 };
 
-export default Row1;
+export default YouTube;

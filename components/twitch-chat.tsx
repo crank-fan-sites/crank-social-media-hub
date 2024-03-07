@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import type { NextPage } from "next";
+import { useRef, useState } from "react";
+
 import { TwitchPlayer, TwitchChat, TwitchEmbed } from "react-twitch-embed";
 
-const TwitchChatBox = (props: any) => {
+const TwitchChatBox: NextPage = (props: any) => {
   const embed = useRef(); // We use a ref instead of state to avoid rerenders.
 
   const handleReady = (e: any) => {

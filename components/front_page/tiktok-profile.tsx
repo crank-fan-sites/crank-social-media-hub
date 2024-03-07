@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import type { NextPage } from "next";
 
-const TikTokProfileEmbed = () => {
+import { useEffect, useRef } from "react";
+
+const TikTokProfileEmbed: NextPage = (props: any) => {
   const tikTokRef = useRef(null); // Create a ref for the blockquote element
 
   useEffect(() => {

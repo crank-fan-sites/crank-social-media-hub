@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import PatreonPost from "./patreon-post";
 
-const PatreonLatestPosts = () => {
+const PatreonLatestPosts: NextPage = () => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
