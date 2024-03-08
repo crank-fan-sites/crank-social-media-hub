@@ -15,6 +15,7 @@ import TwitchChatBox from "@/components/twitch-chat";
 import Reddit from "@/components/front_page/reddit";
 import Patreon from "@/components/front_page/patreon";
 import InstagramPosts from "@/components/front_page/instagram";
+import Discord from "@/components/front_page/discord";
 
 import Link from "next/link";
 import {
