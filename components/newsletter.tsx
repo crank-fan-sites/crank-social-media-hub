@@ -1,15 +1,14 @@
-import { HeadingH6 } from './typography';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { useFormFields, useMailChimpForm } from 'use-mailchimp-form';
+import { HeadingH6 } from "./typography";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { useFormFields, useMailChimpForm } from "use-mailchimp-form";
 
 const Newsletter = () => {
-  const url =
-    'https://buddyhead.us14.list-manage.com/subscribe/post?u=b0028bf7d89bfb68709186c92&amp;id=f8f9b3de4c&amp;f_id=008ebee0f0';
+  const url = "TODO-NEWSLETTER";
   const { loading, error, success, message, handleSubmit } =
     useMailChimpForm(url);
   const { fields, handleFieldChange } = useFormFields({
-    EMAIL: '',
+    EMAIL: "",
   });
   return (
     <div>
@@ -33,7 +32,7 @@ const Newsletter = () => {
           Sign Up
         </Button>
       </form>
-      {loading && 'submitting'}
+      {loading && "submitting"}
       {error && message}
       {success && message}
     </div>

@@ -40,20 +40,20 @@ export function SiteHeader() {
               <DropdownMenuItem onClick={() => router.push("/blog")}>
                 Zine
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push("/label")}>
-                Label
+              <DropdownMenuItem onClick={() => router.push("/3rd")}>
+                3rd
               </DropdownMenuItem>
               <DropdownMenuItem onClick={() => router.push("/contact")}>
                 Contact
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  href="https://buddyheadstore.myshopify.com/"
+                  href="/"
                   target="_blank"
                   rel="noreferrer"
                   className="flex flex-row align-middle"
                 >
-                  Merch{" "}
+                  Other{" "}
                   <Icons.arrowUpRight strokeWidth="1.5" className="h-4 w-4" />
                 </Link>
               </DropdownMenuItem>

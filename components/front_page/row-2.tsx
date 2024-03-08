@@ -21,18 +21,17 @@ const Row1: NextPage = () => {
     <div className="grid bg-primary grid-cols-1 lg:grid-cols-3 border-t border-stone-400 dark:border-stone-600">
       <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Buddyhead the Zine
+          A Header Headline
         </HeadingH3>
         <TwitterProfile />
       </div>
 
       <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Crank Records
+          Crank Crank
         </HeadingH3>
         <Paragraph className="group-hover:text-background group-hover:font-bold">
-          Yes we&lsquo;re still releasing records. Check out our latest releases
-          from Pyramyds, Rathbone, and more.
+          Yes we&lsquo;re still releasing media. Check out our latest releases
         </Paragraph>
         <SoundCloudPlayer trackUrl="https://soundcloud.com/dj-tom-hanks/werepyres-are-coming-down-the-mountain-pt-2" />
         <Button
@@ -46,11 +45,11 @@ const Row1: NextPage = () => {
 
       <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Connect with Buddyhead
+          Connect with djtomhanks
         </HeadingH3>
         <Paragraph className="group-hover:text-background group-hover:font-bold">
-          Sign up for the newsletter, follow us on all socials, and email for an
-          invite to the Buddyhead Discord server.
+          Sign up for the newsletter, follow us on all socials, and email for
+          whatever
         </Paragraph>
         <Button
           className="p-0 group-hover:text-background group-hover:italic hover:font-bold"

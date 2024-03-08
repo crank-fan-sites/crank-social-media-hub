@@ -1,37 +1,37 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: 'BuddyHead',
-  description: 'haha oh hell yeah',
+  name: "CrankCommunism",
+  description: "the description",
   mainNav: [
     {
-      title: 'Home',
-      href: '/',
+      title: "Home",
+      href: "/",
     },
     {
-      title: 'Zine',
-      href: '/blog',
+      title: "Blog",
+      href: "/blog",
     },
     {
-      title: 'Label',
-      href: '/label',
+      title: "Third",
+      href: "/third",
     },
     {
-      title: 'Contact',
-      href: '/contact',
+      title: "Contact",
+      href: "/contact",
     },
     {
-      title: 'Merch',
-      href: 'https://buddyheadstore.myshopify.com/',
+      title: "Others",
+      href: "/",
       external: true,
-      target: '_blank',
+      target: "_blank",
     },
   ],
   links: {
-    facebook: 'http://facebook.com/Buddyhead420',
-    instagram: 'https://instagram.com/buddyhead_',
-    twitch: 'https://www.twitch.tv/buddyhead',
-    twitter: 'https://twitter.com/buddyhead',
-    youtube: 'https://www.youtube.com/@BUDDYHEAD',
+    facebook: "http://facebook.com/UnelectableAirwaves",
+    instagram: "https://instagram.com/djtomhanks",
+    twitch: "https://www.twitch.tv/UnelectableAirwaves",
+    twitter: "https://twitter.com/djtomhanks",
+    youtube: "https://www.youtube.com/@UnelectableAirwaves",
   },
 };
