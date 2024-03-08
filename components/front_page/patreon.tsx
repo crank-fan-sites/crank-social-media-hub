@@ -9,7 +9,10 @@ const PatreonLatestPosts: NextPage = () => {
 
   useEffect(() => {
     // const url = `http://localhost:8000/functions/patreon/crank`;
-    const url = `https://ats-exp-crank.atextbooksituation.com/functions/patreon/crank`;
+    // fetch("/api/discordMessages")
+    // .then((response) => response.json())
+    // .then(setMessages);
+    const url = `/api/patreonAPI`;
 
     axios
       .get(url)

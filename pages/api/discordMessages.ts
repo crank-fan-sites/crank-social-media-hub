@@ -17,7 +17,5 @@ export default async function handler(req, res) {
     client.destroy();
   });
 
-  client.login(
-    "MTIxNTM4OTkzNDEyNzY4MTY1OA.GLIKh8.ZNJA-m7veh6A_SgHcA3PUXYc_HvuVGzfigcTTo"
-  );
+  client.login(process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN);
 }
