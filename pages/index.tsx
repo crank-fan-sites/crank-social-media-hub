@@ -10,12 +10,13 @@ import { TwitchPlayer, TwitchChat } from "react-twitch-embed";
 import { MainLayout } from "@/layouts/layout";
 import { Button } from "@/components/ui/button";
 
-import TwitchEmbed from "@/components/twitch-player";
-import TwitchChatBox from "@/components/twitch-chat";
+// import TwitchEmbed from "@/components/twitch-player";
 import Reddit from "@/components/front_page/reddit";
 import Patreon from "@/components/front_page/patreon";
 import InstagramPosts from "@/components/front_page/instagram";
 import Discord from "@/components/front_page/discord";
+
+import TopSection from "@/components/front_page/top-section";
 
 import Link from "next/link";
 import {
@@ -37,6 +38,7 @@ import Row1 from "@/components/front_page/row-1";
 import Row2 from "@/components/front_page/row-2";
 import Row3 from "@/components/front_page/row-3";
 import Row4 from "@/components/front_page/row-4";
+import Row5 from "@/components/front_page/row-5";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -51,7 +53,7 @@ const Home: NextPage = () => {
           </HeadingH1>
 
           <Image
-            src="/images/hero-landscape.png"
+            src="/screenshots/UnelectableAirwaves_banner-title-2.png"
             alt=""
             height={856}
             width={2295}
@@ -59,122 +61,50 @@ const Home: NextPage = () => {
             quality={10}
           />
         </div>
-        <div className="grid bg-primary place-items-center py-12 grid-cols-1 border-t border-stone-400 dark:border-stone-600">
-          <small>haha oh hell yeah</small>
-          <Icons.skull className="h-6 w-6 m-2 opacity-80" strokeWidth="1.5" />
-        </div>
-        <div className="grid bg-primary place-items-center pb-12 grid-cols-1 2xl:grid-cols-2">
-          <div className="p-1 w-full h-full grid place-items-center">
-            <div className="twitch-video-container">
-              <TwitchEmbed height={480} width={960} />
-            </div>
-          </div>
-        </div>
-        {/* content */}
-        <div className="max-w-7xl mx-auto">
-          <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
-            <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-              <div className="ml-20 pl-2 py-4 px-1 md:p-4 lg:p-4 lg:pl-0">
-                <HeadingH2 className="text-base group-hover:text-background group-hover:font-bold">
-                  Highlighted Twitch Clips
-                </HeadingH2>
-                <div className="twitch-player-container">
-                  <TwitchPlayer
-                    // channel="unelectableairwaves"
-                    collection="Fx6m6WjAdhfwig"
-                    autoplay={false}
-                    muted
-                    width={540}
-                    height={480}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
-              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-                About Crankiness
-              </HeadingH3>
-              Imagine that you are in my shoes, that you are experiencing this.
-              Then in the end you are portrayed as problematic, pushed out, the
-              project you invested 3 years in is practically stolen from you.
-              Yes, it seems like an extremely black and white situation to me. I
-              have never experienced anything so unfair, I had the feeling that
-              I was so badly played, taken advantage of. And no, the fact that I
-              can't see my mistakes is not true at all. I usually have a problem
-              with this, that I give in too quickly, because I immediately find
-              fault with myself, I start drowning in a bad conscience. That's
-              kind of my default response.
-            </div>
-          </div>
-          {/* content after top header parts */}
-          <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
-            <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-                Latest YouTube Video
-              </HeadingH3>
-              {/* <div className="youtube-embed-overlap"> */}
-              <div className="youtube-video-container">
-                <YT />
-              </div>
-              <Button
-                className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
-                variant="link"
-                onClick={() => router.push("/contact")}
-              >
-                Go to YouTube
-              </Button>
-            </div>
 
-            <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
-              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-                Highlighted YouTube Playlist
-              </HeadingH3>
-              <div className="youtube-video-container">
-                <YoutubePlaylist />
-              </div>
-              <Button
-                className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
-                variant="link"
-                onClick={() => router.push("/contact")}
-              >
-                Go to YouTube
-              </Button>
-            </div>
-          </div>
+        {/* <TopSection /> */}
+
+        {/* content */}
+        <div className="mx-auto max-w-7xl">
+          <Row0 />
+          {/* content after top header parts */}
+
           {/* end one row */}
-          <Row1 />
-          <Row3 />
-          <Row2 />
-          <Row4 />
-          <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
-            <div className="group py-6 px-2 md:p-2 lg:p-4 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+          {/* <Row1 /> */}
+          {/* <Row3 /> */}
+          {/* <Row2 /> */}
+          {/* <Row4 /> */}
+          <Row5 />
+          <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+            <div className="px-2 py-6 border-b group md:p-2 lg:p-4 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
                 Latest Patreon Post
               </HeadingH3>
               <div className="patreon-container">
+                {/* <Discord /> */}
                 <Patreon />
               </div>
             </div>
           </div>
           {/* end one row */}
-          <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
-            <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+          <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+            <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
                 Recent Reddit Posts
               </HeadingH3>
-              <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
-                <Reddit />
+              <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+                {/* <Reddit /> */}
               </div>
             </div>
           </div>
           {/* end one row */}
-          <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
-            <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+          <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+            <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
                 Recent Instagram Posts
               </HeadingH3>
-              <div className="grid bg-primary grid-cols-1 border-t border-stone-400 dark:border-stone-600">
-                <InstagramPosts lightwidgetHtml="1a2d6c9700de5c6eb43fb26d39765627" />
+              <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+                {/* <InstagramPosts lightwidgetHtml="1a2d6c9700de5c6eb43fb26d39765627" /> */}
               </div>
             </div>
           </div>

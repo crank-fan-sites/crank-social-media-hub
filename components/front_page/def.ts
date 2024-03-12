@@ -15,8 +15,7 @@ const Row1: NextPage = () => {
   const router = useRouter();
   const yt = useRef(null); // Initialize the ref
 
-  return (
-  );
+  return <div></div>;
 };
 
 export default Row1;
