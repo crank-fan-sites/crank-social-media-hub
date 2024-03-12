@@ -5,8 +5,6 @@ import Head from "next/head";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
-import { TwitchPlayer, TwitchChat } from "react-twitch-embed";
-
 import { MainLayout } from "@/layouts/layout";
 import { Button } from "@/components/ui/button";
 
@@ -34,6 +32,7 @@ import useAxios from "@/axios";
 import YT from "@/components/front_page/youtube";
 import YoutubePlaylist from "@/components/front_page/youtube-playlist";
 
+import Row0 from "@/components/front_page/row0";
 import Row1 from "@/components/front_page/row-1";
 import Row2 from "@/components/front_page/row-2";
 import Row3 from "@/components/front_page/row-3";
@@ -48,7 +47,7 @@ const Home: NextPage = () => {
     <MainLayout>
       <div>
         <div className="relative bg-accent -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
-          <HeadingH1 className="fixed top-0 left-0 -indent-[500%] overflow-hidden bg-wordmark bg-no-repeat bg-center bg-[length:90%_auto] 2xl:bg-[length:1400px_auto] w-full h-[540px] -z-10">
+          <HeadingH1 className="fixed top-0 left-0 -indent-[500%] overflow-hidden bg-no-repeat bg-center bg-[length:90%_auto] 2xl:bg-[length:1400px_auto] w-full h-[540px] -z-10">
             Crank Communism
           </HeadingH1>
 
@@ -62,7 +61,7 @@ const Home: NextPage = () => {
           />
         </div>
 
-        {/* <TopSection /> */}
+        <TopSection />
 
         {/* content */}
         <div className="mx-auto max-w-7xl">

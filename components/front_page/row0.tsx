@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 
+import { TwitchPlayer } from "react-twitch-embed";
+
 import { Button } from "@/components/ui/button";
 import {
   HeadingH1,
