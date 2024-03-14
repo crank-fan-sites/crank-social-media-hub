@@ -12,7 +12,7 @@ const Newsletter = () => {
   });
   return (
     <div>
-      <HeadingH6>buddyhead world domination newsletter</HeadingH6>
+      <HeadingH6>crank communism sign-up (newsletter?)</HeadingH6>
       <form
         className="flex flex-row"
         onSubmit={(event) => {

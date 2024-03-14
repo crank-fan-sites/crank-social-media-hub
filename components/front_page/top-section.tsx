@@ -21,7 +21,7 @@ const TopSection: NextPage = () => {
         <Icons.skull className="w-6 h-6 m-2 opacity-60" strokeWidth="1.5" />
       </div>
 
-      <div className="grid grid-cols-1 pb-12 bg-primary place-items-center 2xl:grid-cols-2">
+      <div className="grid grid-cols-1 pb-12 bg-primary place-items-center">
         <div className="grid w-full h-full p-1 place-items-center">
           <div className="twitch-video-container">
             <TwitchEmbed height={480} width={960} />

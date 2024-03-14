@@ -4,7 +4,7 @@ import { siteConfig } from "@/config/site";
 import { buttonVariants } from "@/components/ui/button";
 import { Icons } from "./icons";
 import { ThemeToggle } from "@/components/theme-toggle";
-import Newsletter from "@/components/newsletter";
+// import Newsletter from "@/components/newsletter";
 import { useTheme } from "next-themes";
 import { links } from "@/lib/links";
 import { HeadingH6 } from "./typography";
@@ -12,9 +12,9 @@ import { HeadingH6 } from "./typography";
 export function SiteFooter() {
   const { theme } = useTheme();
   return (
-    <footer className="w-full bg-primary border-t border-b border-stone-400 dark:border-stone-600">
+    <footer className="w-full border-t border-b bg-primary border-stone-400 dark:border-stone-600">
       <div className="flex flex-col md:flex-row">
-        <div className="w-full py-12 px-2 md:w-7/12 md:px-4 md:border-r border-stone-400 dark:border-stone-600">
+        <div className="w-full px-2 py-12 md:w-7/12 md:px-4 md:border-r border-stone-400 dark:border-stone-600">
           <HeadingH6>look at this stuff</HeadingH6>
           <div className="grid grid-cols-1 gap-y-2">
             {links.map((link) => {
@@ -35,18 +35,10 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="w-full py-12 px-2 md:w-5/12 md:px-4">
-          <Newsletter />
+        <div className="w-full px-2 py-12 md:w-5/12 md:px-4">
           <div className="flex flex-col items-center justify-center my-12 gap-y-6">
-            <Image
-              src="/images/"
-              alt="Something else"
-              width={232}
-              height={206}
-              className="mt-6"
-            />
-            <small>haha oh hell yeah</small>
-            <div className="flex justify-center items-center space-x-1">
+            <small>socials</small>
+            <div className="flex items-center justify-center space-x-1">
               <Link
                 href={siteConfig.links.facebook}
                 target="_blank"
@@ -59,7 +51,7 @@ export function SiteFooter() {
                   })}
                 >
                   <Icons.facebook
-                    className="h-5 w-5 fill-current"
+                    className="w-5 h-5 fill-current"
                     strokeWidth="1.5"
                   />
                   <span className="sr-only">Facebook</span>
@@ -77,7 +69,7 @@ export function SiteFooter() {
                     variant: "ghost",
                   })}
                 >
-                  <Icons.instagram className="h-5 w-5" strokeWidth="1.5" />
+                  <Icons.instagram className="w-5 h-5" strokeWidth="1.5" />
                   <span className="sr-only">Instagram</span>
                 </div>
               </Link>
@@ -93,7 +85,7 @@ export function SiteFooter() {
                     variant: "ghost",
                   })}
                 >
-                  <Icons.twitch className="h-5 w-5" strokeWidth="1.5" />
+                  <Icons.twitch className="w-5 h-5" strokeWidth="1.5" />
                   <span className="sr-only">Twitch</span>
                 </div>
               </Link>
@@ -110,7 +102,7 @@ export function SiteFooter() {
                   })}
                 >
                   <Icons.twitter
-                    className="h-5 w-5 fill-current"
+                    className="w-5 h-5 fill-current"
                     strokeWidth="1.5"
                   />
                   <span className="sr-only">Twitter</span>
@@ -128,7 +120,7 @@ export function SiteFooter() {
                     variant: "ghost",
                   })}
                 >
-                  <Icons.youtube className="h-5 w-5" strokeWidth="1.5" />
+                  <Icons.youtube className="w-5 h-5" strokeWidth="1.5" />
                   <span className="sr-only">YouTube</span>
                 </div>
               </Link>
@@ -137,7 +129,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="flex flex-col p-4 md:py-0 md:ps-0 md:flex-row items-center justify-between border-t border-stone-400 dark:border-stone-600">
+      <div className="flex flex-col items-center justify-between p-4 border-t md:py-0 md:ps-0 md:flex-row border-stone-400 dark:border-stone-600">
         <ThemeToggle />
         <small>
           &copy;{new Date().getFullYear()} CrankCommunism, all rights reserved
