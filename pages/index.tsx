@@ -32,12 +32,11 @@ import useAxios from "@/axios";
 import YT from "@/components/front_page/youtube";
 import YoutubePlaylist from "@/components/front_page/youtube-playlist";
 
-import Row0 from "@/components/front_page/row0";
+import Row0 from "@/components/front_page/row-0";
 import Row1 from "@/components/front_page/row-1";
 import Row2 from "@/components/front_page/row-2";
 import Row3 from "@/components/front_page/row-3";
 import Row4 from "@/components/front_page/row-4";
-import Row5 from "@/components/front_page/row-5";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -62,14 +61,16 @@ const Home: NextPage = () => {
         {/* content */}
         <div className="mx-auto max-w-7xl">
           <Row0 />
-          {/* content after top header parts */}
-
           {/* end one row */}
-          {/* <Row1 /> */}
-          {/* <Row3 /> */}
-          {/* <Row2 /> */}
-          {/* <Row4 /> */}
-          <Row5 />
+          {/* content after top header parts */}
+          <Row1 />
+          {/* end one row */}
+          <Row2 />
+          {/* end one row */}
+          <Row3 />
+          {/* end one row */}
+          <Row4 />
+          {/* end one row */}
           <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
             <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">

@@ -1,9 +1,8 @@
 import type { NextPage } from "next";
 
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 
-import Image from "next/image";
-import { siteConfig } from "@/config/site";
 import { Button } from "@/components/ui/button";
 import {
   HeadingH1,
@@ -12,31 +11,44 @@ import {
   Paragraph,
 } from "@/components/typography";
 
-import TiktokVideo from "@/components/front_page/tiktok-video";
-import TiktokProfile from "@/components/front_page/tiktok-profile";
-
-const Row1: NextPage = () => {
+const Row00: NextPage = () => {
   const router = useRouter();
+  const yt = useRef(null); // Initialize the ref
 
   return (
-    <>
-      <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
-        <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-          <HeadingH1 className="text-base group-hover:text-background group-hover:font-bold">
-            Tiktok Profile
-          </HeadingH1>
-          <TiktokProfile />
-        </div>
-
-        <div className="group py-6 px-2 md:p-8 lg:p-1 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-          <HeadingH2 className="text-base group-hover:text-background group-hover:font-bold">
-            Latest Tiktok Video
-          </HeadingH2>
-          <TiktokVideo />
-        </div>
+    <div className="grid grid-cols-1 border-t bg-primary lg:grid-cols-2 border-stone-400 dark:border-stone-600">
+      <div className="px-2 py-6 border-b group md:p-2 lg:p-4 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+          Latest YouTube Video
+        </HeadingH3>
+        {/* <div className="youtube-embed-overlap"> */}
+        <div className="youtube-video-container">{/* <YT /> */}</div>
+        <Button
+          className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
+          variant="link"
+          onClick={() => router.push("/contact")}
+        >
+          Go to YouTube
+        </Button>
       </div>
-    </>
+
+      <div className="px-2 py-6 group md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
+        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+          Highlighted YouTube Playlist
+        </HeadingH3>
+        <div className="youtube-video-container">
+          {/* <YoutubePlaylist /> */}
+        </div>
+        <Button
+          className="p-0 group-hover:text-background group-hover:italic hover:font-bold"
+          variant="link"
+          onClick={() => router.push("/contact")}
+        >
+          Go to YouTube
+        </Button>
+      </div>
+    </div>
   );
 };
 
-export default Row1;
+export default Row00;

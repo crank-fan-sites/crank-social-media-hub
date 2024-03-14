@@ -11,26 +11,23 @@ import {
 } from "@/components/typography";
 
 import TwitterProfile from "@/components/front_page/twitter-profile";
-import TwitterLikes from "@/components/front_page/twitter-likes";
-import TwitterButtons from "@/components/front_page/twitter-buttons";
+
+import SoundCloudPlayer from "./soundcloud";
 
 const Row1: NextPage = () => {
   const router = useRouter();
 
   return (
-    <div className="grid bg-primary grid-cols-1 lg:grid-cols-2 border-t border-stone-400 dark:border-stone-600">
-      <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
-        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Twitter Profile
-        </HeadingH3>
+    <div className="grid grid-cols-1 border-t bg-primary lg:grid-cols-2 border-stone-400 dark:border-stone-600">
+      <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
         <TwitterProfile />
       </div>
 
-      <div className="group py-6 px-2 md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
+      <div className="px-2 py-6 group md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
         <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          Twitter Buttons
+          Featured Songs
         </HeadingH3>
-        <TwitterButtons />
+        <SoundCloudPlayer trackUrl="https://soundcloud.com/dj-tom-hanks/werepyres-are-coming-down-the-mountain-pt-2" />
       </div>
     </div>
   );
