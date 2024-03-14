@@ -17,9 +17,8 @@ import TwitchEmbed from "@/components/twitch-player";
 const TopSection: NextPage = () => {
   return (
     <>
-      <div className="grid grid-cols-1 py-12 border-t bg-primary place-items-center border-stone-400 dark:border-stone-600">
-        <small>Crank Communism</small>
-        <Icons.skull className="w-6 h-6 m-2 opacity-80" strokeWidth="1.5" />
+      <div className="grid grid-cols-1 py-1 border-t bg-primary place-items-center border-stone-400 dark:border-stone-600">
+        <Icons.skull className="w-6 h-6 m-2 opacity-60" strokeWidth="1.5" />
       </div>
 
       <div className="grid grid-cols-1 pb-12 bg-primary place-items-center 2xl:grid-cols-2">

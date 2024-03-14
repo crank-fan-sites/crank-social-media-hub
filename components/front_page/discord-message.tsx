@@ -10,7 +10,6 @@ import {
 } from "@/components/typography";
 
 const DiscordMessage: NextPage = (props: any) => {
-  console.log("props", props);
   const {
     content,
     createdAt,
@@ -22,7 +21,7 @@ const DiscordMessage: NextPage = (props: any) => {
   const date = new Date(createdAt);
   const readableDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
   return (
-    <div className="discord-message">
+    <div className="p-2 discord-message">
       <p>{content}</p>
       <p>on {readableDate}</p>
       <p>{/* <Link href={url}>Jump to this in Discord</Link> */}</p>

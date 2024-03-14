@@ -30,7 +30,7 @@ const PatreonLatestPosts: NextPage = () => {
   }, []); // Empty dependency array means this effect runs once on mount
 
   return (
-    <div className="group py-6 px-2 md:p-8 lg:p-12 border-b border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+    <div className="px-2 py-6 group md:p-8 lg:p-12">
       {posts &&
         // <></>
         posts.data.map((post, index) => (

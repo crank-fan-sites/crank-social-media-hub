@@ -46,11 +46,7 @@ const Home: NextPage = () => {
   return (
     <MainLayout>
       <div>
-        <div className="relative bg-accent -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
-          <HeadingH1 className="fixed top-0 left-0 -indent-[500%] overflow-hidden bg-no-repeat bg-center bg-[length:90%_auto] 2xl:bg-[length:1400px_auto] w-full h-[540px] -z-10">
-            Crank Communism
-          </HeadingH1>
-
+        <div className="relative -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
           <Image
             src="/screenshots/UnelectableAirwaves_banner-title-2.png"
             alt=""
@@ -75,14 +71,22 @@ const Home: NextPage = () => {
           {/* <Row4 /> */}
           <Row5 />
           <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+            <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
+              <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+                Recent Discord General Chat Messages
+              </HeadingH3>
+              <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+                <Discord />
+              </div>
+            </div>
+          </div>
+          {/* end one row */}
+          <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
             <div className="px-2 py-6 border-b group md:p-2 lg:p-4 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines hover:bg-accent">
               <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
                 Latest Patreon Post
               </HeadingH3>
-              <div className="patreon-container">
-                {/* <Discord /> */}
-                <Patreon />
-              </div>
+              <Patreon />
             </div>
           </div>
           {/* end one row */}
@@ -92,7 +96,7 @@ const Home: NextPage = () => {
                 Recent Reddit Posts
               </HeadingH3>
               <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
-                {/* <Reddit /> */}
+                <Reddit />
               </div>
             </div>
           </div>
@@ -103,7 +107,7 @@ const Home: NextPage = () => {
                 Recent Instagram Posts
               </HeadingH3>
               <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
-                {/* <InstagramPosts lightwidgetHtml="1a2d6c9700de5c6eb43fb26d39765627" /> */}
+                <InstagramPosts lightwidgetHtml="1a2d6c9700de5c6eb43fb26d39765627" />
               </div>
             </div>
           </div>

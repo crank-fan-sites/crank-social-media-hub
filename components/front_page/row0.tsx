@@ -30,19 +30,11 @@ const Row1: NextPage = () => {
           </div>
         </div>
       </div>
-      <div className="px-2 py-6 group md:p-8 lg:p-12 hover:bg-scanlines hover:bg-accent">
-        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
-          About Crankiness
-        </HeadingH3>
-        Imagine that you are in my shoes, that you are experiencing this. Then
-        in the end you are portrayed as problematic, pushed out, the project you
-        invested 3 years in is practically stolen from you. Yes, it seems like
-        an extremely black and white situation to me. I have never experienced
-        anything so unfair, I had the feeling that I was so badly played, taken
-        advantage of. And no, the fact that I can't see my mistakes is not true
-        at all. I usually have a problem with this, that I give in too quickly,
-        because I immediately find fault with myself, I start drowning in a bad
-        conscience. That's kind of my default response.
+      <div className="flex items-center justify-center p-0">
+        <img
+          src="/screenshots-vertical/Twitch-unelectable-text-600x720_vertical.png"
+          alt="UnelectableAirwaves Alien"
+        />
       </div>
     </div>
   );

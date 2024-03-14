@@ -23,17 +23,20 @@ const Discord: NextPage = () => {
 
   return (
     <div>
-      {messages.map((message, index) => (
-        <Message
-          key={index}
-          content={message.cleanContent}
-          author={message.authorId}
-          createdAt={message.createdTimestamp}
-          embeds={message.embeds}
-          attachments={message.attachments}
-          reactions={message.stickers}
-        />
-      ))}
+      {messages.map(
+        (message, index) =>
+          message.cleanContent && (
+            <Message
+              key={index}
+              content={message.cleanContent}
+              author={message.authorId}
+              createdAt={message.createdTimestamp}
+              embeds={message.embeds}
+              attachments={message.attachments}
+              reactions={message.stickers}
+            />
+          )
+      )}
     </div>
   );
 };
