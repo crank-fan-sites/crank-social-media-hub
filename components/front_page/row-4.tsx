@@ -1,7 +1,5 @@
 import type { NextPage } from "next";
 
-import { useRouter } from "next/router";
-
 import { Button } from "@/components/ui/button";
 import {
   HeadingH1,
