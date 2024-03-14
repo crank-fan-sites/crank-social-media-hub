@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import { MainLayout } from "@/layouts/layout";
 import { Button } from "@/components/ui/button";
 
-// import TwitchEmbed from "@/components/twitch-player";
 import Reddit from "@/components/front_page/reddit";
 import Patreon from "@/components/front_page/patreon";
 import InstagramPosts from "@/components/front_page/instagram";
@@ -25,9 +24,6 @@ import {
 } from "@/components/typography";
 import { Icons } from "@/components/icons";
 import Image from "next/image";
-import heroImgPortrait from "@/public/images/hero-portrait.png";
-import heroImgLandscape from "@/public/images/hero-landscape.png";
-import useAxios from "@/axios";
 
 import YT from "@/components/front_page/youtube";
 import YoutubePlaylist from "@/components/front_page/youtube-playlist";
@@ -40,14 +36,13 @@ import Row4 from "@/components/front_page/row-4";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const api = useAxios();
 
   return (
     <MainLayout>
       <div>
         <div className="relative -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
           <Image
-            src="/screenshots/UnelectableAirwaves_banner-title-2.png"
+            src="/screenshots/UnelectableAirwaves_banner-title-2-thin.png"
             alt=""
             height={856}
             width={2295}
