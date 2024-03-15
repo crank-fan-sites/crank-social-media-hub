@@ -158,7 +158,7 @@
 .patreon-container::after {
   display: block;
   content: "";
-  padding-top: 60.25%;
+  padding-top: 100%;
   /* padding-bottom: 60.25%; */
 }
 
