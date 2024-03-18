@@ -1,5 +1,6 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import Image from "next/image";
 
 const SocialButton = ({ link, text, iconSrc, iconAlt, className }) => {
   const mergedClassNames = twMerge(
@@ -9,7 +10,7 @@ const SocialButton = ({ link, text, iconSrc, iconAlt, className }) => {
 
   return (
     <a className={mergedClassNames} href={link} target="_blank">
-      <img
+      <Image
         className="pt-0 pl-0 pr-2"
         aria-hidden="true"
         src={`/img/${iconSrc}`}

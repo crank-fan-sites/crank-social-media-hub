@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 import { TwitchPlayer } from "react-twitch-embed";
 
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   HeadingH1,
   HeadingH2,
@@ -31,7 +31,7 @@ const Row1: NextPage = () => {
         </div>
       </div>
       <div className="items-center justify-center hidden p-0 lg:flex">
-        <img
+        <Image
           src="/screenshots-vertical/Twitch-unelectable-text-600x720_vertical.png"
           alt="UnelectableAirwaves Alien"
         />

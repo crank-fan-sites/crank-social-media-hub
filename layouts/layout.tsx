@@ -1,10 +1,11 @@
-import { SiteFooter } from '@/components/site-footer';
-import { SiteHeader } from '@/components/site-header';
-import { Red_Hat_Mono } from 'next/font/google';
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { Red_Hat_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const redHatMono = Red_Hat_Mono({
-  subsets: ['latin'],
-  display: 'swap',
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export function MainLayout({ children, ...props }: any) {
@@ -13,6 +14,7 @@ export function MainLayout({ children, ...props }: any) {
       <div className="container border-l border-r border-stone-400 dark:border-stone-600">
         <SiteHeader />
         <main>{children}</main>
+        <Analytics />
         <SiteFooter />
       </div>
     </div>

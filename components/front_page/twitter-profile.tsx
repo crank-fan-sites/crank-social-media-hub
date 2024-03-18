@@ -17,7 +17,7 @@ const TwitterProfle: NextPage = () => {
     <Timeline
       dataSource={{
         sourceType: "profile",
-        screenName: "djtomhanks",
+        screenName: "UnelectableA",
       }}
       options={{ theme: "dark", height: 800 }}
     />

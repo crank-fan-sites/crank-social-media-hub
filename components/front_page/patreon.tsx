@@ -35,6 +35,7 @@ const PatreonLatestPosts: NextPage = () => {
         // <></>
         posts.data.map((post, index) => (
           <PatreonPost
+            key={index}
             title={post.attributes.title}
             content={post.attributes.content}
             embed_data={post.attributes.embed_data}
