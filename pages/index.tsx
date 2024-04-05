@@ -29,6 +29,8 @@ import RowDiscord from "@/components/front_page/row-discord";
 import RowReddit from "@/components/front_page/row-reddit";
 import RowInstagram from "@/components/front_page/row-instagram";
 
+// import Facebook from "@/components/front_page/facebook";
+
 const Home: NextPage = () => {
   const router = useRouter();
 
@@ -67,6 +69,7 @@ const Home: NextPage = () => {
           {/* end one row */}
           <RowInstagram />
           {/* end one row */}
+          {/* <Facebook /> */}
         </div>
         {/* end .max-w-7xl.mx-auto */}
       </div>
