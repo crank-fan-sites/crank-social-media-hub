@@ -34,6 +34,8 @@ const RowDiscord: NextPage = () => {
         <div className="items-center justify-center hidden p-0 lg:flex">
           <Image
             src="/screenshots-vertical/UnelectableAirwaves_Twitch-bird-silhouette-350x720.png"
+            width={350}
+            height={720}
             className="w-full"
             alt="UnelectableAirwaves Alien"
           />

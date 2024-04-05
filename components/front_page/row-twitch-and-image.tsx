@@ -33,6 +33,8 @@ const Row1: NextPage = () => {
       <div className="items-center justify-center hidden p-0 lg:flex">
         <Image
           src="/screenshots-vertical/Twitch-unelectable-text-600x720_vertical.png"
+          width={600}
+          height={720}
           alt="UnelectableAirwaves Alien"
         />
       </div>

@@ -14,6 +14,8 @@ const PatreonRow: NextPage = () => {
       <div className="items-center justify-center hidden col-span-1 p-0 border-b xl:flex xl:col-span-2 group lg:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
         <Image
           src="/screenshots-vertical/Unelectable-unele-smoke-normans-vertical-365x720.png"
+          width={365}
+          height={720}
           alt="UnelectableAirwaves Alien"
           className="items-center justify-center w-full"
         />
