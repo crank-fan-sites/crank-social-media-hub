@@ -16,44 +16,24 @@ export default async function handler(req, res) {
     if (code) {
       const data = {
         client_id: process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID,
-        // client_id: 1159665752108528,
         client_secret: process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_SECRET,
         grant_type: "authorization_code",
         redirect_uri: process.env.NEXT_PUBLIC_INSTAGRAM_AUTH_REDIRECT_URL,
-        // code: "lala",
         code: code.endsWith("#_") ? code.slice(0, -2) : code,
       };
-      // console.log("req code", req.query.code);
-      // console.log("id", process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID);
-      // console.log(data);
-      const url = new URLSearchParams(data).toString();
-      console.log("ONE", url);
+
       const tokenResponse = await axios.post(
         INSTAGRAM_TOKEN_URL,
-        // `${domain}/api/instagram/receiveAuth`,
-        url,
+        new URLSearchParams(data).toString(),
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }
       );
-      // const tokenResponse = await axios.post(
-      //   `${domain}/api/instagram/receiveAuth`,
-      //   data
-      // );
-      console.log("TWO");
 
-      // res.status(200).json({ msg: "success" });
-      // return;
-
-      // console.log("STATUS", tokenResponse.status);
-
-      // if (tokenResponse.status === 200) {
+      // @TODO attempt to save this to STRAPI first or tell user to add it to STRAPI
       const bodyParsed = tokenResponse.data;
-      // if (bodyParsed.access_token) {
-      // console.log("DATA", bodyParsed);
-      // console.log("count", Object.keys(bodyParsed).length);
       // res.status(200).json(bodyParsed.access_token);
       res.status(200).json(bodyParsed);
       return;
