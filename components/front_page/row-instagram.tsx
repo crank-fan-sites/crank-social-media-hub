@@ -15,7 +15,7 @@ const InstagramRow: NextPage = () => {
           Recent Instagram Posts
         </HeadingH3>
         <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
-          <InstagramPosts lightwidgetHtml="1a2d6c9700de5c6eb43fb26d39765627" />
+          <InstagramPosts />
         </div>
       </div>
     </div>

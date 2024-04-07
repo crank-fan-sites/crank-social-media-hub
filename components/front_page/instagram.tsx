@@ -1,26 +1,35 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-// What lightwidget.js gave <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/4009c8ca96185db498257afcb4269552.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
-const InstagramPosts: NextPage = ({ lightwidgetHtml }) => {
-  const source = "//lightwidget.com/widgets/" + lightwidgetHtml + ".html";
+import InstagramPost from "./instagram-post";
+
+const InstagramPosts: NextPage = () => {
+  const [media, setMedia] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://cdn.lightwidget.com/widgets/lightwidget.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
+    const fetchMedia = async () => {
+      const response = await fetch("/api/instagram/media");
+      const data = await response.json();
+      setMedia(data);
     };
+
+    fetchMedia();
   }, []);
 
   return (
-    <iframe
-      src={source}
-      scrolling="no"
-      className="lightwidget-widget w-full border-0 overflow-hidden bg-indigo-500"
-    />
+    <div>
+      {media.map((item, index) => (
+        <div>
+          <InstagramPost
+            date={item.date}
+            url={item.url}
+            text={item.text}
+            picture={item.picture}
+          />
+        </div>
+      ))}
+    </div>
   );
 };
 
