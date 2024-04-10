@@ -18,11 +18,10 @@ const InstagramPosts: NextPage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="flex flex-wrap -m-2">
       {media.map((item, index) => (
-        <div>
+        <div key={index} className="w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/4">
           <InstagramPost
-            date={item.date}
             url={item.url}
             text={item.text}
             picture={item.picture}

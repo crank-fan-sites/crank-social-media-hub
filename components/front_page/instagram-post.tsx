@@ -1,22 +1,23 @@
 import type { NextPage } from "next";
 
 const InstagramPost: NextPage = (props) => {
-  const { date, url, picture, text } = props;
+  const { url, picture, text } = props;
+  const hasText = text && text.trim().length > 0;
   return (
-    <div>
-      <div className="relative w-[300px] h-[200px]">
-        <a href={url}>
+    <div className="relative h-auto">
+      <div className="relative h-[200px] overflow-hidden">
+        <a href={url} className="block w-full h-full" target="_blank">
           <img
             src={picture}
             alt="Instagram Post"
-            layout="fill"
-            objectFit="cover"
-            className=""
+            className="object-cover w-full h-full"
           />
         </a>
       </div>
-      <span>{date}</span>
-      <span>{text}</span>
+      {/* Only render this div if there is text */}
+      {hasText && (
+        <div className="block overflow-y-auto h-[100px] mb-2">{text}</div>
+      )}
     </div>
   );
 };
