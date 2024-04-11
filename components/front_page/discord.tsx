@@ -16,7 +16,7 @@ const Discord: NextPage = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    fetch("/api/discordMessages")
+    fetch("/api/discord/messages")
       .then((response) => response.json())
       .then(setMessages);
   }, []);

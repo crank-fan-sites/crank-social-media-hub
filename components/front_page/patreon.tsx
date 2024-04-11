@@ -12,7 +12,7 @@ const PatreonLatestPosts: NextPage = () => {
     // fetch("/api/discordMessages")
     // .then((response) => response.json())
     // .then(setMessages);
-    const url = `/api/patreonAPI`;
+    const url = `/api/patreon/posts`;
 
     axios
       .get(url)
