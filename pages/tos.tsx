@@ -14,19 +14,19 @@ const Label: NextPage = () => {
         <section>
           <h2>1. Introduction</h2>
           <p>
-            Welcome to Crank Sites! These Terms of Service ("Terms") govern your
-            use of Crank Sites's website, products, and services ("Service"). By
-            accessing or using our Service, you agree to be bound by these Terms
-            and our Privacy Policy.
+            Welcome to Crank Sites! These Terms of Service (&quot;Terms&quot;)
+            govern your use of Crank Sites&apos;s website, products, and
+            services (&quot;Service&quot;). By accessing or using our Service,
+            you agree to be bound by these Terms and our Privacy Policy.
           </p>
         </section>
         <section>
           <h2>2. Using Our Service</h2>
           <p>
             You must follow any policies made available to you within the
-            Service. Don't misuse our Service. For example, don't interfere with
-            our Service or try to access it using a method other than the
-            interface and the instructions that we provide.
+            Service. Don&apos;t misuse our Service. For example, don&apos;t
+            interfere with our Service or try to access it using a method other
+            than the interface and the instructions that we provide.
           </p>
         </section>
         <section>
@@ -54,18 +54,18 @@ const Label: NextPage = () => {
             We are constantly changing and improving our Service. We may add or
             remove functionalities or features, and we may suspend or stop a
             Service altogether. You can stop using our Service at any time,
-            although we'll be sorry to see you go.
+            although we&apos;ll be sorry to see you go.
           </p>
         </section>
         <section>
           <h2>6. Disclaimers and Limitations of Liability</h2>
           <p>
-            The Service is provided "as is," and we make no express or implied
-            warranties or guarantees about the Service. To the extent permitted
-            by law, we disclaim all warranties. We shall not be liable for any
-            indirect, special, incidental, consequential, or exemplary damages
-            arising from your use of the Service or for any other claim related
-            in any way to your use of the Service.
+            The Service is provided &quot;as is,&quot; and we make no express or
+            implied warranties or guarantees about the Service. To the extent
+            permitted by law, we disclaim all warranties. We shall not be liable
+            for any indirect, special, incidental, consequential, or exemplary
+            damages arising from your use of the Service or for any other claim
+            related in any way to your use of the Service.
           </p>
         </section>
         <section>
@@ -73,9 +73,9 @@ const Label: NextPage = () => {
           <p>
             These Terms control the relationship between Crank Sites and you.
             They do not create any third-party beneficiary rights. If you do not
-            comply with these Terms, and we don't take action right away, this
-            doesn't mean that we are giving up any rights that we may have (such
-            as taking action in the future).
+            comply with these Terms, and we don&apos;t take action right away,
+            this doesn&apos;t mean that we are giving up any rights that we may
+            have (such as taking action in the future).
           </p>
         </section>
         <section>

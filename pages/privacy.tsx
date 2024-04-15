@@ -3,7 +3,7 @@ import { MainLayout } from "@/layouts/layout";
 import { HeadingH1 } from "@/components/typography";
 import { links } from "@/lib/links";
 import { Button } from "@/components/ui/button";
-
+("");
 const Label: NextPage = () => {
   return (
     <MainLayout>
@@ -12,12 +12,13 @@ const Label: NextPage = () => {
       <div className="container px-4">
         <HeadingH1 className="my-8">Privacy Policy</HeadingH1>
         <p>
-          To be honest. I'm not collecting anything besides Google Analytics.
-          For Google Analytics, I can't track a user long term even if I wanted
-          to. The open source code base shows that. There's no cookies or
-          anything. The handle and email are saved in local browser storage and
-          possibly at some point in Firestore, but if that was done, no
-          personally idenitfying info would be kept beyond 30 days.
+          To be honest. I&apos;m not collecting anything besides Google
+          Analytics. For Google Analytics, I can&apos;t track a user long term
+          even if I wanted to. The open source code base shows that.
+          There&apos;s no cookies or anything. The handle and email are saved in
+          local browser storage and possibly at some point in Firestore, but if
+          that was done, no personally idenitfying info would be kept beyond 30
+          days.
         </p>
         <p>Below is stuff I found online to copy paste into places like this</p>
         <p>
@@ -41,10 +42,10 @@ const Label: NextPage = () => {
         </p>
         <p>
           We collect your personal information when you register with us
-          ("User"), when you express an interest in obtaining information about
-          us or our products and services, when you participate in activities on
-          our Website Site (such as using our builder) or otherwise contacting
-          us.
+          (&quot;User&quot;), when you express an interest in obtaining
+          information about us or our products and services, when you
+          participate in activities on our Website Site (such as using our
+          builder) or otherwise contacting us.
         </p>
         <p>
           Generally, you control the amount and type of information you provide
@@ -75,13 +76,13 @@ const Label: NextPage = () => {
         </p>
         <h3>Cookies</h3>
         <p>
-          Our Website uses "Cookies" to identify the areas of our Website that
-          you have visited. A Cookie is a small piece of data stored on your
-          computer or mobile device by your web browser. We use Cookies to
-          personalize the Content that you see on our Website. Most web browsers
-          can be set to disable the use of Cookies. However, if you disable
-          Cookies, you may not be able to access functionality on our Website
-          correctly or at all. We never place Personally Identifiable
+          Our Website uses &quot;Cookies&quot; to identify the areas of our
+          Website that you have visited. A Cookie is a small piece of data
+          stored on your computer or mobile device by your web browser. We use
+          Cookies to personalize the Content that you see on our Website. Most
+          web browsers can be set to disable the use of Cookies. However, if you
+          disable Cookies, you may not be able to access functionality on our
+          Website correctly or at all. We never place Personally Identifiable
           Information in Cookies.
         </p>
         <h3>Third Party Tracking Tools</h3>
@@ -99,12 +100,12 @@ const Label: NextPage = () => {
           We automatically receive information from your web browser or mobile
           device. This information includes the name of the website from which
           you entered our Website, if any, as well as the name of the website to
-          which you're headed when you leave our website. This information also
-          includes the IP address of your computer/proxy server that you use to
-          access the Internet, your Internet Website provider name, web browser
-          type, type of mobile device, and computer operating system. We use all
-          of this information to analyze trends among our Users to help improve
-          our Website.
+          which you&apos;re headed when you leave our website. This information
+          also includes the IP address of your computer/proxy server that you
+          use to access the Internet, your Internet Website provider name, web
+          browser type, type of mobile device, and computer operating system. We
+          use all of this information to analyze trends among our Users to help
+          improve our Website.
         </p>
       </div>
     </MainLayout>

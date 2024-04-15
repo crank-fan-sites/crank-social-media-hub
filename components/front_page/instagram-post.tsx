@@ -7,6 +7,7 @@ const InstagramPost: NextPage = (props) => {
     <div className="relative h-auto">
       <div className="relative h-[200px] overflow-hidden">
         <a href={url} className="block w-full h-full" target="_blank">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={picture}
             alt="Instagram Post"

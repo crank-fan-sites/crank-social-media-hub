@@ -42,6 +42,7 @@ const TiktokVideo: NextPage = () => {
 
   useEffect(() => {
     start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return <div id="content" ref={contentRef} />;
