@@ -8,17 +8,16 @@ import { Button } from "@/components/ui/button";
 
 import { usePutStrapiAxios } from "@/lib/strapiAxios";
 
-const body = {
-  api_client_id: "4",
-  api_redirect_uri: "https://axiomos.appiy",
-};
-const testAxiosHook: NextPage = () => {
+const testAxiosMemo: NextPage = () => {
+  const body = {
+    api_client_id: "4",
+    api_redirect_uri: "https://axiomos.appiyBODY",
+  };
   const { response, loading, error } = usePutStrapiAxios({
     path: "/social-media-instagrams/4",
     body,
   });
   const [data, setData] = useState([]);
-  console.log("res", "yo");
 
   useEffect(() => {
     if (response != null) {
@@ -37,4 +36,4 @@ const testAxiosHook: NextPage = () => {
   );
 };
 
-export default testAxiosHook;
+export default testAxiosMemo;
