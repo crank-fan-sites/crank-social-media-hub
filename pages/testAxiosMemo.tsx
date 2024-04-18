@@ -6,15 +6,15 @@ import { HeadingH1 } from "@/components/typography";
 import { links } from "@/lib/links";
 import { Button } from "@/components/ui/button";
 
-import { usePutStrapiAxios } from "@/lib/strapiAxios";
+import { usePutStrapiAxios } from "@/lib/useStrapiAxios";
 
 const testAxiosMemo: NextPage = () => {
   const body = {
     api_client_id: "4",
-    api_redirect_uri: "https://axiomos.appiyBODY",
+    api_redirect_uri: "https://axiomos.appiyBOD",
   };
   const { response, loading, error } = usePutStrapiAxios({
-    path: "/social-media-instagrams/4",
+    path: "/social-media-instagram",
     body,
   });
   const [data, setData] = useState([]);
