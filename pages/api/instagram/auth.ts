@@ -1,29 +1,54 @@
 import axios from "axios";
+import strapiAxios from "@/lib/strapiAxios";
 
-const INSTAGRAM_AUTH_URL = "https://api.instagram.com/oauth/authorize";
-const INSTAGRAM_TOKEN_URL = "https://api.instagram.com/oauth/access_token";
+const AUTH_URL = "https://api.instagram.com/oauth/authorize";
+const TOKEN_URL = "https://api.instagram.com/oauth/access_token";
 const domain = "https://national-easy-dingo.ngrok-free.app";
-// const this_url = "https://national-easy-dingo.ngrok-free.app/api/instagram/auth";
+
+async function runStrapiAxios() {
+  try {
+    const res = await strapiAxios().get("/social-media-instagram");
+    const { api_client_id, api_client_secret, api_redirect_uri } =
+      res.data.attributes;
+    return {
+      api_client_id,
+      api_client_secret,
+      api_redirect_uri,
+    };
+  } catch (error) {
+    return { status: false };
+  }
+}
+
+async function postAccessToken(user_id, access_token) {
+  try {
+    const res = await strapiAxios().put("/social-media-instagram", {
+      data: { user_id: user_id, api_access_token: access_token },
+    });
+    // things worked out.
+    const res2 = await strapiAxios().get("/social-media-instagram");
+    return res2.data.attributes;
+  } catch (error) {
+    console.log("didnt post up access token");
+  }
+}
 
 export default async function handler(req, res) {
-  // if (req.method === "POST") {
-  // Handle POST request
-  // You can access the request body using req.body
-  // console.log("req body", req.body);
-  // }
+  const { api_client_id, api_client_secret, api_redirect_uri } =
+    await runStrapiAxios();
   try {
     const code = req.query.code;
     if (code) {
       const data = {
-        client_id: process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID,
-        client_secret: process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_SECRET,
+        client_id: api_client_id,
+        client_secret: api_client_secret,
         grant_type: "authorization_code",
-        redirect_uri: process.env.NEXT_PUBLIC_INSTAGRAM_AUTH_REDIRECT_URL,
+        redirect_uri: api_redirect_uri,
         code: code.endsWith("#_") ? code.slice(0, -2) : code,
       };
 
       const tokenResponse = await axios.post(
-        INSTAGRAM_TOKEN_URL,
+        TOKEN_URL,
         new URLSearchParams(data).toString(),
         {
           headers: {
@@ -34,12 +59,12 @@ export default async function handler(req, res) {
 
       // @TODO attempt to save this to STRAPI first or tell user to add it to STRAPI
       const bodyParsed = tokenResponse.data;
-      // res.status(200).json(bodyParsed.access_token);
-      res.status(200).json(bodyParsed);
+      const res2 = postAccessToken(bodyParsed.user_id, bodyParsed.access_token);
+      res.status(200).json(res2);
       return;
       // }
     } else {
-      const url = `${INSTAGRAM_AUTH_URL}?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_INSTAGRAM_AUTH_REDIRECT_URL}&scope=user_profile,user_media&response_type=code`;
+      const url = `${AUTH_URL}?client_id=${api_client_id}&redirect_uri=${api_redirect_uri}&scope=user_profile,user_media&response_type=code`;
       res.redirect(url);
     }
   } catch (error) {
