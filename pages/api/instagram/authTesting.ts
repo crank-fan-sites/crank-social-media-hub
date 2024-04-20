@@ -71,9 +71,7 @@ async function postShortLivedToken(userId, accessToken, expiresIn) {
       },
     });
     // things worked out.
-    const res2 = await strapiAxios().get("/social-media-instagram");
-    res.status(200).json(res2.data.attributes);
-    return;
+    return true;
   } catch (error) {
     res.status(500).json({ status: failure, message: error.message });
     console.log("didnt post up access token");
@@ -147,12 +145,14 @@ export default async function handler(req, res) {
         api_redirect_uri,
         code
       );
+      console.log("2nd", tokenResponse);
 
       // @TODO take the data and push to exchange for long term token
       const firstLongLiveTokenRes = await exchangeShortForLongToken(
         api_client_secret,
         tokenResponse.access_token
       );
+      console.log("3rd", firstLongLiveTokenRes);
 
       // const { success, longLivedToken, expiresIn } = firstLongLiveTokenRes;
       // success: true,
@@ -167,8 +167,8 @@ export default async function handler(req, res) {
       );
       // run long term exchange token method
       // put the changes up to the server: api_token_expiry, last_updated, api_access_token
-
-      res.status(200).json(res2);
+      const res2 = await strapiAxios().get("/social-media-instagram");
+      res.status(200).json(res2.data.attributes);
       return;
       // }
     } else {
