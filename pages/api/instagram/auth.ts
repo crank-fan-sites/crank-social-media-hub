@@ -4,26 +4,18 @@ import strapiAxios from "@/lib/strapiAxios";
 const AUTH_URL = "https://api.instagram.com/oauth/authorize";
 const TOKEN_URL = "https://api.instagram.com/oauth/access_token";
 const LONG_LIVED_TOKEN_URL = "https://graph.instagram.com/access_token";
-const domain = "https://national-easy-dingo.ngrok-free.app";
 
-async function getStrapi() {
+async function getStrapi(path) {
   try {
-    const res = await strapiAxios().get("/social-media-instagram");
-    const { api_client_id, api_client_secret, api_redirect_uri } =
-      res.data.attributes;
-    return {
-      api_client_id,
-      api_client_secret,
-      api_redirect_uri,
-    };
+    const result = await strapiAxios().get(path);
+    return result.data.data.attributes;
   } catch (error) {
     return { status: false };
   }
 }
 
 function firstOAuthStep(api_client_id, api_redirect_uri) {
-  const firstUrl = `${AUTH_URL}?client_id=${api_client_id}&redirect_uri=${api_redirect_uri}&scope=user_profile,user_media&response_type=code`;
-  res.redirect(firstUrl);
+  return `${AUTH_URL}?client_id=${api_client_id}&redirect_uri=${api_redirect_uri}&scope=user_profile,user_media&response_type=code`;
 }
 
 async function secondOAuthAccessTokenStep(
@@ -52,31 +44,39 @@ async function secondOAuthAccessTokenStep(
     );
     return tokenResponse.data;
   } catch (error) {
-    res.status(500).json({ if: "request", req: error.message | "" });
+    console.error(
+      "ERR",
+      { method: "secondOAuthAccessTokenStep" },
+      { message: error.message }
+    );
+    throw error;
   }
 }
 
 // This doesnt have to be saved or used. Getting the long lived access token. Can put user id then if need be
 // @TODO make this the one after getting the long lived
-async function postShortLivedToken(userId, accessToken, expiresIn) {
+async function postLongtLivedToken(userId, accessToken, expiresIn) {
   try {
     const updated = Math.floor(Date.now() / 1000);
 
-    const res = await strapiAxios().put("/social-media-instagram", {
+    const response = await strapiAxios().put("/social-media-instagram", {
       data: {
-        user_id: userId,
+        user_id: String(userId),
         api_access_token: accessToken,
         api_token_expiry: expiresIn,
         last_updated: updated,
       },
     });
     // things worked out.
-    const res2 = await strapiAxios().get("/social-media-instagram");
-    res.status(200).json(res2.data.attributes);
-    return;
+    console.log("postShortLivedToken put", response.data.data.attributes);
+    return response.data.data;
   } catch (error) {
-    res.status(500).json({ status: failure, message: error.message });
-    console.log("didnt post up access token");
+    console.error(
+      "ERR didnt post up access token",
+      { method: "postLongtLivedToken" },
+      error.message
+    );
+    throw error;
   }
 }
 
@@ -85,15 +85,10 @@ const exchangeShortForLongToken = async (
   shortLivedToken: string
 ) => {
   try {
-    // const params = {
-    //   grant_type: "ig_exchange_token",
-    //   client_secret: process.env.INSTAGRAM_CLIENT_SECRET,
-    //   access_token: shortLivedToken,
-    // };
-    // const response = await axios.get(TOKEN_URL, { params });
-    const url = `${TOKEN_URL}?grant_type=ig_exchange_token&client_secret=${clientSecret}&access_token=${shortLivedToken}`;
+    const url = `${LONG_LIVED_TOKEN_URL}?grant_type=ig_exchange_token&client_secret=${clientSecret}&access_token=${shortLivedToken}`;
     const response = await axios.get(url);
     const result = response.data;
+    console.log("exchangeShortForLongToken result", result);
 
     if (
       result.access_token &&
@@ -107,40 +102,33 @@ const exchangeShortForLongToken = async (
         expiresIn: result.expires_in,
       };
     } else {
-      return {
-        success: false,
-        error: "Failed to exchange short-lived token for a long-lived token.",
-      };
+      console.error(
+        { method: "exchangeShortForLongToken else" },
+        {
+          message:
+            "Failed to exchange short-lived token for a long-lived token",
+        }
+      );
+      throw new Error(
+        "Failed to exchange short-lived token for a long-lived token"
+      );
     }
   } catch (error) {
-    console.error("Error exchanging short-lived token:", error);
-    return { success: false, error: error.message };
+    console.error(
+      "ERR exchanging short-lived token:",
+      { method: "exchangeShortForLongToken catch" },
+      error.message
+    );
+    throw error;
   }
 };
 
 export default async function handler(req, res) {
-  const { api_client_id, api_client_secret, api_redirect_uri } =
-    await getStrapi();
   try {
+    const { api_client_id, api_client_secret, api_redirect_uri } =
+      await getStrapi("/social-media-instagram");
     const code = req.query.code;
     if (code) {
-      // const data = {
-      //   client_id: api_client_id,
-      //   client_secret: api_client_secret,
-      //   grant_type: "authorization_code",
-      //   redirect_uri: api_redirect_uri,
-      //   code: code.endsWith("#_") ? code.slice(0, -2) : code,
-      // };
-
-      // const tokenResponse = await axios.post(
-      //   TOKEN_URL,
-      //   new URLSearchParams(data).toString(),
-      //   {
-      //     headers: {
-      //       "Content-Type": "application/x-www-form-urlencoded",
-      //     },
-      //   }
-      // );
       const tokenResponse = await secondOAuthAccessTokenStep(
         api_client_id,
         api_client_secret,
@@ -148,31 +136,22 @@ export default async function handler(req, res) {
         code
       );
 
-      // @TODO take the data and push to exchange for long term token
       const firstLongLiveTokenRes = await exchangeShortForLongToken(
         api_client_secret,
         tokenResponse.access_token
       );
 
-      // const { success, longLivedToken, expiresIn } = firstLongLiveTokenRes;
-      // success: true,
-      // longLivedToken: result.access_token,
-      // expiresIn: result.expires_in,
-
-      // verify thiss is
-      const shortLivedRes = await postShortLivedToken(
+      const shortLivedRes = await postLongtLivedToken(
         tokenResponse.user_id,
         firstLongLiveTokenRes.longLivedToken,
         firstLongLiveTokenRes.expiresIn
       );
-      // run long term exchange token method
-      // put the changes up to the server: api_token_expiry, last_updated, api_access_token
 
-      res.status(200).json(res2);
+      res.status(200).json(shortLivedRes.attributes);
       return;
-      // }
     } else {
-      firstOAuthStep(api_client_id, api_redirect_uri);
+      res.redirect(firstOAuthStep(api_client_id, api_redirect_uri));
+      return;
     }
   } catch (error) {
     if (error.response) {
@@ -186,6 +165,6 @@ export default async function handler(req, res) {
     } else {
       res.status(500).json({ if: "else", msg: error.message });
     }
-    console.error(error.config);
+    console.error("ERR", error.config);
   }
 }
