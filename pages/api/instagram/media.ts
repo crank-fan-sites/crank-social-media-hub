@@ -1,13 +1,29 @@
 import axios from "axios";
+import strapiAxios from "@/lib/strapiAxios";
 
 const { parseISO } = require("date-fns/parseISO");
 
-const INSTAGRAM_API_URL = "https://graph.instagram.com/";
-const token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
+const INSTAGRAM_API_URL = "https://graph.instagram.com";
+
+async function getStrapi(path) {
+  try {
+    const result = await strapiAxios().get(path);
+    return result.data.data.attributes;
+  } catch (error) {
+    return { status: false };
+  }
+}
 
 export default async function handler(req, res) {
-  const url = `${INSTAGRAM_API_URL}me/media`;
+  let apiAccessToken = null;
+  try {
+    const { api_access_token } = await getStrapi("/social-media-instagram");
+    apiAccessToken = api_access_token;
+  } catch (error) {
+    throw `Strapi get IG not working. | ${error.status} status. msg: ${error.message}`;
+  }
 
+  const url = `${INSTAGRAM_API_URL}/me/media`;
   const params = new URLSearchParams();
   const fields = [
     "id",
@@ -23,7 +39,7 @@ export default async function handler(req, res) {
 
   const response = await axios.get(`${url}?${params.toString()}`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${apiAccessToken}`,
     },
   });
   if (response.status !== 200) {
@@ -32,8 +48,8 @@ export default async function handler(req, res) {
 
   const { data } = response;
 
-  let result = [];
-  Object.values(data.data).forEach((item) => {
+  const result: any[] = [];
+  Object.values(data.data).forEach((item: any) => {
     const createdDate = parseISO(item.timestamp);
 
     const media = {
