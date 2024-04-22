@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { TwitchEmbed } from "react-twitch-embed";
+import { TwitchPlayer } from "react-twitch-embed";
 
 const Twitch: NextPage = (props: any) => {
-  const [channel, setChannel] = useState(null);
+  const [highlighted, setHighlighted] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -15,7 +15,7 @@ const Twitch: NextPage = (props: any) => {
           throw new Error("Network response was not ok");
         }
         const thedata = await response.json();
-        setChannel(thedata.channel_handle);
+        setHighlighted(thedata.highlighted_playlist);
       } catch (error) {
         setError(error);
       } finally {
@@ -30,18 +30,14 @@ const Twitch: NextPage = (props: any) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="">
-      <TwitchEmbed
-        channel={channel}
-        autoplay
+    <div className="twitch-player-container">
+      <TwitchPlayer
+        collection={highlighted || undefined}
+        autoplay={false}
         muted
-        hideControls={false}
+        width={props.width || 540}
         height={props.height || 480}
-        width={props.width || 960}
-        className="lolcopter"
-        withChat={true}
       />
-      {/* Render your data here */}
     </div>
   );
 };

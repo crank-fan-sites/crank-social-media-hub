@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 
 import { TwitchPlayer } from "react-twitch-embed";
+import TwitchHighlights from "@/components/twitch-highlights";
 
 import Image from "next/image";
 import {
@@ -18,16 +19,7 @@ const Row1: NextPage = () => {
           <HeadingH2 className="text-base group-hover:text-background group-hover:font-bold">
             Highlighted Twitch Clips
           </HeadingH2>
-          <div className="twitch-player-container">
-            <TwitchPlayer
-              // channel="unelectableairwaves"
-              collection="Fx6m6WjAdhfwig"
-              autoplay={false}
-              muted
-              width={540}
-              height={480}
-            />
-          </div>
+          <TwitchHighlights width={540} height={480} />
         </div>
       </div>
       <div className="items-center justify-center hidden p-0 lg:flex">
