@@ -5,7 +5,6 @@ import InstagramPost from "./instagram-post";
 
 const InstagramPosts: NextPage = () => {
   const [media, setMedia] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchMedia = async () => {

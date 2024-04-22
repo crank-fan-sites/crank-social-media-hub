@@ -56,11 +56,11 @@ const useStrapiAxios = ({ path, method, body = null }: StrapiAxiosParams) => {
   return { response, error, loading };
 };
 
-const useGetStrapiAxios = ({ path }: { path: string }) => {
+const useGetStrapiAxios = (path: string) => {
   return useStrapiAxios({ method: "get", path });
 };
 
-const useDelStrapiAxios = ({ path }: { path: string }) => {
+const useDelStrapiAxios = (path: string) => {
   return useStrapiAxios({ method: "delete", path });
 };
 
