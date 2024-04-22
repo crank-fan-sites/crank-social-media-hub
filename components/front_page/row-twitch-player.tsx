@@ -14,7 +14,7 @@ import { Icons } from "@/components/icons";
 
 import TwitchEmbed from "@/components/twitch-player";
 
-const TopSection: NextPage = () => {
+const TwitchRow: NextPage = () => {
   return (
     <div>
       <div className="grid grid-cols-1 py-1 border-t bg-primary place-items-center border-stone-400 dark:border-stone-600">
@@ -32,4 +32,4 @@ const TopSection: NextPage = () => {
   );
 };
 
-export default TopSection;
+export default TwitchRow;

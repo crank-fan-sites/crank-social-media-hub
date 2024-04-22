@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { MainLayout } from "@/layouts/layout";
 import { Button } from "@/components/ui/button";
 
-import RowTopSection from "@/components/front_page/row-top-section";
+import RowTwitchPlayer from "@/components/front_page/row-twitch-player";
 
 import Link from "next/link";
 import {
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
           />
         </div>
 
-        <RowTopSection />
+        <RowTwitchPlayer />
 
         {/* content */}
         <div className="mx-auto max-w-7xl">
