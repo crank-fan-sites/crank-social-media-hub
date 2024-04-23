@@ -1,36 +1,52 @@
 import type { NextPage } from "next";
 
-import { useEffect, useRef } from "react";
-import { useRouter } from "next/router";
-
-import { Button } from "@/components/ui/button";
-import {
-  HeadingH1,
-  HeadingH2,
-  HeadingH3,
-  Paragraph,
-} from "@/components/typography";
+import { useEffect, useRef, useState } from "react";
 
 const YouTube: NextPage = () => {
-  const router = useRouter();
+  const [channel, setChannel] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const yt = useRef(null); // Initialize the ref
-  const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/youtube/content");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const thedata = await response.json();
+        setChannel(thedata.channel_id);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+
+  // const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
   var reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
 
-  async function getYTJson() {
+  async function getYTJson(channelId) {
     try {
       const reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
-      const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
+      // const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
       const response = await fetch(
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-          reqURL + channelID
+          reqURL + channelId
         )}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const responseJson = await response.json();
-      console.log("Response JSON:", responseJson); // Debug: Log the response JSON
+      // console.log("Response JSON:", responseJson); // Debug: Log the response JSON
 
       if (responseJson.items && responseJson.items.length > 0) {
         const link = responseJson.items[0].link;
@@ -50,19 +66,24 @@ const YouTube: NextPage = () => {
 
   // Call getYTJson when the component mounts
   useEffect(() => {
-    getYTJson();
-  }, []);
+    getYTJson(channel);
+  }, [channel]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <iframe
-      ref={yt} // Assign the ref to the iframe
-      id="youtube_video"
-      width="600"
-      height="340"
-      frameBorder="0"
-      allowFullScreen
-      title="Unelectable Latest YouTube Video"
-    ></iframe>
+    channel && (
+      <iframe
+        ref={yt} // Assign the ref to the iframe
+        id="youtube_video"
+        width="600"
+        height="340"
+        frameBorder="0"
+        allowFullScreen
+        title="Unelectable Latest YouTube Video"
+      ></iframe>
+    )
   );
 };
 
