@@ -1,6 +1,18 @@
 import { Client, GatewayIntentBits } from "discord.js";
+import strapiAxios from "@/lib/strapiAxios";
+
+async function getStrapi(path) {
+  try {
+    const result = await strapiAxios().get(path);
+    return result.data.data.attributes;
+  } catch (error) {
+    return { status: false };
+  }
+}
 
 export default async function handler(req, res) {
+  const { channel_id } = await getStrapi("/social-media-discord");
+
   const client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
@@ -10,7 +22,7 @@ export default async function handler(req, res) {
   });
 
   client.once("ready", async () => {
-    const channel = await client.channels.fetch("855475575217061904");
+    const channel = await client.channels.fetch(channel_id);
     const messages = await channel.messages.fetch({ limit: 25 });
     res.status(200).json(messages);
     // res.status(200).json(messages.map((message) => message));
