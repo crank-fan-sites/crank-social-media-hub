@@ -8,33 +8,61 @@ import RedditPost from "./reddit-post";
 
 const Reddit: NextPage = (props: any) => {
   const [extractedPosts, setExtractedPosts] = useState<any[]>([]);
+  const [subreddit, setSubreddit] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const subreddit = "UnelectableAirwaves"; // Replace with your desired subreddit
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/reddit/content");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const thedata = await response.json();
+        setSubreddit(thedata.subreddit);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!subreddit) {
+      return;
+    }
     fetchRedditData(subreddit)
       .then((data) => {
         const posts = extractPostDetails(data);
         setExtractedPosts(posts);
       })
       .catch((error) => console.error(error));
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [subreddit]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
-      {extractedPosts.map((post, index) => (
-        <RedditPost
-          key={index}
-          title={post.title}
-          selftext={post.selftext}
-          author={post.author}
-          crosspost={post.crosspost}
-          ups={post.ups}
-          created={post.created}
-          permalink={post.permalink}
-          url={post.url}
-          link_flair_type={post.link_flair_path}
-        />
-      ))}
+      {extractedPosts.length > 0 &&
+        extractedPosts.map((post, index) => (
+          <RedditPost
+            key={index}
+            title={post.title}
+            selftext={post.selftext}
+            author={post.author}
+            crosspost={post.crosspost}
+            ups={post.ups}
+            created={post.created}
+            permalink={post.permalink}
+            url={post.url}
+            link_flair_type={post.link_flair_path}
+          />
+        ))}
     </div>
   );
 };
@@ -53,7 +81,9 @@ interface RedditResponse {
   };
 }
 
-async function fetchRedditData(subreddit: string): Promise<RedditResponse> {
+async function fetchRedditData(
+  subreddit: string | null
+): Promise<RedditResponse> {
   const url = `https://www.reddit.com/r/${subreddit}.json`;
   try {
     const response = await axios.get<RedditResponse>(url);
