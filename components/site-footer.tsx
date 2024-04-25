@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "next-themes";
 import { links } from "@/lib/links";
 import { HeadingH6 } from "./typography";
+import FooterLinks from "@/components/footer-links";
 
 export function SiteFooter() {
   const { theme } = useTheme();
@@ -15,23 +16,9 @@ export function SiteFooter() {
     <footer className="w-full border-t border-b bg-primary border-stone-400 dark:border-stone-600">
       <div className="flex flex-col md:flex-row">
         <div className="w-full px-2 py-12 md:w-7/12 md:px-4 md:border-r border-stone-400 dark:border-stone-600">
-          <HeadingH6>look at this stuff</HeadingH6>
+          <HeadingH6>Links</HeadingH6>
           <div className="grid grid-cols-1 gap-y-2">
-            {links.map((link) => {
-              return (
-                <div className="mt-4" key={link.id}>
-                  <div>
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      className="hover:underline hover:italic"
-                    >
-                      {link.title}
-                    </a>
-                  </div>
-                </div>
-              );
-            })}
+            <FooterLinks />
           </div>
         </div>
 
