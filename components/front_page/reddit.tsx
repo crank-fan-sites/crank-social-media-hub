@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-// import { promises as fs } from "fs";
 
 import RedditPost from "./reddit-post";
 

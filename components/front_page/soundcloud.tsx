@@ -39,8 +39,8 @@ const Soundcloud: NextPage = () => {
       </HeadingH3>
       {data.length > 0 &&
         data.map((item) => (
-          <div className="mb-10">
-            <SoundCloudPlayer key={item.id} trackUrl={item.url} />
+          <div className="mb-10" key={item.id}>
+            <SoundCloudPlayer trackUrl={item.url} />
           </div>
         ))}
     </div>

@@ -5,7 +5,8 @@ async function getStrapi(path) {
     const result = await strapiAxios().get(path);
     return result.data.data.attributes;
   } catch (error) {
-    return { status: false };
+    throw Error;
+    // return { status: false };
   }
 }
 
