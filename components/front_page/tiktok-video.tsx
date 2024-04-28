@@ -68,6 +68,9 @@ const TiktokVideo: NextPage = () => {
   }
 
   useEffect(() => {
+    if (videoInfo.creator == null || videoInfo.id == null) {
+      return;
+    }
     start();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [videoInfo]);
