@@ -17,7 +17,7 @@ export default async function handler(req, res) {
     const campaignId = response.data.data[0].id; // Assuming the user has at least one campaign
     res
       .status(200)
-      .json({ status: response.status, campaigns, id: campaignId });
+      .json({ status: response.status, campaigns, firstCampaign: campaignId });
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
