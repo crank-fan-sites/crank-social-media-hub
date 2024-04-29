@@ -44,8 +44,10 @@ const YoutubePlaylist: NextPage = () => {
 
   // Use useEffect to set the src of the iframe after the component mounts
   useEffect(() => {
-    if (ytPlaylist.current) {
-      ytPlaylist.current.src = generatePlaylistEmbedUrl(playlistId);
+    if (playlistId) {
+      if (ytPlaylist.current) {
+        ytPlaylist.current.src = generatePlaylistEmbedUrl(playlistId);
+      }
     }
   }, [playlistId]); // Depend on playlistID so it updates if the ID changes
 

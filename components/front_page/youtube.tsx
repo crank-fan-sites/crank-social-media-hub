@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 import { useEffect, useRef, useState } from "react";
 
 const YouTube: NextPage = () => {
@@ -27,16 +26,9 @@ const YouTube: NextPage = () => {
     fetchData();
   }, []);
 
-  // if (loading) return <div>Loading...</div>;
-  // if (error) return <div>Error: {error.message}</div>;
-
-  // const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
-  var reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
-
   async function getYTJson(channelId) {
     try {
       const reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
-      // const channelID = "UC7u4D4F6H1itVNM9wHe6PCw";
       const response = await fetch(
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
           reqURL + channelId
@@ -46,12 +38,10 @@ const YouTube: NextPage = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const responseJson = await response.json();
-      // console.log("Response JSON:", responseJson); // Debug: Log the response JSON
 
       if (responseJson.items && responseJson.items.length > 0) {
         const link = responseJson.items[0].link;
         const id = link.substr(link.indexOf("=") + 1);
-        console.log("Video ID:", id); // Debug: Log the video ID
 
         if (yt.current) {
           yt.current.src = `https://youtube.com/embed/${id}?controls=0&showinfo=0&rel=0`;
@@ -66,7 +56,9 @@ const YouTube: NextPage = () => {
 
   // Call getYTJson when the component mounts
   useEffect(() => {
-    getYTJson(channel);
+    if (channel && !yt.current) {
+      getYTJson(channel);
+    }
   }, [channel]);
 
   if (loading) return <div>Loading...</div>;

@@ -8,31 +8,22 @@ const PatreonLatestPosts: NextPage = () => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
-    // const url = `http://localhost:8000/functions/patreon/crank`;
-    // fetch("/api/discordMessages")
-    // .then((response) => response.json())
-    // .then(setMessages);
     const url = `/api/patreon/posts`;
-
     axios
       .get(url)
       .then((response) => {
-        console.log("wtf1");
         console.log(response.data.data.length);
         // const postsArray = Object.values(response.data);
         setPosts(response.data);
       })
       .catch((error) => {
-        console.log("wtf2");
         console.error("Error fetching Patreon posts:", error);
       });
-    console.log("wtf99");
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   return (
     <div className="px-2 py-6 group md:p-8 lg:p-12">
       {posts &&
-        // <></>
         posts.data.map((post, index) => (
           <PatreonPost
             key={index}
