@@ -13,18 +13,20 @@ const DiscordMessage: NextPage = (props: any) => {
   const {
     content,
     createdAt,
-    // author,
-    // reactions,
+    author,
+    reactions,
     // embeds,
     // attachments
   } = props;
   const date = new Date(createdAt);
-  const readableDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  const readableDate = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
   return (
-    <div className="p-2 discord-message">
-      <p>{content}</p>
-      <p>on {readableDate}</p>
-      <p>{/* <Link href={url}>Jump to this in Discord</Link> */}</p>
+    <div className="pb-4 pr-2 pl-2 max-w-xl mx-auto mt-1">
+      <div className="flex justify-between items-center">
+        <span className="text-sm font-light text-gray-600">{readableDate}</span>
+      </div>
+      <p className="mt-2 text-md break-words">{content}</p>
+      <div className="border-b border-dashed border-gray-400 mt-3"></div>
     </div>
   );
 };

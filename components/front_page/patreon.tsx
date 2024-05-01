@@ -22,7 +22,7 @@ const PatreonLatestPosts: NextPage = () => {
   }, []);
 
   return (
-    <div className="px-2 py-6 group md:p-8 lg:p-12">
+    <div className="px-2 py-6 group md:p-1 lg:p-2">
       {posts &&
         posts.data.map((post, index) => (
           <PatreonPost

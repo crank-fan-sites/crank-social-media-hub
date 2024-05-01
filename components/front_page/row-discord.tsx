@@ -40,7 +40,7 @@ const RowDiscord: NextPage = () => {
         <HeadingH3 className="text-base group-hover:font-bold">
           Recent Discord {info.name} Chat Messages
         </HeadingH3>
-        <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
+        <div className="grid grid-cols-1 bg-primary border-stone-400 dark:border-stone-600">
           <Discord />
         </div>
       </div>
