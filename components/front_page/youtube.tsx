@@ -5,7 +5,7 @@ const YouTube: NextPage = () => {
   const [channel, setChannel] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const yt = useRef(null); // Initialize the ref
+  const yt = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,9 +31,10 @@ const YouTube: NextPage = () => {
       const reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
       const response = await fetch(
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-          reqURL + channelId
+          reqURL + channel
         )}`
       );
+      console.log("res", response);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -56,9 +57,10 @@ const YouTube: NextPage = () => {
 
   // Call getYTJson when the component mounts
   useEffect(() => {
-    if (channel && !yt.current) {
+    if (channel && yt.current) {
       getYTJson(channel);
     }
+    console.log("c", channel);
   }, [channel]);
 
   if (loading) return <div>Loading...</div>;
