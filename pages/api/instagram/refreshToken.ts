@@ -1,9 +1,14 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 import strapiAxios from "@/lib/strapiAxios";
 
 const REFRESH_URL = "https://graph.instagram.com/refresh_access_token";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const result = await ensureAuth();
     res.status(200).json(result.attributes);

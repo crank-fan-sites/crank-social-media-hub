@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 
 const AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
@@ -8,7 +10,10 @@ const CLIENT_SECRET = process.env.NEXT_PUBLIC_YT_CLIENT_SECRET;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_YT_AUTH_REDIRECT_URL;
 const scope = "https://www.googleapis.com/auth/youtube.readonly";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const code = req.query.code;
     if (code) {

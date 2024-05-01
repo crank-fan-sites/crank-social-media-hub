@@ -1,7 +1,12 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 import getStrapi from "@/lib/getStrapi";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { campaign_id, access_token } = await getStrapi(
     "/social-media-patreon"
   );

@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import strapiAxios from "@/lib/strapiAxios";
 
 async function getStrapi(path) {
@@ -9,7 +11,10 @@ async function getStrapi(path) {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const { channel_id, playlist_id } = await getStrapi(
       "/social-media-youtube"

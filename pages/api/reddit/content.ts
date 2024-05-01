@@ -1,4 +1,5 @@
 import strapiAxios from "@/lib/strapiAxios";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 async function getStrapi(path) {
   try {
@@ -9,7 +10,10 @@ async function getStrapi(path) {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const { subreddit } = await getStrapi("/social-media-reddit");
     res.status(200).json({ subreddit });

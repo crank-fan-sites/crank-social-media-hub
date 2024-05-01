@@ -1,7 +1,12 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 import getStrapi from "@/lib/getStrapi";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const accessToken = (await getStrapi("/social-media-patreon")).access_token;
   const url = `https://www.patreon.com/api/oauth2/api/current_user/campaigns?include=campaigns&fields${encodeURIComponent(
     "["

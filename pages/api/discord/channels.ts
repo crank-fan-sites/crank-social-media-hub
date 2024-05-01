@@ -1,3 +1,4 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import { Client, GatewayIntentBits } from "discord.js";
 import strapiAxios from "@/lib/strapiAxios";
 
@@ -10,7 +11,10 @@ async function getStrapi(path) {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const { guild_id } = await getStrapi("/social-media-discord");
   const client = new Client({
     intents: [

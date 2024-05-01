@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 const { formatISO } = require("date-fns/formatISO");
 // const parseISO = require("date-fns/parseISO");
@@ -6,7 +8,10 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_YT_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_YT_CLIENT_SECRET;
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const result = await ensureAuth();
   res.status(200).json(result);
 }

@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 import strapiAxios from "@/lib/strapiAxios";
 
@@ -14,7 +16,10 @@ async function getStrapi(path) {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   let apiAccessToken = null;
   try {
     const { api_access_token } = await getStrapi("/social-media-instagram");

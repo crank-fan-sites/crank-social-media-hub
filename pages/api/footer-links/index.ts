@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 import strapiAxios from "@/lib/strapiAxios";
 
@@ -10,7 +12,10 @@ async function getStrapi(path) {
   }
 }
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const response = await getStrapi("/footer-links");
     const flattenedResponse = response.map((item) => ({

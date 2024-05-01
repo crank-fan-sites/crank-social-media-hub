@@ -1,10 +1,15 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 
 const AUTH_URL = "https://www.tiktok.com/v2/auth/authorize/";
 const TOKEN_URL = "https://api.instagram.com/oauth/access_token";
 const domain = "https://national-easy-dingo.ngrok-free.app";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const clientKey = process.env.NEXT_PUBLIC_TIKTOK_CLIENT_KEY;
   const clientSecret = process.env.NEXT_PUBLIC_TIKTOK_CLIENT_SECRET;
   const redirectUri = process.env.NEXT_PUBLIC_TIKTOK_AUTH_REDIRECT_URL;

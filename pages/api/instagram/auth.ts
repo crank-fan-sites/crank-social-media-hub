@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 import strapiAxios from "@/lib/strapiAxios";
 
@@ -123,7 +125,10 @@ const exchangeShortForLongToken = async (
   }
 };
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const { api_client_id, api_client_secret, api_redirect_uri } =
       await getStrapi("/social-media-instagram");

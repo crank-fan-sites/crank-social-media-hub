@@ -1,9 +1,14 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 
 const INSTAGRAM_API_URL = "https://graph.instagram.com/";
 const token = process.env.NEXT_PUBLIC_INSTAGRAM_ACCESS_TOKEN;
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const params = new URLSearchParams();
   const fields = ["id", "username", "media_count"];
   params.append("fields", fields.join(","));

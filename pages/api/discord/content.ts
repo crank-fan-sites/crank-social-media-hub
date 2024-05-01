@@ -8,8 +8,12 @@ async function getStrapi(path) {
     return { status: false };
   }
 }
+import type { NextApiRequest, NextApiResponse } from "next";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   try {
     const { channel_name, channel_id, widget_url } = await getStrapi(
       "/social-media-discord"

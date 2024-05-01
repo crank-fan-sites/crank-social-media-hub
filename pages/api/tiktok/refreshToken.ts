@@ -1,10 +1,15 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 const formatISO = require("date-fns/formatISO");
 // const parseISO = require("date-fns/parseISO");
 
 const TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const result = await ensureAuth();
   res.status(200).json(result);
 }

@@ -1,3 +1,5 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 import axios from "axios";
 
 // const YT_AUTH_URL = "https://api.instagram.com/oauth/authorize";
@@ -7,7 +9,10 @@ const token = process.env.NEXT_PUBLIC_YT_API_KEY;
 const videoId = "GDbJqRwNp5E";
 const channelUsername = "unelectableairwaves";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   // return;
   // const channelId = req.query.channelId; // Assuming the channel ID is passed as a query parameter
 
