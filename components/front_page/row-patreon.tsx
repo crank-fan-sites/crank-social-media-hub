@@ -21,7 +21,7 @@ const PatreonRow: NextPage = () => {
         />
       </div>
       <div className="col-span-1 px-2 py-6 border-b md:border-r xl:col-span-3 group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
-        <HeadingH3 className="p-0 m-0 text-base group-hover:text-background group-hover:font-bold">
+        <HeadingH3 className="p-0 m-0 text-base group-hover:font-bold">
           Latest Patreon Posts
         </HeadingH3>
         <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">

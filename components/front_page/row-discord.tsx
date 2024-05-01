@@ -37,7 +37,7 @@ const RowDiscord: NextPage = () => {
   return (
     <div className="grid grid-cols-1 border-t md:grid-cols-5 bg-primary border-stone-400 dark:border-stone-600">
       <div className="col-span-5 px-2 py-6 border-b lg:col-span-3 group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
-        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+        <HeadingH3 className="text-base group-hover:font-bold">
           Recent Discord {info.name} Chat Messages
         </HeadingH3>
         <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
@@ -45,7 +45,7 @@ const RowDiscord: NextPage = () => {
         </div>
       </div>
       <div className="col-span-5 px-2 py-6 border-b lg:col-span-2 group lg:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
-        <HeadingH3 className="text-base group-hover:text-background group-hover:font-bold">
+        <HeadingH3 className="text-base group-hover:font-bold">
           Discord Widget
         </HeadingH3>
 
