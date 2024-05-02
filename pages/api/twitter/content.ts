@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import getStrapi from "@/lib/getStrapi";
+import { getStrapi } from "@/lib/getStrapi";
 
 export default async function handler(
   req: NextApiRequest,

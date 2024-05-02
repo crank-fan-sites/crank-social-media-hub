@@ -1,14 +1,5 @@
-import strapiAxios from "@/lib/strapiAxios";
-
-async function getStrapi(path) {
-  try {
-    const result = await strapiAxios().get(path);
-    return result.data.data.attributes;
-  } catch (error) {
-    return { status: false };
-  }
-}
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getStrapi } from "@/lib/getStrapi";
 
 export default async function handler(
   req: NextApiRequest,
