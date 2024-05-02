@@ -60,7 +60,6 @@ const YouTube: NextPage = () => {
     if (channel && yt.current) {
       getYTJson(channel);
     }
-    console.log("c", channel);
   }, [channel]);
 
   if (loading) return <div>Loading...</div>;

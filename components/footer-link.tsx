@@ -1,7 +1,5 @@
 import { NextPage } from "next";
 
-import { Button } from "@/components/ui/button";
-
 const Link: NextPage = ({ title, url }) => {
   return (
     <div className="mt-4">
