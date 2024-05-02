@@ -1,23 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import axios from "axios";
-import strapiAxios from "@/lib/strapiAxios";
-
-async function getStrapi(path) {
-  try {
-    const result = await strapiAxios().get(path);
-    return result.data.data;
-  } catch (error) {
-    return { status: false };
-  }
-}
+import { getStrapiMultiple } from "@/lib/getStrapi";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    const response = await getStrapi("/social-media-soundclouds");
+    const response = await getStrapiMultiple("/social-media-soundclouds");
     const flattenedResponse = response.map((item) => ({
       id: item.id,
       ...item.attributes,

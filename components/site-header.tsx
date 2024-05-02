@@ -24,7 +24,8 @@ export function SiteHeader() {
         >
           Crank Communism <span className="text-lg">☭</span>
         </span>
-        <MainNav items={siteConfig.mainNav} />
+        <MainNav />
+
         <span className="flex md:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger>

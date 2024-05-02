@@ -1,30 +1,49 @@
-import * as React from 'react';
-import Link from 'next/link';
-import { NavItem } from '@/types/nav';
-import { cn } from '@/lib/utils';
-import { Icons } from './icons';
-interface MainNavProps {
-  items?: NavItem[];
-}
+import * as React from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { Icons } from "./icons";
 
-export function MainNav({ items }: MainNavProps) {
+export function MainNav() {
+  const [links, setLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/header-links");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const thedata = await response.json();
+        setLinks(thedata);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
   return (
     <div className="hidden md:flex md:pl-4 gap-6 md:gap-10">
-      {items?.length ? (
+      {links?.length ? (
         <nav className="flex gap-6">
-          {items?.map(
+          {links?.map(
             (item, index) =>
-              item.href && (
+              item.url && (
                 <Link
                   key={index}
-                  href={item.href}
-                  target={item.target}
+                  href={item.url}
+                  target="_blank"
                   className={cn(
-                    'flex items-center text-sm font-light uppercase underline-offset-4 hover:underline',
-                    item.disabled &&
-                      'cursor-not-allowed opacity-80 hover:no-underline'
+                    "flex items-center text-sm font-light uppercase underline-offset-4 hover:underline"
                   )}
-                  aria-disabled={item.disabled}
                 >
                   {item.title}
                   {item.external && (

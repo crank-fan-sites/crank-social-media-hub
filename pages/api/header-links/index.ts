@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    const response = await getStrapiMultiple("/footer-links");
+    const response = await getStrapiMultiple("/header-links");
     const flattenedResponse = response.map((item) => ({
       id: item.id,
       ...item.attributes,
