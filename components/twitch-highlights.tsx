@@ -24,21 +24,22 @@ const Twitch: NextPage = (props: any) => {
     };
 
     fetchData();
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, []);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
   return (
-    <div className="twitch-player-container">
-      <TwitchPlayer
-        collection={highlighted || undefined}
-        autoplay={false}
-        muted
-        width={props.width || 540}
-        height={props.height || 480}
-      />
-    </div>
+    highlighted && (
+      <div className="twitch-player-container">
+        <TwitchPlayer
+          collection={highlighted || undefined}
+          autoplay={false}
+          muted
+          width={props.width || 540}
+          height={props.height || 480}
+        />
+      </div>
+    )
   );
 };
 
