@@ -1,30 +1,39 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import PatreonPost from "./patreon-post";
 
 const PatreonLatestPosts: NextPage = () => {
-  const [posts, setPosts] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const url = `/api/patreon/posts`;
-    axios
-      .get(url)
-      .then((response) => {
-        console.log(response.data.data.length);
-        // const postsArray = Object.values(response.data);
-        setPosts(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching Patreon posts:", error);
-      });
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/patreon/posts");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const thedata = await response.json();
+        setPosts(thedata.data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
   return (
     <div className="px-2 py-6 group md:p-1 lg:p-2">
       {posts &&
-        posts.data.map((post, index) => (
+        posts.length > 0 &&
+        posts.map((post, index) => (
           <PatreonPost
             key={index}
             title={post.attributes.title}
