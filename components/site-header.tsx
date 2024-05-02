@@ -1,16 +1,6 @@
-import Link from "next/link";
-import { siteConfig } from "@/config/site";
-import { Icons } from "./icons";
-import { MainNav } from "./main-nav";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
+import { MainNav } from "./main-nav";
 
 export function SiteHeader() {
   const { theme } = useTheme();
@@ -25,42 +15,6 @@ export function SiteHeader() {
           Crank Communism <span className="text-lg">☭</span>
         </span>
         <MainNav />
-
-        <span className="flex md:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <span className="uppercase text-sm flex flex-row">
-                Menu
-                <Icons.menu className="h-5 w-5 ml-1" strokeWidth="1.5" />
-              </span>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-stone-50 dark:bg-stone-900 rounded-none border border-stone-400 dark:border-stone-600">
-              <DropdownMenuItem onClick={() => router.push("/")}>
-                Home
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push("/blog")}>
-                Zine
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push("/3rd")}>
-                3rd
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => router.push("/contact")}>
-                Contact
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  href="/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex flex-row align-middle"
-                >
-                  Other{" "}
-                  <Icons.arrowUpRight strokeWidth="1.5" className="h-4 w-4" />
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </span>
       </div>
     </header>
   );
