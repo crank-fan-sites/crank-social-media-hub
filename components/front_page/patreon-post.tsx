@@ -26,13 +26,13 @@ const PatreonPost: NextPage = (props: any) => {
   const patreonHandle = "chase_saddy";
 
   return (
-    <div className="max-w-4xl mx-auto p-1 pb-5 rounded-lg shadow-md">
-      <HeadingH4 className="text-2xl font-bold text-gray-500 mb-3">
+    <div className="p-1 pb-4 rounded-lg shadow-md">
+      <HeadingH4 className="text-2xl font-bold text-gray-500 mb-0 pb-2">
         {title}
       </HeadingH4>
       <p className="text-sm text-gray-600">{readableDate}</p>
       <div
-        className="prose max-w-none mt-1"
+        className="text-sm prose max-w-none mt-1"
         dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
       ></div>
       <p className="mt-1 italic text-sm">
@@ -48,16 +48,18 @@ const PatreonPost: NextPage = (props: any) => {
         <div className="patreon-embedding p-4 mt-1 rounded-lg">
           {embed_data.html && (
             <>
-              <HeadingH5 className="text-lg font-semibold text-orange-600 mb-2">
-                <i className="fas fa-external-link-alt mr-2 text-pink-500"></i>
+              <HeadingH5 className="text-lg font-semibold text-orange-800 mb-0">
+                <i className="fas fa-external-link-alt mr-2 text-pink-700"></i>
                 <span className="italic">Embedded Content</span>
               </HeadingH5>
               <a
                 href={embed_url}
                 target="_blank"
-                className="text-sm text-pink-600 hover:text-pink-700 font-medium"
+                className="text-sm text-pink-800 hover:text-pink-700 font-medium"
               >
-                {embed_data.subject}
+                <span className="text-sm text-pink-800">
+                  {embed_data.subject}
+                </span>
               </a>
             </>
           )}

@@ -21,7 +21,7 @@ const DiscordMessage: NextPage = (props: any) => {
   const date = new Date(createdAt);
   const readableDate = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
   return (
-    <div className="pb-4 pr-2 pl-2 max-w-xl mx-auto mt-1">
+    <div className="pb-4 pr-2 pl-2 mt-1">
       <div className="flex justify-between items-center">
         <span className="text-sm font-light text-gray-600">{readableDate}</span>
       </div>

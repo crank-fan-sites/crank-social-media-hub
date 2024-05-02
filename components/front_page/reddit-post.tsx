@@ -1,10 +1,8 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
 
 import axios from "axios";
-// import { promises as fs } from "fs";
 
-const Reddit: NextPage = (props: any) => {
+const RedditPost: NextPage = (props: any) => {
   const {
     title,
     selftext,
@@ -16,91 +14,58 @@ const Reddit: NextPage = (props: any) => {
     url,
     link_flair_type,
   } = props;
+  const date = new Date(created * 1000);
+  const readableDate = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
 
   return (
-    <div>
-      <h2>{title}</h2>
-      <p>{selftext}</p>
-      <p>Author: {author}</p>
-      <p>
-        created timestamp: {created} (will turn into a user friendly DateTime)
-      </p>
-      <p>upvotes: {ups}</p>
-      <p>reddit link: {permalink}</p>
-      <p>url: {url}</p>
-      <p>link_flair_type: {link_flair_type}</p>
+    <div className="p-4 my-4">
+      <h2 className="text-xl font-bold text-white">{title}</h2>
+      <p className="mt-2 text-gray-300">{selftext}</p>
+      <div className="mt-4">
+        <p className="text-gray-400">
+          Author: <span className="text-gray-200">{author}</span>
+        </p>
+        <p className="text-gray-400">
+          Created: <span className="text-gray-200">{readableDate}</span>
+        </p>
+        <p className="text-gray-400">
+          Upvotes: <span className="text-gray-200">{ups}</span>
+        </p>
+        <p className="text-gray-400 italic">
+          <a
+            href={`https://reddit.com/r${permalink}`}
+            className="text-blue-400 hover:text-blue-300"
+          >
+            Go to reddit post
+          </a>
+        </p>
+        <p className="text-gray-400">
+          Link:{" "}
+          <a
+            href={url}
+            className="break-words text-blue-400 hover:text-blue-300"
+          >
+            {url}
+          </a>
+        </p>
+        <p className="text-gray-400">
+          <span className="text-gray-200">{link_flair_type}</span>
+        </p>
+      </div>
       {crosspost &&
         crosspost.map((cross, crossIndex) => (
-          <div key={crossIndex}>
-            <h3>Crosspost: {cross.title}</h3>
-            {/* <p>{cross.selftext}</p> */}
-            <p>Author: {cross.author}</p>
+          <div key={crossIndex} className="mt-4 p-4 bg-gray-700 rounded-lg">
+            <h3 className="text-lg font-semibold text-white">
+              Crosspost: {cross.title}
+            </h3>
+            <p className="text-gray-400">
+              Author: <span className="text-gray-200">{cross.author}</span>
+            </p>
           </div>
         ))}
-      <hr />
+      <div className="border-b border-dashed border-gray-400 mt-4"></div>
     </div>
   );
 };
 
-interface RedditResponse {
-  kind: string;
-  data: {
-    after: string | null;
-    dist: number;
-    modhash: string;
-    geo_filter: null | string;
-    children: Array<{
-      kind: string;
-      data: object;
-    }>;
-  };
-}
-
-async function fetchRedditData(subreddit: string): Promise<RedditResponse> {
-  const url = `https://www.reddit.com/r/${subreddit}.json`;
-  try {
-    const response = await axios.get<RedditResponse>(url);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(`Axios error: ${error.message}`);
-    } else {
-      throw new Error(`Unexpected error: ${error}`);
-    }
-  }
-}
-
-function extractPostDetails(posts: any): any[] {
-  // Initialize an empty array to hold the extracted details
-  let extractedDetails = [];
-
-  // Loop through the first 10 items in the children array
-  for (let i = 0; i < Math.min(posts.data.children.length, 10); i++) {
-    const post = posts.data.children[i].data;
-
-    // Extract the required fields from the current post
-    let detail = {
-      title: post.title,
-      selftext: post.selftext,
-      author: post.author,
-      crosspost: null,
-    };
-
-    // Check if the crosspost_parent_list exists and is not empty
-    if (post.crosspost_parent_list && post.crosspost_parent_list.length > 0) {
-      // Extract the same fields for the crosspost
-      detail.crosspost = post.crosspost_parent_list.map((crosspost: any) => ({
-        title: crosspost.title,
-        selftext: crosspost.selftext,
-        author: crosspost.author,
-      }));
-    }
-
-    // Add the extracted details to the array
-    extractedDetails.push(detail);
-  }
-
-  return extractedDetails;
-}
-
-export default Reddit;
+export default RedditPost;
