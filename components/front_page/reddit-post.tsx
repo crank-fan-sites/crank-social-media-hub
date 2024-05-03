@@ -18,9 +18,9 @@ const RedditPost: NextPage = (props: any) => {
   const readableDate = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
 
   return (
-    <div className="p-4 my-4">
-      <h2 className="text-xl font-bold text-white">{title}</h2>
-      <p className="mt-2 text-gray-300">{selftext}</p>
+    <div className="p-3 my-3">
+      <h2 className="text-lg font-bold text-white">{title}</h2>
+      <p className="text-sm mt-2 text-gray-300 italic">{selftext}</p>
       <div className="mt-4">
         <p className="text-gray-400">
           Author: <span className="text-gray-200">{author}</span>

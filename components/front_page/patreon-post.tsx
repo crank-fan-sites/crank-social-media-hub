@@ -27,7 +27,7 @@ const PatreonPost: NextPage = (props: any) => {
 
   return (
     <div className="p-1 pb-4 rounded-lg shadow-md">
-      <HeadingH4 className="text-2xl font-bold text-gray-500 mb-0 pb-2">
+      <HeadingH4 className="text-2xl font-bold text-gray-500 mb-0 pb-0">
         {title}
       </HeadingH4>
       <p className="text-sm text-gray-600">{readableDate}</p>
@@ -48,10 +48,10 @@ const PatreonPost: NextPage = (props: any) => {
         <div className="patreon-embedding p-4 mt-1 rounded-lg">
           {embed_data.html && (
             <>
-              <HeadingH5 className="text-lg font-semibold text-orange-800 mb-0">
+              <h5 className="text-lg font-semibold text-orange-800 mb-1">
                 <i className="fas fa-external-link-alt mr-2 text-pink-700"></i>
                 <span className="italic">Embedded Content</span>
-              </HeadingH5>
+              </h5>
               <a
                 href={embed_url}
                 target="_blank"

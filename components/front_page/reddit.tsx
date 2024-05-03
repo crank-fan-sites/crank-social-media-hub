@@ -46,7 +46,7 @@ const Reddit: NextPage = (props: any) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
+    <div className="px-2 py-0 border-b group md:p-8 lg:p-2 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
       {extractedPosts.length > 0 &&
         extractedPosts.map((post, index) => (
           <RedditPost
