@@ -5,6 +5,8 @@ import axios from "axios";
 
 import RedditPost from "./reddit-post";
 
+import CTAButton from "@/components/ui2/variants/reddit";
+
 const Reddit: NextPage = (props: any) => {
   const [extractedPosts, setExtractedPosts] = useState<any[]>([]);
   const [subreddit, setSubreddit] = useState(null);
@@ -46,23 +48,29 @@ const Reddit: NextPage = (props: any) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="px-2 py-0 border-b group md:p-8 lg:p-2 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
-      {extractedPosts.length > 0 &&
-        extractedPosts.map((post, index) => (
-          <RedditPost
-            key={index}
-            title={post.title}
-            selftext={post.selftext}
-            author={post.author}
-            crosspost={post.crosspost}
-            ups={post.ups}
-            created={post.created}
-            permalink={post.permalink}
-            url={post.url}
-            link_flair_type={post.link_flair_path}
-          />
-        ))}
-    </div>
+    <>
+      <CTAButton
+        url="https://www.reddit.com/r/UnelectableAirwaves"
+        text="Go to the subreddit"
+      />
+      <div className="px-2 py-0 border-b group md:p-8 lg:p-2 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
+        {extractedPosts.length > 0 &&
+          extractedPosts.map((post, index) => (
+            <RedditPost
+              key={index}
+              title={post.title}
+              selftext={post.selftext}
+              author={post.author}
+              crosspost={post.crosspost}
+              ups={post.ups}
+              created={post.created}
+              permalink={post.permalink}
+              url={post.url}
+              link_flair_type={post.link_flair_path}
+            />
+          ))}
+      </div>
+    </>
   );
 };
 

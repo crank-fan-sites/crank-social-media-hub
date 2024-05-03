@@ -5,6 +5,8 @@ import { HeadingH3 } from "@/components/typography";
 
 import SoundCloudPlayer from "./soundcloud-player";
 
+import CTAButton from "@/components/ui2/variants/soundcloud";
+
 const Soundcloud: NextPage = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -37,6 +39,10 @@ const Soundcloud: NextPage = () => {
       <HeadingH3 className="text-base group-hover:font-bold">
         Featured Songs
       </HeadingH3>
+      <CTAButton
+        url="https://soundcloud.com/dj-tom-hanks"
+        text="Go to SoundCloud Profile"
+      />
       {data.length > 0 &&
         data.map((item) => (
           <div className="mb-10" key={item.id}>

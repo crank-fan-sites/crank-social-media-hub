@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
 
+import CTAButton from "@/components/ui2/variants/youtube";
+
 const YouTube: NextPage = () => {
   const [channel, setChannel] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -66,17 +68,23 @@ const YouTube: NextPage = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    channel && (
-      <iframe
-        ref={yt} // Assign the ref to the iframe
-        id="youtube_video"
-        width="600"
-        height="340"
-        frameBorder="0"
-        allowFullScreen
-        title="Unelectable Latest YouTube Video"
-      ></iframe>
-    )
+    <>
+      <CTAButton
+        url="https://www.youtube.com/@UnelectableAirwaves"
+        text="Go to the YouTube Channel"
+      />
+      {channel && (
+        <iframe
+          ref={yt} // Assign the ref to the iframe
+          id="youtube_video"
+          width="600"
+          height="340"
+          frameBorder="0"
+          allowFullScreen
+          title="Unelectable Latest YouTube Video"
+        ></iframe>
+      )}
+    </>
   );
 };
 

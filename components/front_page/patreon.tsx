@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
 import PatreonPost from "./patreon-post";
+import CTAButton from "@/components/ui2/variants/patreon";
 
 const PatreonLatestPosts: NextPage = () => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +32,7 @@ const PatreonLatestPosts: NextPage = () => {
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div className="px-2 py-6 group md:p-1 lg:p-2">
+      <CTAButton />
       {posts &&
         posts.length > 0 &&
         posts.map((post, index) => (

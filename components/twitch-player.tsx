@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { TwitchEmbed } from "react-twitch-embed";
 
+// import CTAButton from "@/components/ui2/variants/twitch";
+
 const Twitch: NextPage = (props: any) => {
   const [channel, setChannel] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,21 +32,22 @@ const Twitch: NextPage = (props: any) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    channel && (
-      <div className="">
-        <TwitchEmbed
-          channel={channel}
-          autoplay
-          muted
-          hideControls={false}
-          height={props.height || 480}
-          width={props.width || 960}
-          className="lolcopter"
-          withChat={true}
-        />
-        {/* Render your data here */}
-      </div>
-    )
+    <>
+      {channel && (
+        <div>
+          <TwitchEmbed
+            channel={channel}
+            autoplay
+            muted
+            hideControls={false}
+            height={props.height || 480}
+            width={props.width || 960}
+            className="lolcopter"
+            withChat={true}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

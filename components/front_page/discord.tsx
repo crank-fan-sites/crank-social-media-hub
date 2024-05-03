@@ -3,14 +3,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
 import Message from "@/components/front_page/discord-message";
-
-import { Button } from "@/components/ui/button";
-import {
-  HeadingH1,
-  HeadingH2,
-  HeadingH3,
-  Paragraph,
-} from "@/components/typography";
+import CTAButton from "@/components/ui2/variants/discord";
 
 const Discord: NextPage = () => {
   const [messages, setMessages] = useState([]);
@@ -23,6 +16,7 @@ const Discord: NextPage = () => {
 
   return (
     <div>
+      <CTAButton url="https://discord.gg" />
       {messages.map(
         (message, index) =>
           message.cleanContent && (

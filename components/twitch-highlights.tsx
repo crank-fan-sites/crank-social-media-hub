@@ -2,6 +2,8 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { TwitchPlayer } from "react-twitch-embed";
 
+import CTAButton from "@/components/ui2/variants/twitch";
+
 const Twitch: NextPage = (props: any) => {
   const [highlighted, setHighlighted] = useState(undefined);
   const [loading, setLoading] = useState(true);
@@ -29,17 +31,27 @@ const Twitch: NextPage = (props: any) => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
-    highlighted && (
-      <div className="twitch-player-container">
-        <TwitchPlayer
-          collection={highlighted || undefined}
-          autoplay={false}
-          muted
-          width={props.width || 540}
-          height={props.height || 480}
-        />
-      </div>
-    )
+    <>
+      <CTAButton
+        url="https://www.twitch.tv/unelectableairwaves"
+        text="Twitch Profile"
+      />
+      <CTAButton
+        url="https://www.twitch.tv/unelectableairwaves/videos"
+        text="All Twitch Videos"
+      />
+      {highlighted && (
+        <div className="twitch-player-container">
+          <TwitchPlayer
+            collection={highlighted || undefined}
+            autoplay={false}
+            muted
+            width={props.width || 540}
+            height={props.height || 480}
+          />
+        </div>
+      )}
+    </>
   );
 };
 
