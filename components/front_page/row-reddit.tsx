@@ -2,10 +2,7 @@ import type { NextPage } from "next";
 
 import Reddit from "@/components/front_page/reddit";
 
-import SocialButton from "@/components/ui2/social-button";
 import { HeadingH3, Paragraph } from "@/components/typography";
-
-import styles from "./button.module.css";
 
 const PatreonRow: NextPage = () => {
   return (
