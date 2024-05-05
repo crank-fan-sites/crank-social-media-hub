@@ -35,7 +35,6 @@ export default async function handler(
     },
     url: `https://instagram.com/${data.username}`,
   };
-  console.log("USER", user);
   res.status(200).json(user);
   // return user;
 }

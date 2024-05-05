@@ -37,7 +37,6 @@ export default async function handler(
     guild.channels.cache.forEach((channel) => {
       // Print the channel name and ID
       arr.push({ name: channel.name, id: channel.id });
-      console.log(`Channel Name: ${channel.name} | Channel ID: ${channel.id}`);
     });
     res.status(200).json(arr);
     client.destroy();
