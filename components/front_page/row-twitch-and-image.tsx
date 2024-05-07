@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
 import { TwitchPlayer } from "react-twitch-embed";
-import TwitchHighlights from "@/components/twitch-highlights";
+import TwitchHighlights from "@/components/components/twitch/twitch-highlights";
 
 import Image from "next/image";
 import {

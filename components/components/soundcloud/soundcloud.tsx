@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 
 import { HeadingH3 } from "@/components/typography";
 
-import SoundCloudPlayer from "./soundcloud-player";
+import SoundCloudPlayer from "@/components/components/soundcloud/soundcloud-player";
 
 import CTAButton from "@/components/ui2/variants/soundcloud";
 

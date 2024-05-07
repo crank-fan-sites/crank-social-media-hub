@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
-import InstagramPost from "./instagram-post";
+import InstagramPost from "@/components/components/instagram/instagram-post";
 
 import CTAButton from "@/components/ui2/variants/instagram";
 

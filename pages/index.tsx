@@ -2,13 +2,8 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-
 import { MainLayout } from "@/layouts/layout";
 import { Button } from "@/components/ui/button";
-
-import RowTwitchPlayer from "@/components/front_page/row-twitch-player";
 
 import Link from "next/link";
 import {
@@ -20,6 +15,7 @@ import {
 import { Icons } from "@/components/icons";
 import Image from "next/image";
 
+import RowTwitchPlayer from "@/components/front_page/row-twitch-player";
 import RowTwitchAndImage from "@/components/front_page/row-twitch-and-image";
 import RowYt from "@/components/front_page/row-yt";
 import RowTiktok from "@/components/front_page/row-tiktok";
@@ -28,12 +24,9 @@ import RowPatreon from "@/components/front_page/row-patreon";
 import RowDiscord from "@/components/front_page/row-discord";
 import RowReddit from "@/components/front_page/row-reddit";
 import RowInstagram from "@/components/front_page/row-instagram";
-
 // import Facebook from "@/components/front_page/facebook";
 
-const Home: NextPage = () => {
-  const router = useRouter();
-
+const Home: NextPage = (props) => {
   return (
     <MainLayout>
       <div>
@@ -78,20 +71,12 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Fetch data here and pass it to the page via props
+  // Example: const data = await fetchData();
+  return {
+    props: {}, // Pass data here
+  };
+};
 
-// use
-{
-  /*
-<HeadingH1>what up</HeadingH1>
-<HeadingH2>what up</HeadingH2>
-<HeadingH3>what up</HeadingH3>
-<HeadingH4>what up</HeadingH4>
-<HeadingH5>what up</HeadingH5>
-<Paragraph>what up</Paragraph>
-<TypographyLarge>TypographyLarge</TypographyLarge>
-<TypographySmall>small</TypographySmall>
-<TypographyMuted>small</TypographyMuted>
-<Button variant="outline">Button</Button>
-*/
-}
+export default Home;

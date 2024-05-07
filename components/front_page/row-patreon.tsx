@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import Patreon from "@/components/front_page/patreon";
+import Patreon from "@/components/components/patreon/patreon";
 
 import SocialButton from "@/components/ui2/social-button";
 import { HeadingH3, Paragraph } from "@/components/typography";

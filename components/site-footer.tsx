@@ -8,7 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "next-themes";
 import { links } from "@/lib/links";
 import { HeadingH6 } from "./typography";
-import FooterLinks from "@/components/footer-links";
+import FooterLinks from "@/components/layout/footer-links";
 
 export function SiteFooter() {
   const { theme } = useTheme();

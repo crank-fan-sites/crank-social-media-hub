@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import RedditPost from "./reddit-post";
+import RedditPost from "@/components/components/reddit/reddit-post";
 
 import CTAButton from "@/components/ui2/variants/reddit";
 

@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 
-import Reddit from "@/components/front_page/reddit";
+import Reddit from "@/components/components/reddit/reddit";
 
 import { HeadingH3, Paragraph } from "@/components/typography";
 

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
-import Youtube from "@/components/front_page/youtube";
-import YoutubePlaylist from "@/components/front_page/youtube-playlist";
+import Youtube from "@/components/components/youtube/youtube";
+import YoutubePlaylist from "@/components/components/youtube/youtube-playlist";
 
 import { Button } from "@/components/ui/button";
 import {

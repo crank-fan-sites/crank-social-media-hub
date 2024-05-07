@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 
-import TwitterProfile from "@/components/front_page/twitter-profile";
-import Soundcloud from "@/components/front_page/soundcloud";
+import TwitterProfile from "@/components/components/twitter/twitter-profile";
+import Soundcloud from "@/components/components/soundcloud/soundcloud";
 
 const RowTwitterSoundcloud: NextPage = () => {
   return (

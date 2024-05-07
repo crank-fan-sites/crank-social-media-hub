@@ -12,8 +12,8 @@ import {
   Paragraph,
 } from "@/components/typography";
 
-import TiktokVideo from "@/components/front_page/tiktok-video";
-import TiktokProfile from "@/components/front_page/tiktok-profile";
+import TiktokVideo from "@/components/components/tiktok/tiktok-video";
+import TiktokProfile from "@/components/components/tiktok/tiktok-profile";
 
 const Row1: NextPage = () => {
   const router = useRouter();

@@ -12,7 +12,7 @@ import {
 
 import { Icons } from "@/components/icons";
 
-import TwitchEmbed from "@/components/twitch-player";
+import TwitchEmbed from "@/components/components/twitch/twitch-player";
 
 const TwitchRow: NextPage = () => {
   return (

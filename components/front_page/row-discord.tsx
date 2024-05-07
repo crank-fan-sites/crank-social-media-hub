@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
 
-import Discord from "@/components/front_page/discord";
-import DiscordWidget from "@/components/front_page/discord-widget";
+import Discord from "@/components/components/discord/discord";
+import DiscordWidget from "@/components/components/discord/discord-widget";
 
 import { HeadingH3 } from "@/components/typography";
 

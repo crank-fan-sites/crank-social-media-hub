@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 
-import PatreonPost from "./patreon-post";
+import PatreonPost from "@/components/components/patreon/patreon-post";
 import CTAButton from "@/components/ui2/variants/patreon";
 
 const PatreonLatestPosts: NextPage = () => {

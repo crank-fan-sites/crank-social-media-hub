@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 import { useEffect, useState } from "react";
 
-import Message from "@/components/front_page/discord-message";
+import Message from "@/components/components/discord/discord-message";
 import CTAButton from "@/components/ui2/variants/discord";
 
 const Discord: NextPage = () => {
