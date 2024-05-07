@@ -1,20 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import axios from "axios";
-import strapiAxios from "@/lib/strapiAxios";
+import { getStrapi } from "@/lib/getStrapi";
 
 const AUTH_URL = "https://api.instagram.com/oauth/authorize";
 const TOKEN_URL = "https://api.instagram.com/oauth/access_token";
 const LONG_LIVED_TOKEN_URL = "https://graph.instagram.com/access_token";
-
-async function getStrapi(path) {
-  try {
-    const result = await strapiAxios().get(path);
-    return result.data.data.attributes;
-  } catch (error) {
-    return { status: false };
-  }
-}
 
 function firstOAuthStep(api_client_id, api_redirect_uri) {
   return `${AUTH_URL}?client_id=${api_client_id}&redirect_uri=${api_redirect_uri}&scope=user_profile,user_media&response_type=code`;

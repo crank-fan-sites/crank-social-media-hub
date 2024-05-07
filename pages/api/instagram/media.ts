@@ -1,20 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import axios from "axios";
-import strapiAxios from "@/lib/strapiAxios";
+import { getStrapi } from "@/lib/getStrapi";
 
 const { parseISO } = require("date-fns/parseISO");
 
 const INSTAGRAM_API_URL = "https://graph.instagram.com";
-
-async function getStrapi(path) {
-  try {
-    const result = await strapiAxios().get(path);
-    return result.data.data.attributes;
-  } catch (error) {
-    return { status: false };
-  }
-}
 
 export default async function handler(
   req: NextApiRequest,

@@ -1,15 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Client, GatewayIntentBits } from "discord.js";
-import strapiAxios from "@/lib/strapiAxios";
-
-async function getStrapi(path) {
-  try {
-    const result = await strapiAxios().get(path);
-    return result.data.data.attributes;
-  } catch (error) {
-    return { status: false };
-  }
-}
+import { getStrapi } from "@/lib/getStrapi";
 
 export default async function handler(
   req: NextApiRequest,
