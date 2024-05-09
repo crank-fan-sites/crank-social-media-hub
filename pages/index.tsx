@@ -50,7 +50,10 @@ const Home: NextPage = (props) => {
           <RowTwitchAndImage highlighted={props.twitch.highlighted} />
           {/* end one row */}
           {/* content after top header parts */}
-          <RowYt />
+          <RowYt
+            channel={props.youtube.channel}
+            playlistId={props.youtube.playlistId}
+          />
           {/* end one row */}
           <RowTiktok
             profile={props.tiktok.profile}
@@ -109,6 +112,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     tiktok,
     twitch,
     twitter,
+    youtube,
   } = result;
 
   // Instagram
@@ -171,6 +175,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     darkMode: twitter.dark_mode,
     height: twitter.widget_height,
   };
+
+  // Youtube
+  const youtubeObj = {
+    channel: youtube.channel_id,
+    playlistId: youtube.playlist_id,
+  };
   // Props
   return {
     props: {
@@ -185,6 +195,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       tiktok: tiktokObj,
       twitch: twitchObj,
       twitter: twitterObj,
+      youtube: youtubeObj,
     },
   };
 };

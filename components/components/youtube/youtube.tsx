@@ -3,30 +3,8 @@ import { useEffect, useRef, useState } from "react";
 
 import CTAButton from "@/components/ui2/variants/youtube";
 
-const YouTube: NextPage = () => {
-  const [channel, setChannel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const YouTube: NextPage = ({ channel }) => {
   const yt = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/youtube/content");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setChannel(thedata.channel_id);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   async function getYTJson(channelId) {
     try {
@@ -63,9 +41,6 @@ const YouTube: NextPage = () => {
       getYTJson(channel);
     }
   }, [channel]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <>
