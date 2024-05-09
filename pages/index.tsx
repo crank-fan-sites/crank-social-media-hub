@@ -58,7 +58,11 @@ const Home: NextPage = (props) => {
             videoId={props.tiktok.videoId}
           />
           {/* end one row */}
-          <RowTwitterSoundcloud />
+          <RowTwitterSoundcloud
+            twitterProfile={props.twitter.profile}
+            darkMode={props.twitter.darkMode}
+            height={props.twitter.height}
+          />
           {/* end one row */}
           <RowDiscord
             name={props.discord.name}
@@ -104,6 +108,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     reddit,
     tiktok,
     twitch,
+    twitter,
   } = result;
 
   // Instagram
@@ -159,6 +164,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     channel: twitch.channel_handle,
     highlighted: twitch.highlighted_playlist,
   };
+
+  // Twitter
+  const twitterObj = {
+    profile: twitter.profile,
+    darkMode: twitter.dark_mode,
+    height: twitter.widget_height,
+  };
   // Props
   return {
     props: {
@@ -172,6 +184,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       reddit: { posts: redditPosts },
       tiktok: tiktokObj,
       twitch: twitchObj,
+      twitter: twitterObj,
     },
   };
 };
