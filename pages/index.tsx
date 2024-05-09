@@ -52,7 +52,11 @@ const Home: NextPage = (props) => {
           {/* content after top header parts */}
           <RowYt />
           {/* end one row */}
-          <RowTiktok />
+          <RowTiktok
+            profile={props.tiktok.profile}
+            videoCreator={props.tiktok.videoCreator}
+            videoId={props.tiktok.videoId}
+          />
           {/* end one row */}
           <RowTwitterSoundcloud />
           {/* end one row */}
@@ -98,6 +102,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     instagram,
     patreon,
     reddit,
+    tiktok,
   } = result;
 
   // Instagram
@@ -140,6 +145,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     throw new Error("Network response was not ok");
   }
   const redditPosts = await redditResponse.json();
+
+  // Tiktok
+  const tiktokObj = {
+    profile: tiktok.profile,
+    videoCreator: tiktok.video_creator,
+    videoId: tiktok.video_id,
+  };
   // Props
   return {
     props: {

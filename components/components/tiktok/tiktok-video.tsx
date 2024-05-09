@@ -1,41 +1,9 @@
 import type { NextPage } from "next";
 
-import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
 
-import { Button } from "@/components/ui/button";
-import {
-  HeadingH1,
-  HeadingH2,
-  HeadingH3,
-  Paragraph,
-} from "@/components/typography";
-
-const TiktokVideo: NextPage = () => {
-  const contentRef = useRef(null); // Initialize the ref with useRef
-
-  const [videoInfo, setVideoInfo] = useState({ creator: null, id: null });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/tiktok/content");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setVideoInfo({ creator: thedata.videoCreator, id: thedata.videoId });
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+const TiktokVideo: NextPage = ({ videoCreator, videoId }) => {
+  const contentRef = useRef(null);
 
   const loadTikTokScript = () => {
     const script = document.createElement("script");
@@ -58,8 +26,8 @@ const TiktokVideo: NextPage = () => {
     }
   }
 
-  async function start() {
-    const url = `https://www.tiktok.com/@${videoInfo.creator}/video/${videoInfo.id}`;
+  async function start(videoCreator: string, videoId: string) {
+    const url = `https://www.tiktok.com/@${videoCreator}/video/${videoId}`;
     const data = await loadDataFromURL(url);
     if (contentRef.current) {
       contentRef.current.innerHTML = data.html;
@@ -68,17 +36,13 @@ const TiktokVideo: NextPage = () => {
   }
 
   useEffect(() => {
-    if (videoInfo.creator == null || videoInfo.id == null) {
+    if (videoCreator == null || videoId == null) {
       return;
     }
-    start();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [videoInfo]);
+    start(videoCreator, videoId);
+  }, [videoCreator, videoId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
-  return videoInfo.creator && <div id="content" ref={contentRef} />;
+  return videoCreator && <div id="content" ref={contentRef} />;
 };
 
 export default TiktokVideo;

@@ -1,32 +1,9 @@
 import type { NextPage } from "next";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-const TikTokProfileEmbed: NextPage = (props: any) => {
+const TikTokProfileEmbed: NextPage = ({ profile }) => {
   const tikTokRef = useRef(null); // Create a ref for the blockquote element
-
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/tiktok/content");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setProfile(thedata.profile);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     if (tikTokRef.current) {
@@ -42,8 +19,8 @@ const TikTokProfileEmbed: NextPage = (props: any) => {
     }
   }, [profile]); // Empty dependency array ensures this effect runs only once after the initial render
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   return (
     profile && (
