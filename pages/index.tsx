@@ -65,6 +65,7 @@ const Home: NextPage = (props) => {
             twitterProfile={props.twitter.profile}
             darkMode={props.twitter.darkMode}
             height={props.twitter.height}
+            tracks={props.soundcloud.tracks}
           />
           {/* end one row */}
           <RowDiscord
@@ -113,6 +114,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     twitch,
     twitter,
     youtube,
+    soundcloud,
   } = result;
 
   // Instagram
@@ -181,6 +183,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     channel: youtube.channel_id,
     playlistId: youtube.playlist_id,
   };
+
   // Props
   return {
     props: {
@@ -196,6 +199,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       twitch: twitchObj,
       twitter: twitterObj,
       youtube: youtubeObj,
+      soundcloud: { tracks: soundcloud },
+
     },
   };
 };
