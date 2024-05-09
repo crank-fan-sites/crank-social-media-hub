@@ -64,7 +64,7 @@ const Home: NextPage = (props) => {
           {/* end one row */}
           <RowPatreon posts={props.patreon.posts} />
           {/* end one row */}
-          <RowReddit />
+          <RowReddit data={props.reddit.posts} />
           {/* end one row */}
           <RowInstagram data={props.instagram} />
           {/* end one row */}
@@ -97,6 +97,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     discord,
     instagram,
     patreon,
+    reddit,
   } = result;
 
   // Instagram
@@ -131,6 +132,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const patreonPostsResponse = await patreonResponse.json();
   const patreonPosts = patreonPostsResponse.data;
 
+  // Reddit
+  const redditResponse = await fetch(
+    baseUrl + "/api/reddit/posts" + "?subreddit=" + reddit.subreddit
+  );
+  if (!redditResponse.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const redditPosts = await redditResponse.json();
   // Props
   return {
     props: {
@@ -141,6 +150,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
       instagram: { media: igMedia },
       patreon: { posts: patreonPosts },
+      reddit: { posts: redditPosts },
     },
   };
 };

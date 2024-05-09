@@ -4,7 +4,7 @@ import Reddit from "@/components/components/reddit/reddit";
 
 import { HeadingH3, Paragraph } from "@/components/typography";
 
-const PatreonRow: NextPage = () => {
+const PatreonRow: NextPage = ({ data }) => {
   return (
     <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
       <div className="px-2 py-6 border-b group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
@@ -12,7 +12,7 @@ const PatreonRow: NextPage = () => {
           Recent Subreddit Posts
         </HeadingH3>
         <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
-          <Reddit />
+          <Reddit data={data} />
         </div>
       </div>
     </div>
