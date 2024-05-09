@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextPage } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 
 import { MainLayout } from "@/layouts/layout";
@@ -25,6 +25,8 @@ import RowDiscord from "@/components/front_page/row-discord";
 import RowReddit from "@/components/front_page/row-reddit";
 import RowInstagram from "@/components/front_page/row-instagram";
 // import Facebook from "@/components/front_page/facebook";
+
+import { getStrapi } from "@/lib/getStrapi";
 
 const Home: NextPage = (props) => {
   return (
@@ -60,7 +62,7 @@ const Home: NextPage = (props) => {
           {/* end one row */}
           <RowReddit />
           {/* end one row */}
-          <RowInstagram />
+          <RowInstagram data={props.instagram} />
           {/* end one row */}
           {/* <Facebook /> */}
         </div>
@@ -72,10 +74,45 @@ const Home: NextPage = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // Fetch data here and pass it to the page via props
-  // Example: const data = await fetchData();
+  // Get base url for Next.JS api calls. Same base url
+  const { req } = context;
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const host = req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+
+  let result = null;
+  try {
+    const url = "/front-page?populate=*";
+    result = await getStrapi(url);
+  } catch (error) {
+    console.log("grab error", error);
+    return false;
+  }
+  const {
+    discord,
+    instagram,
+  } = result;
+
+  // Instagram
+  const igResponse = await fetch(
+    baseUrl + "/api/instagram/media" + "?token=" + instagram.api_access_token
+  );
+  if (!igResponse.ok) {
+    // throw new Error("Network response was not ok");
+    console.log("bad IG");
+  }
+  const thedata = await igResponse.json();
+
+  // Props
   return {
-    props: {}, // Pass data here
+    props: {
+      discord: {
+        name: discord.channel_name,
+        id: discord.channel_id,
+        widget: discord.widget_url,
+      },
+      instagram: thedata,
+    },
   };
 };
 

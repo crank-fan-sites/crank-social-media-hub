@@ -5,7 +5,7 @@ import InstagramPost from "@/components/components/instagram/instagram-post";
 
 import CTAButton from "@/components/ui2/variants/instagram";
 
-const InstagramPosts: NextPage = () => {
+const InstagramPosts: NextPage = ({ data = null }) => {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,8 +26,13 @@ const InstagramPosts: NextPage = () => {
       }
     };
 
-    fetchMedia();
-  }, []);
+    if (!data) {
+      fetchMedia();
+    } else {
+      setMedia(data);
+      setLoading(false);
+    }
+  }, [data]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

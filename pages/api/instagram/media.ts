@@ -11,12 +11,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  let apiAccessToken = null;
-  try {
-    const { api_access_token } = await getStrapi("/social-media-instagram");
-    apiAccessToken = api_access_token;
-  } catch (error) {
-    throw `Strapi get IG not working. | ${error.status} status. msg: ${error.message}`;
+  let apiAccessToken = req.query.token as string | undefined;
+
+  if (!apiAccessToken) {
+    try {
+      const { api_access_token } = await getStrapi("/social-media-instagram");
+      apiAccessToken = api_access_token;
+    } catch (error) {
+      throw `Strapi get IG not working. | ${error.status} status. msg: ${error.message}`;
+    }
   }
 
   const url = `${INSTAGRAM_API_URL}/me/media`;
@@ -62,7 +65,7 @@ export default async function handler(
       media.video = {
         url: item.media_url,
         width: 600,
-        heigh: 600,
+        height: 600,
       };
     } else {
       media.picture = item.media_url;
