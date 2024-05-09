@@ -6,9 +6,7 @@ import SocialButton from "@/components/ui2/social-button";
 import { HeadingH3, Paragraph } from "@/components/typography";
 import Image from "next/image";
 
-import styles from "./button.module.css";
-
-const PatreonRow: NextPage = () => {
+const PatreonRow: NextPage = ({ posts = null }) => {
   return (
     <div className="grid grid-cols-1 border-t xl:grid-cols-5 bg-primary border-stone-400 dark:border-stone-600">
       <div className="items-center justify-center hidden col-span-1 p-0 border-b xl:flex xl:col-span-2 group lg:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
@@ -25,7 +23,7 @@ const PatreonRow: NextPage = () => {
           Latest Patreon Posts
         </HeadingH3>
         <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
-          <Patreon />
+          <Patreon posts={posts} />
         </div>
       </div>
     </div>

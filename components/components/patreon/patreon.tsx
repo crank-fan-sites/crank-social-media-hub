@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import PatreonPost from "@/components/components/patreon/patreon-post";
 import CTAButton from "@/components/ui2/variants/patreon";
 
-const PatreonLatestPosts: NextPage = () => {
+const PatreonLatestPosts: NextPage = ({ posts: initialPosts }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,8 +25,13 @@ const PatreonLatestPosts: NextPage = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (!initialPosts) {
+      fetchData();
+    } else {
+      setPosts(initialPosts);
+      setLoading(false);
+    }
+  }, [initialPosts]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;

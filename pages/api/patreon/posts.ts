@@ -7,11 +7,14 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { campaign_id, access_token } = await getStrapi(
-    "/social-media-patreon"
-  );
-  const accessToken = access_token;
-  const campaignId = campaign_id;
+  let { campaignId, accessToken } = req.query;
+
+  if (!campaignId || !accessToken) {
+    const data = await getStrapi("/social-media-patreon");
+    campaignId = campaignId || data.campaign_id;
+    accessToken = accessToken || data.access_token;
+  }
+
   const url = `https://www.patreon.com/api/oauth2/v2/campaigns/${campaignId}/posts?fields${encodeURIComponent(
     "["
   )}post${encodeURIComponent(

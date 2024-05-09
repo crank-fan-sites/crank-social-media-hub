@@ -62,7 +62,7 @@ const Home: NextPage = (props) => {
             messages={props.discord.messages}
           />
           {/* end one row */}
-          <RowPatreon />
+          <RowPatreon posts={props.patreon.posts} />
           {/* end one row */}
           <RowReddit />
           {/* end one row */}
@@ -96,6 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const {
     discord,
     instagram,
+    patreon,
   } = result;
 
   // Instagram
@@ -115,6 +116,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     .then((response) => response.json())
     .catch((error) => console.error("Failed to load Discord messages", error));
 
+  // Patreon
+  const patreonResponse = await fetch(
+    baseUrl +
+      "/api/patreon/posts" +
+      "?campaignId=" +
+      patreon.campaign_id +
+      "&accessToken=" +
+      patreon.access_token
+  );
+  if (!patreonResponse.ok) {
+    throw new Error("Network response was not ok");
+  }
+  const patreonPostsResponse = await patreonResponse.json();
+  const patreonPosts = patreonPostsResponse.data;
+
   // Props
   return {
     props: {
@@ -124,6 +140,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         messages: discordMessages,
       },
       instagram: { media: igMedia },
+      patreon: { posts: patreonPosts },
     },
   };
 };
