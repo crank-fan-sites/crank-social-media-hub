@@ -10,7 +10,7 @@ import { links } from "@/lib/links";
 import { HeadingH6 } from "./typography";
 import FooterLinks from "@/components/layout/footer-links";
 
-export function SiteFooter() {
+export function SiteFooter({ footerLinks }: { footerLinks: any[] }) {
   const { theme } = useTheme();
   return (
     <footer className="w-full border-t border-b bg-primary border-stone-400 dark:border-stone-600">
@@ -18,7 +18,7 @@ export function SiteFooter() {
         <div className="w-full px-2 py-12 md:w-7/12 md:px-4 md:border-r border-stone-400 dark:border-stone-600">
           <HeadingH6>Links</HeadingH6>
           <div className="grid grid-cols-1 gap-y-2">
-            <FooterLinks />
+            <FooterLinks links={footerLinks} />
           </div>
         </div>
 

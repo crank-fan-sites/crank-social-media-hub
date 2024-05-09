@@ -14,33 +14,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export function MainNav() {
-  const [links, setLinks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+export function MainNav({ links }: { links: any[] }) {
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/header-links");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setLinks(thedata);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
   return (
     <>
       <div className="hidden md:flex md:pl-4 gap-6 md:gap-10">
@@ -52,7 +28,7 @@ export function MainNav() {
                   <Link
                     key={index}
                     href={item.url}
-                    target="_blank"
+                    target={item.target || undefined}
                     className={cn(
                       "flex items-center text-sm font-light uppercase underline-offset-4 hover:underline"
                     )}
@@ -82,7 +58,7 @@ export function MainNav() {
           <DropdownMenuContent className="bg-stone-50 dark:bg-stone-900 rounded-none border border-stone-400 dark:border-stone-600">
             {links?.length
               ? links?.map((item, index) =>
-                  item.external ? (
+                  !item.external ? (
                     <DropdownMenuItem
                       key={index}
                       onClick={() => router.push(item.url)}
@@ -93,7 +69,7 @@ export function MainNav() {
                     <DropdownMenuItem key={index}>
                       <Link
                         href={item.url}
-                        target="_blank"
+                        target={item.target || undefined}
                         className="flex flex-row align-middle"
                       >
                         {item.title}{" "}

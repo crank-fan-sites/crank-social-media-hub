@@ -2,7 +2,7 @@ import { useTheme } from "next-themes";
 import { useRouter } from "next/router";
 import { MainNav } from "./main-nav";
 
-export function SiteHeader() {
+export function SiteHeader({ headerLinks }) {
   const { theme } = useTheme();
   const router = useRouter();
   return (
@@ -14,7 +14,7 @@ export function SiteHeader() {
         >
           Crank Communism <span className="text-lg">☭</span>
         </span>
-        <MainNav />
+        <MainNav links={headerLinks} />
       </div>
     </header>
   );

@@ -30,7 +30,7 @@ import { getStrapi } from "@/lib/getStrapi";
 
 const Home: NextPage = (props) => {
   return (
-    <MainLayout>
+    <MainLayout headerLinks={props.headerLinks} footerLinks={props.footerLinks}>
       <div>
         <div className="relative -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
           <Image
@@ -90,6 +90,17 @@ const Home: NextPage = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Header and footer links
+  let links = null;
+  try {
+    const url = "/main-link?populate=*";
+    links = await getStrapi(url);
+  } catch (error) {
+    console.log("grab error", error);
+    return false;
+  }
+  const { top_links, bottom_links } = links;
+
   // Get base url for Next.JS api calls. Same base url
   const { req } = context;
   const protocol = req.headers["x-forwarded-proto"] || "http";
@@ -201,6 +212,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       youtube: youtubeObj,
       soundcloud: { tracks: soundcloud },
 
+      headerLinks: top_links,
+      footerLinks: bottom_links,
     },
   };
 };

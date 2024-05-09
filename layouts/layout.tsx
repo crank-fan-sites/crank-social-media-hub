@@ -12,10 +12,10 @@ export function MainLayout({ children, ...props }: any) {
   return (
     <div {...props} className={`${redHatMono.className}`}>
       <div className="container border-l border-r border-stone-400 dark:border-stone-600">
-        <SiteHeader />
+        <SiteHeader headerLinks={props.headerLinks} />
         <main>{children}</main>
         <Analytics />
-        <SiteFooter />
+        <SiteFooter footerLinks={props.footerLinks} />
       </div>
     </div>
   );
