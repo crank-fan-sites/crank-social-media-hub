@@ -6,7 +6,11 @@ import DiscordWidget from "@/components/components/discord/discord-widget";
 
 import { HeadingH3 } from "@/components/typography";
 
-const RowDiscord: NextPage = () => {
+const RowDiscord: NextPage = ({
+  name: initialName,
+  widget: initialWidget,
+  messages,
+}) => {
   const [name, setName] = useState(null);
   const [widget, setWidget] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,8 +33,14 @@ const RowDiscord: NextPage = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (!initialName || !initialWidget) {
+      fetchData();
+    } else {
+      setName(initialName);
+      setWidget(initialWidget);
+      setLoading(false);
+    }
+  }, [initialName, initialWidget]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -42,7 +52,7 @@ const RowDiscord: NextPage = () => {
           Recent Discord {name} Chat Messages
         </HeadingH3>
         <div className="grid grid-cols-1 bg-primary border-stone-400 dark:border-stone-600">
-          <Discord />
+          <Discord messages={messages} />
         </div>
       </div>
 

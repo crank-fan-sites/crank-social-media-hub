@@ -56,7 +56,11 @@ const Home: NextPage = (props) => {
           {/* end one row */}
           <RowTwitterSoundcloud />
           {/* end one row */}
-          <RowDiscord />
+          <RowDiscord
+            name={props.discord.name}
+            widget={props.discord.widget}
+            messages={props.discord.messages}
+          />
           {/* end one row */}
           <RowPatreon />
           {/* end one row */}
@@ -88,6 +92,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     console.log("grab error", error);
     return false;
   }
+
   const {
     discord,
     instagram,
@@ -101,17 +106,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // throw new Error("Network response was not ok");
     console.log("bad IG");
   }
-  const thedata = await igResponse.json();
+  const igMedia = await igResponse.json();
+
+  // Discord
+  const discordMessages = await fetch(
+    baseUrl + "/api/discord/messages" + "?channelId=" + discord.channel_id
+  )
+    .then((response) => response.json())
+    .catch((error) => console.error("Failed to load Discord messages", error));
 
   // Props
   return {
     props: {
       discord: {
         name: discord.channel_name,
-        id: discord.channel_id,
         widget: discord.widget_url,
+        messages: discordMessages,
       },
-      instagram: thedata,
+      instagram: { media: igMedia },
     },
   };
 };

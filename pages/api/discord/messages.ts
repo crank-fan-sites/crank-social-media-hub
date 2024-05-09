@@ -7,7 +7,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { channel_id } = await getStrapi("/social-media-discord");
+  let channelId = req.query.channelId as string | undefined;
+  if (!channelId) {
+    const { channel_id } = await getStrapi("/social-media-discord");
+    channelId = channel_id;
+  }
 
   const client = new Client({
     intents: [
@@ -18,7 +22,7 @@ export default async function handler(
   });
 
   client.once("ready", async () => {
-    const channel = await client.channels.fetch(channel_id);
+    const channel = await client.channels.fetch(channelId);
     const messages = await channel.messages.fetch({ limit: 25 });
     res.status(200).json(messages);
     // res.status(200).json(messages.map((message) => message));

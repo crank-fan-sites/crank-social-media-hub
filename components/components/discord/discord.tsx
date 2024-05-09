@@ -5,14 +5,19 @@ import { useEffect, useState } from "react";
 import Message from "@/components/components/discord/discord-message";
 import CTAButton from "@/components/ui2/variants/discord";
 
-const Discord: NextPage = () => {
+const Discord: NextPage = ({ messages: initialMessages }) => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    fetch("/api/discord/messages")
-      .then((response) => response.json())
-      .then(setMessages);
-  }, []);
+    if (!initialMessages) {
+      fetch("/api/discord/messages")
+        .then((response) => response.json())
+        .then(setMessages)
+        .catch((error) => console.error("Failed to load messages", error));
+    } else {
+      setMessages(initialMessages);
+    }
+  }, [initialMessages]);
 
   return (
     <div>
