@@ -43,11 +43,11 @@ const Home: NextPage = (props) => {
           />
         </div>
 
-        <RowTwitchPlayer />
+        <RowTwitchPlayer channel={props.twitch.channel} />
 
         {/* content */}
         <div className="mx-auto max-w-7xl">
-          <RowTwitchAndImage />
+          <RowTwitchAndImage highlighted={props.twitch.highlighted} />
           {/* end one row */}
           {/* content after top header parts */}
           <RowYt />
@@ -103,6 +103,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     patreon,
     reddit,
     tiktok,
+    twitch,
   } = result;
 
   // Instagram
@@ -152,6 +153,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     videoCreator: tiktok.video_creator,
     videoId: tiktok.video_id,
   };
+
+  // Twitch
+  const twitchObj = {
+    channel: twitch.channel_handle,
+    highlighted: twitch.highlighted_playlist,
+  };
   // Props
   return {
     props: {
@@ -163,6 +170,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       instagram: { media: igMedia },
       patreon: { posts: patreonPosts },
       reddit: { posts: redditPosts },
+      tiktok: tiktokObj,
+      twitch: twitchObj,
     },
   };
 };

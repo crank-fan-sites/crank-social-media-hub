@@ -4,32 +4,32 @@ import { TwitchEmbed } from "react-twitch-embed";
 
 // import CTAButton from "@/components/ui2/variants/twitch";
 
-const Twitch: NextPage = (props: any) => {
-  const [channel, setChannel] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const Twitch: NextPage = ({ channel, height, width }) => {
+  // const [channel, setChannel] = useState(null);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/twitch/content");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setChannel(thedata.channel_handle);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("/api/twitch/content");
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const thedata = await response.json();
+  //       setChannel(thedata.channel_handle);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
 
   return (
     <>
@@ -40,8 +40,8 @@ const Twitch: NextPage = (props: any) => {
             autoplay
             muted
             hideControls={false}
-            height={props.height || 480}
-            width={props.width || 960}
+            height={height || 480}
+            width={width || 960}
             className="lolcopter"
             withChat={true}
           />

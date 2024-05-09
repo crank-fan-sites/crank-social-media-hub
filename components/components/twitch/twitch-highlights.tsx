@@ -4,32 +4,33 @@ import { TwitchPlayer } from "react-twitch-embed";
 
 import CTAButton from "@/components/ui2/variants/twitch";
 
-const Twitch: NextPage = (props: any) => {
-  const [highlighted, setHighlighted] = useState(undefined);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const Twitch: NextPage = ({ highlighted, width, height }) => {
+  // const [highlighted, setHighlighted] = useState(undefined);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/twitch/content");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setHighlighted(thedata.highlighted_playlist);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch("/api/twitch/content");
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const thedata = await response.json();
+  //       setHighlighted(thedata.highlighted_playlist);
+  //     } catch (error) {
+  //       setError(error);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (loading) return <div>Loading...</div>;
+  // if (error) return <div>Error: {error.message}</div>;
+
   return (
     <>
       <CTAButton
@@ -46,8 +47,8 @@ const Twitch: NextPage = (props: any) => {
             collection={highlighted || undefined}
             autoplay={false}
             muted
-            width={props.width || 540}
-            height={props.height || 480}
+            width={width || 540}
+            height={height || 480}
           />
         </div>
       )}

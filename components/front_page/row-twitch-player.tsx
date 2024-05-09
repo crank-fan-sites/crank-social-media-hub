@@ -14,7 +14,7 @@ import { Icons } from "@/components/icons";
 
 import TwitchEmbed from "@/components/components/twitch/twitch-player";
 
-const TwitchRow: NextPage = () => {
+const TwitchRow: NextPage = ({ channel, height, width }) => {
   return (
     <div>
       <div className="grid grid-cols-1 py-1 border-t bg-primary place-items-center border-stone-400 dark:border-stone-600">
@@ -24,7 +24,7 @@ const TwitchRow: NextPage = () => {
       <div className="grid grid-cols-1 pb-12 bg-primary place-items-center hover:bg-accent">
         <div className="grid w-full h-full p-1 place-items-center">
           <div className="twitch-video-container">
-            <TwitchEmbed height={480} width={960} />
+            <TwitchEmbed channel={channel} height={height} width={width} />
           </div>
         </div>
       </div>
