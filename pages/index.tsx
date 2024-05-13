@@ -31,7 +31,11 @@ import siteLinks from "@/lib/siteLinks";
 
 const Home: NextPage = (props) => {
   return (
-    <MainLayout headerLinks={props.headerLinks} footerLinks={props.footerLinks}>
+    <MainLayout
+      headerLinks={props.headerLinks}
+      footerLinks={props.footerLinks}
+      title={props.siteConfig.title}
+    >
       <div>
         <div className="relative -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
           <Image
@@ -92,6 +96,17 @@ const Home: NextPage = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Header and footer links
+  // CONFIG
+  let siteConfig = null;
+  try {
+    const url = "/site-config";
+    siteConfig = await getStrapi(url);
+  } catch (error) {
+    console.log("siteConfig grab error", error);
+    return false;
+  }
+  const { siteTitle } = siteConfig;
+  const SiteConfigObj = { title: siteTitle };
   const { headerLinks, footerLinks } = await siteLinks();
 
   // INTEGRATIONS
@@ -192,6 +207,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // Props
   return {
     props: {
+      siteConfig: { ...SiteConfigObj },
+
       discord: {
         name: discord.channel_name,
         widget: discord.widget_url,

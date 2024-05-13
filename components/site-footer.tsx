@@ -10,7 +10,7 @@ import { links } from "@/lib/links";
 import { HeadingH6 } from "./typography";
 import FooterLinks from "@/components/layout/footer-links";
 
-export function SiteFooter({ footerLinks }: { footerLinks: any[] }) {
+export function SiteFooter({ title, footerLinks }: { footerLinks: any[] }) {
   const { theme } = useTheme();
   return (
     <footer className="w-full border-t border-b bg-primary border-stone-400 dark:border-stone-600">
@@ -119,7 +119,7 @@ export function SiteFooter({ footerLinks }: { footerLinks: any[] }) {
       <div className="flex flex-col items-center justify-between p-4 border-t md:py-0 md:ps-0 md:flex-row border-stone-400 dark:border-stone-600">
         <ThemeToggle />
         <small>
-          &copy;{new Date().getFullYear()} CrankCommunism, all rights reserved
+          &copy;{new Date().getFullYear()} {title}, all rights reserved
         </small>
       </div>
     </footer>
