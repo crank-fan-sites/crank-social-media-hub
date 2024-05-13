@@ -10,10 +10,12 @@ const Widget: NextPage = ({
   widget,
   imageSrc,
   alt,
+  buttons,
 }: {
   widget: string;
   imageSrc: string;
   alt: string;
+  buttons: any[];
 }) => {
   return (
     <>
@@ -21,7 +23,11 @@ const Widget: NextPage = ({
         Discord Widget
       </HeadingH3>
 
-      <CTAButton url="https://discord.gg" />
+      {buttons &&
+        buttons.length > 0 &&
+        buttons.map((button: any) => (
+          <CTAButton key={button.id} {...button.link} />
+        ))}
 
       <div className="patreon-container">
         <iframe

@@ -52,7 +52,10 @@ const Home: NextPage = (props) => {
 
         {/* content */}
         <div className="mx-auto max-w-7xl">
-          <RowTwitchAndImage highlighted={props.twitch.highlighted} />
+          <RowTwitchAndImage
+            highlighted={props.twitch.highlighted}
+            buttons={props.twitch.buttons}
+          />
           {/* end one row */}
           {/* content after top header parts */}
           <RowYt

@@ -23,6 +23,7 @@ const RowDiscord: NextPage = ({ name, widget, messages, buttons }) => {
           widget={widget}
           imageSrc="/screenshots-vertical/UnelectableAirwaves_Twitch-bird-silhouette-350x720.png"
           alt="UnelectableAirwaves Alien"
+          buttons={buttons}
         />
       </div>
     </div>
