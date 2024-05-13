@@ -3,22 +3,26 @@ import { MainLayout } from "@/layouts/layout";
 import { HeadingH1 } from "@/components/typography";
 import { links } from "@/lib/links";
 import { Button } from "@/components/ui/button";
-("");
-const Label: NextPage = () => {
+
+import { getStrapi } from "@/lib/getStrapi";
+import siteLinks from "@/lib/siteLinks";
+
+const Privacy: NextPage = (props) => {
   return (
-    <MainLayout>
+    <MainLayout
+      headerLinks={props.headerLinks}
+      footerLinks={props.footerLinks}
+      title={props.siteConfig.title}
+    >
       {/* TODO: add head */}
       {/* TODO: refactor Links into Dynamic Zones */}
       <div className="container px-4">
         <HeadingH1 className="my-8">Privacy Policy</HeadingH1>
         <p>
-          To be honest. I&apos;m not collecting anything besides Google
-          Analytics. For Google Analytics, I can&apos;t track a user long term
-          even if I wanted to. The open source code base shows that.
-          There&apos;s no cookies or anything. The handle and email are saved in
-          local browser storage and possibly at some point in Firestore, but if
-          that was done, no personally idenitfying info would be kept beyond 30
-          days.
+          To be honest. I&apos;m not collecting anything besides Plausible soon.
+          For Plausible, I can&apos;t track a user long term even if I wanted
+          to. The open source code base shows that. There&apos;s no cookies or
+          anything.
         </p>
         <p>Below is stuff I found online to copy paste into places like this</p>
         <p>
@@ -112,4 +116,30 @@ const Label: NextPage = () => {
   );
 };
 
-export default Label;
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // CONFIG
+  let siteConfig = null;
+  try {
+    const url = "/site-config";
+    siteConfig = await getStrapi(url);
+  } catch (error) {
+    console.log("siteConfig grab error", error);
+    return false;
+  }
+  const { siteTitle } = siteConfig;
+  const SiteConfigObj = { title: siteTitle };
+
+  // LINKS -- Header and footer links
+  const { headerLinks, footerLinks } = await siteLinks();
+
+  // Props
+  return {
+    props: {
+      siteConfig: { ...SiteConfigObj },
+      headerLinks,
+      footerLinks,
+    },
+  };
+};
+
+export default Privacy;
