@@ -11,7 +11,7 @@ import {
   Paragraph,
 } from "@/components/typography";
 
-const YoutubeRow: NextPage = ({ channel, playlistId }) => {
+const YoutubeRow: NextPage = ({ channel, playlistId, buttons }) => {
   return (
     <div className="grid grid-cols-1 border-t bg-primary lg:grid-cols-2 border-stone-400 dark:border-stone-600">
       <div className="px-2 py-6 border-b group md:p-2 lg:p-4 hover:bg-scanlines border-stone-400 dark:border-stone-600">
@@ -19,7 +19,7 @@ const YoutubeRow: NextPage = ({ channel, playlistId }) => {
           Latest YouTube Video
         </HeadingH3>
         <div className="youtube-video-container">
-          <Youtube channel={channel} />
+          <Youtube channel={channel} buttons={buttons} />
         </div>
       </div>
 

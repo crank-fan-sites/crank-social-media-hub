@@ -5,11 +5,18 @@ import InstagramPost from "@/components/components/instagram/instagram-post";
 
 import CTAButton from "@/components/ui2/variants/instagram";
 
-const InstagramPosts: NextPage = ({ data = null }) => {
-  const [media, setMedia] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+interface InstagramPostsProps {
+  data?: any;
+  buttons?: any;
+}
 
+const InstagramPosts: NextPage<InstagramPostsProps> = ({
+  data = null,
+  buttons,
+}) => {
+  const [media, setMedia] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
     const fetchMedia = async () => {
       try {
@@ -38,10 +45,11 @@ const InstagramPosts: NextPage = ({ data = null }) => {
   if (error) return <div>Error: {error.message}</div>;
   return (
     <>
-      <CTAButton
-        url="https://instagram.com/StalinChad"
-        text="Instagram Profile"
-      />
+      {buttons &&
+        buttons.length > 0 &&
+        buttons.map((button: any) => (
+          <CTAButton key={button.id} {...button.link} />
+        ))}
       <div className="flex flex-wrap -m-2">
         {media.length > 0 &&
           media.map((item, index) => (

@@ -6,9 +6,9 @@ import SocialButton from "@/components/ui2/social-button";
 import { HeadingH3, Paragraph } from "@/components/typography";
 import Image from "next/image";
 
-const PatreonRow: NextPage = ({ posts = null }) => {
+const PatreonRow: NextPage = ({ posts = null, buttons }) => {
   return (
-    <div className="grid grid-cols-1 border-t xl:grid-cols-5 bg-primary border-stone-400 dark:border-stone-600">
+    <div className="grid grid-cols-1 border-t xl:grid-cols-5 bg-primary border-stone-4000 dark:border-stone-600">
       <div className="items-center justify-center hidden col-span-1 p-0 border-b xl:flex xl:col-span-2 group lg:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
         <Image
           src="/screenshots-vertical/Unelectable-unele-smoke-normans-vertical-365x720.png"
@@ -23,7 +23,7 @@ const PatreonRow: NextPage = ({ posts = null }) => {
           Latest Patreon Posts
         </HeadingH3>
         <div className="grid grid-cols-1 border-t bg-primary border-stone-400 dark:border-stone-600">
-          <Patreon posts={posts} />
+          <Patreon posts={posts} buttons={buttons} />
         </div>
       </div>
     </div>

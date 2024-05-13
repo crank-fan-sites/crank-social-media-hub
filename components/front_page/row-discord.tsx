@@ -6,45 +6,7 @@ import DiscordWidget from "@/components/components/discord/discord-widget";
 
 import { HeadingH3 } from "@/components/typography";
 
-const RowDiscord: NextPage = ({
-  name: initialName,
-  widget: initialWidget,
-  messages,
-}) => {
-  const [name, setName] = useState(null);
-  const [widget, setWidget] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/discord/content");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const thedata = await response.json();
-        setName(thedata.name);
-        setWidget(thedata.widget);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (!initialName || !initialWidget) {
-      fetchData();
-    } else {
-      setName(initialName);
-      setWidget(initialWidget);
-      setLoading(false);
-    }
-  }, [initialName, initialWidget]);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
+const RowDiscord: NextPage = ({ name, widget, messages, buttons }) => {
   return (
     <div className="grid grid-cols-1 border-t md:grid-cols-5 bg-primary border-stone-400 dark:border-stone-600">
       <div className="col-span-5 px-2 py-6 border-b lg:col-span-3 group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
@@ -52,7 +14,7 @@ const RowDiscord: NextPage = ({
           Recent Discord {name} Chat Messages
         </HeadingH3>
         <div className="grid grid-cols-1 bg-primary border-stone-400 dark:border-stone-600">
-          <Discord messages={messages} />
+          <Discord messages={messages} buttons={buttons} />
         </div>
       </div>
 

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 import CTAButton from "@/components/ui2/variants/youtube";
 
-const YouTube: NextPage = ({ channel }) => {
+const YouTube: NextPage = ({ channel, buttons }) => {
   const yt = useRef(null);
 
   async function getYTJson(channelId) {
@@ -11,10 +11,10 @@ const YouTube: NextPage = ({ channel }) => {
       const reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
       const response = await fetch(
         `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-          reqURL + channel
+          reqURL + channelId
         )}`
       );
-      console.log("res", response);
+      // console.log("res", response);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -44,10 +44,11 @@ const YouTube: NextPage = ({ channel }) => {
 
   return (
     <>
-      <CTAButton
-        url="https://www.youtube.com/@UnelectableAirwaves"
-        text="Go to the YouTube Channel"
-      />
+      {buttons &&
+        buttons.length > 0 &&
+        buttons.map((button: any) => (
+          <CTAButton key={button.id} {...button.link} />
+        ))}
       {channel && (
         <iframe
           ref={yt} // Assign the ref to the iframe

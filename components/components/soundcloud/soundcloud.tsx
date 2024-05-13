@@ -13,16 +13,19 @@ const Soundcloud: NextPage = ({ tracks = [] }) => {
       <HeadingH3 className="text-base group-hover:font-bold">
         Featured Songs
       </HeadingH3>
-      <CTAButton
-        url="https://soundcloud.com/dj-tom-hanks"
-        text="Go to SoundCloud Profile"
-      />
       {tracks &&
         tracks.length > 0 &&
         tracks.map((item) => (
-          <div className="mb-10" key={item.id}>
-            <SoundCloudPlayer trackUrl={item.media_url} />
-          </div>
+          <>
+            {item.buttons &&
+              item.buttons.length > 0 &&
+              item.buttons.map((button: any) => (
+                <CTAButton key={button.id} {...button.link} />
+              ))}
+            <div className="mb-10" key={item.id}>
+              <SoundCloudPlayer trackUrl={item.media_url} />
+            </div>
+          </>
         ))}
     </div>
   );

@@ -58,6 +58,7 @@ const Home: NextPage = (props) => {
           <RowYt
             channel={props.youtube.channel}
             playlistId={props.youtube.playlistId}
+            buttons={props.youtube.buttons}
           />
           {/* end one row */}
           <RowTiktok
@@ -77,13 +78,20 @@ const Home: NextPage = (props) => {
             name={props.discord.name}
             widget={props.discord.widget}
             messages={props.discord.messages}
+            buttons={props.discord.buttons}
           />
           {/* end one row */}
-          <RowPatreon posts={props.patreon.posts} />
+          <RowPatreon
+            posts={props.patreon.posts}
+            buttons={props.patreon.buttons}
+          />
           {/* end one row */}
-          <RowReddit data={props.reddit.posts} />
+          <RowReddit data={props.reddit.posts} buttons={props.reddit.buttons} />
           {/* end one row */}
-          <RowInstagram data={props.instagram} />
+          <RowInstagram
+            data={props.instagram.media}
+            buttons={props.instagram.buttons}
+          />
           {/* end one row */}
           {/* <Facebook /> */}
         </div>
@@ -214,14 +222,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         name: discord.channel_name,
         widget: discord.widget_url,
         messages: discordMessages,
+        buttons: discord.buttonLink,
       },
-      instagram: { media: igMedia },
-      patreon: { posts: patreonPosts },
-      reddit: { posts: redditPosts },
-      tiktok: tiktokObj,
-      twitch: twitchObj,
-      twitter: twitterObj,
-      youtube: youtubeObj,
+      instagram: { media: igMedia, buttons: instagram.buttonLink },
+      patreon: { posts: patreonPosts, buttons: patreon.buttonLink },
+      reddit: { posts: redditPosts, buttons: reddit.buttonLink },
+      tiktok: { ...tiktokObj, buttons: tiktok.buttonLink },
+      twitch: { ...twitchObj, buttons: twitch.buttonLink },
+      twitter: { ...twitterObj, buttons: twitter.buttonLink },
+      youtube: { ...youtubeObj, buttons: youtube.buttonLink },
       soundcloud: { tracks: soundcloud },
 
       headerLinks,
