@@ -16,16 +16,16 @@ const Soundcloud: NextPage = ({ tracks = [] }) => {
       {tracks &&
         tracks.length > 0 &&
         tracks.map((item) => (
-          <>
-            {item.buttons &&
-              item.buttons.length > 0 &&
-              item.buttons.map((button: any) => (
+          <div key={item.id}>
+            {item.buttonLink &&
+              item.buttonLink.length > 0 &&
+              item.buttonLink.map((button: any) => (
                 <CTAButton key={button.id} {...button.link} />
               ))}
             <div className="mb-10" key={item.id}>
               <SoundCloudPlayer trackUrl={item.media_url} />
             </div>
-          </>
+          </div>
         ))}
     </div>
   );
