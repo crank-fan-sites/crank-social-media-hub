@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
-
-import axios from "axios";
+import { useEffect, useState } from "react";
 
 const RedditPost: NextPage = (props: any) => {
   const {
@@ -14,8 +13,15 @@ const RedditPost: NextPage = (props: any) => {
     url,
     link_flair_type,
   } = props;
-  const date = new Date(created * 1000);
-  const readableDate = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+
+  const [readableDate, setReadableDate] = useState(false);
+
+  useEffect(() => {
+    const date = new Date(created * 1000);
+    setReadableDate(
+      `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`
+    );
+  }, [created]);
 
   return (
     <div className="p-3 my-3">
