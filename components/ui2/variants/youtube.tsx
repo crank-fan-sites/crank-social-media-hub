@@ -21,12 +21,4 @@ const YoutubeButton: NextPage<ButtonProps> = ({
   );
 };
 
-// {
-//   url,
-//   text,
-// }: {
-//   url: string;
-//   text: string;
-// }
-
 export default YoutubeButton;

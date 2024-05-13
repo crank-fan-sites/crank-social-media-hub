@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
 import { ButtonProps } from "@/components/ui2/social-button";
 
-const YoutubeButton: NextPage<ButtonProps> = ({
+const TiktokButton: NextPage<ButtonProps> = ({
   url,
   title = "Tiktok Profile",
   target,
