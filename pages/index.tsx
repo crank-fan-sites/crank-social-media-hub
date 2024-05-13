@@ -150,14 +150,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } = result;
 
   // Instagram
+  let igMedia = [];
   const igResponse = await fetch(
     baseUrl + "/api/instagram/media" + "?token=" + instagram.api_access_token
   );
   if (!igResponse.ok) {
     // throw new Error("Network response was not ok");
-    console.log("bad IG");
+    console.log("bad IG call");
   }
-  const igMedia = await igResponse.json();
+  try {
+    igMedia = await igResponse.json();
+  } catch (error) {
+    console.log("bad IG wont be able to get json", error);
+  }
 
   // Discord
   const discordMessages = await fetch(
