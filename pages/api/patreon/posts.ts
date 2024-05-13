@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
 import axios from "axios";
 import { getStrapi } from "@/lib/getStrapi";
 
@@ -10,9 +9,19 @@ export default async function handler(
   let { campaignId, accessToken } = req.query;
 
   if (!campaignId || !accessToken) {
-    const data = await getStrapi("/social-media-patreon");
-    campaignId = campaignId || data.campaign_id;
-    accessToken = accessToken || data.access_token;
+    try {
+      const data = await getStrapi("/social-media-patreon");
+      campaignId = campaignId || data.campaign_id;
+      accessToken = accessToken || data.access_token;
+    } catch (error) {
+      console.error(
+        "Failed to retrieve campaign ID or access token from Strapi:",
+        error
+      );
+      return res
+        .status(500)
+        .json({ error: "Failed to retrieve necessary Patreon credentials" });
+    }
   }
 
   const url = `https://www.patreon.com/api/oauth2/v2/campaigns/${campaignId}/posts?fields${encodeURIComponent(
@@ -28,21 +37,41 @@ export default async function handler(
       },
     });
 
+    if (response.status !== 200) {
+      console.error(
+        `Patreon API Error -- returned a ${response.status} status: ${response.statusText}`
+      );
+      return res
+        .status(response.status)
+        .json({
+          error: response.statusText
+            ? response.statusText
+            : "Patreon API Error not status 200",
+        });
+    }
+
     res.status(200).json({ status: response.status, ...response.data });
   } catch (error) {
+    console.error("Failed to fetch Patreon posts:", error);
     if (error.response) {
       res.status(error.response.status).json({
-        if: "response",
-        msg: error.message,
-        ...error.response.data,
+        error: "API response error",
+        details: error.response.data,
       });
     } else if (error.request) {
-      res.status(500).json({ if: "request", req: error.request });
+      res
+        .status(500)
+        .json({
+          error: "Patreon API -- No response received from Patreon API",
+          details: error.request,
+        });
     } else {
       res
         .status(500)
-        .json({ if: "else", msg: error.message, message: error.message });
+        .json({
+          error: "Patreon API -- Unexpected error occurred",
+          details: error.message,
+        });
     }
-    console.error(error.config);
   }
 }

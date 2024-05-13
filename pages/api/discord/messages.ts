@@ -9,8 +9,13 @@ export default async function handler(
 ) {
   let channelId = req.query.channelId as string | undefined;
   if (!channelId) {
-    const { channel_id } = await getStrapi("/social-media-discord");
-    channelId = channel_id;
+    try {
+      const { channel_id } = await getStrapi("/social-media-discord");
+      channelId = channel_id;
+    } catch (error) {
+      console.error("Failed to retrieve channel ID from Strapi:", error);
+      return res.status(500).json({ error: "Failed to retrieve channel ID" });
+    }
   }
 
   const client = new Client({
@@ -21,13 +26,22 @@ export default async function handler(
     ],
   });
 
-  client.once("ready", async () => {
-    const channel = await client.channels.fetch(channelId);
-    const messages = await channel.messages.fetch({ limit: 25 });
-    res.status(200).json(messages);
-    // res.status(200).json(messages.map((message) => message));
-    client.destroy();
-  });
-
-  client.login(process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN);
+  try {
+    await client.login(process.env.NEXT_PUBLIC_DISCORD_BOT_TOKEN);
+    client.once("ready", async () => {
+      try {
+        const channel = await client.channels.fetch(channelId);
+        const messages = await channel.messages.fetch({ limit: 25 });
+        res.status(200).json(messages);
+      } catch (fetchError) {
+        console.error("Failed to fetch messages:", fetchError);
+        res.status(500).json({ error: "Failed to fetch messages" });
+      } finally {
+        client.destroy();
+      }
+    });
+  } catch (loginError) {
+    console.error("Discord client login failed:", loginError);
+    res.status(500).json({ error: "Discord client login failed" });
+  }
 }

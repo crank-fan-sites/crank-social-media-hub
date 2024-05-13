@@ -18,7 +18,13 @@ export default async function handler(
       const { api_access_token } = await getStrapi("/social-media-instagram");
       apiAccessToken = api_access_token;
     } catch (error) {
-      throw `Strapi get IG not working. | ${error.status} status. msg: ${error.message}`;
+      console.error(
+        "Failed to retrieve Instagram API access token from Strapi:",
+        error
+      );
+      return res
+        .status(500)
+        .json({ error: "Failed to retrieve Instagram API access token" });
     }
   }
 
@@ -36,43 +42,43 @@ export default async function handler(
   ];
   params.append("fields", fields.join(","));
 
-  const response = await axios.get(`${url}?${params.toString()}`, {
-    headers: {
-      Authorization: `Bearer ${apiAccessToken}`,
-    },
-  });
-  if (response.status !== 200) {
-    throw `API returned a ${response.status} status: ${response.statusText}`;
-  }
+  try {
+    const response = await axios.get(`${url}?${params.toString()}`, {
+      headers: {
+        Authorization: `Bearer ${apiAccessToken}`,
+      },
+    });
 
-  const { data } = response;
-
-  const result: any[] = [];
-  Object.values(data.data).forEach((item: any) => {
-    const createdDate = parseISO(item.timestamp);
-
-    const media = {
-      id: item.id,
-      date: createdDate.toISOString(),
-      timestamp: createdDate.getTime(),
-      type: "instagram",
-      url: item.permalink,
-      text: item.caption,
-      picture: item.thumbnail_url,
-    };
-
-    if (item.media_type === "VIDEO") {
-      media.video = {
-        url: item.media_url,
-        width: 600,
-        height: 600,
-      };
-    } else {
-      media.picture = item.media_url;
+    if (response.status !== 200) {
+      console.error(
+        `Instagram API returned a ${response.status} status: ${response.statusText}`
+      );
+      return res.status(response.status).json({ error: response.statusText });
     }
 
-    result.push(media);
-  });
+    const { data } = response;
+    const result = data.data.map((item: any) => {
+      const createdDate = parseISO(item.timestamp);
+      const media = {
+        id: item.id,
+        date: createdDate.toISOString(),
+        timestamp: createdDate.getTime(),
+        type: "instagram",
+        url: item.permalink,
+        text: item.caption,
+        picture:
+          item.media_type === "VIDEO" ? item.thumbnail_url : item.media_url,
+        video:
+          item.media_type === "VIDEO"
+            ? { url: item.media_url, width: 600, height: 600 }
+            : null,
+      };
+      return media;
+    });
 
-  res.status(200).json(result);
+    res.status(200).json(result);
+  } catch (error) {
+    console.error("Failed to fetch Instagram media:", error);
+    res.status(500).json({ error: "Failed to fetch Instagram media" });
+  }
 }
