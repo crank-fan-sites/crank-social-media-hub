@@ -1,18 +1,19 @@
 import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const PatreonButton: NextPage = ({
+const PatreonButton: NextPage<ButtonProps> = ({
   url,
-  text,
-}: {
-  url: string;
-  text: string;
+  title = "Join the Patreon",
+  target,
+  external,
 }) => {
-  text = text || "Join the Patreon";
   return (
     <SocialButton
-      link="https://www.patreon.com/unelectableairwaves/"
-      text={text}
+      link={url}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="patreon.svg"
       iconAlt="Patreon Logo"
       className="bg-[#dc143c]"

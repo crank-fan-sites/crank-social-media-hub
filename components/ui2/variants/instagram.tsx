@@ -1,18 +1,19 @@
 import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const InstagramButton: NextPage = ({
+const InstagramButton: NextPage<ButtonProps> = ({
   url,
-  text,
-}: {
-  url: string;
-  text: string;
+  title = "Instagram Profile",
+  target,
+  external,
 }) => {
-  text = text || "Instagram Profile";
   return (
     <SocialButton
       link={url}
-      text={text}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="instagram.svg"
       iconAlt="Instagram Logo"
       className="bg-[#b900b4]"

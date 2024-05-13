@@ -1,23 +1,32 @@
 import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const YoutubeButton: NextPage = ({
+const YoutubeButton: NextPage<ButtonProps> = ({
   url,
-  text,
-}: {
-  url: string;
-  text: string;
+  title = "Go to the YouTube Channel",
+  target,
+  external,
 }) => {
-  text = text || "Go to the YouTube Channel";
   return (
     <SocialButton
-      link="https://www.patreon.com/unelectableairwaves/"
-      text={text}
+      link={url}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="youtube.svg"
       iconAlt="YouTube Logo"
       className="color-black bg-[#000000]"
     />
   );
 };
+
+// {
+//   url,
+//   text,
+// }: {
+//   url: string;
+//   text: string;
+// }
 
 export default YoutubeButton;

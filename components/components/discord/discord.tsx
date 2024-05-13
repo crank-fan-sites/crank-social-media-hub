@@ -5,8 +5,16 @@ import { useEffect, useState } from "react";
 import Message from "@/components/components/discord/discord-message";
 import CTAButton from "@/components/ui2/variants/discord";
 
-const Discord: NextPage = ({ messages: initialMessages }) => {
-  const [messages, setMessages] = useState([]);
+interface DiscordProps {
+  messages?: any[];
+  buttons?: { id: string; link: any }[];
+}
+
+const Discord: NextPage<DiscordProps> = ({
+  messages: initialMessages,
+  buttons,
+}) => {
+  const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
     if (!initialMessages) {
@@ -21,7 +29,11 @@ const Discord: NextPage = ({ messages: initialMessages }) => {
 
   return (
     <div>
-      <CTAButton url="https://discord.gg" />
+      {buttons &&
+        buttons.length > 0 &&
+        buttons.map((button: any) => (
+          <CTAButton key={button.id} {...button.link} />
+        ))}
       {messages.map(
         (message, index) =>
           message.cleanContent && (

@@ -1,18 +1,19 @@
 import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const SoundcloudButton: NextPage = ({
+const YoutubeButton: NextPage<ButtonProps> = ({
   url,
-  text,
-}: {
-  url: string;
-  text: string;
+  title = "Go to SoundCloud Profile",
+  target,
+  external,
 }) => {
-  text = text || "Go to SoundCloud Profile";
   return (
     <SocialButton
       link={url}
-      text={text}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="soundcloud.svg"
       iconAlt="Soundcloud Logo"
       className="bg-[#ff5500]"

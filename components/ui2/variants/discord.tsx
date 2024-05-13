@@ -1,18 +1,19 @@
 import type { NextPage } from "next";
 import SocialButton from "../social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const DiscordButton: NextPage = ({
+const DiscordButton: NextPage<ButtonProps> = ({
   url,
-  text,
-}: {
-  url: string;
-  text: string;
+  title = "Join the Discord!",
+  target,
+  external,
 }) => {
-  text = text || "Join the Discord";
   return (
     <SocialButton
       link={url}
-      text={text}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="discord.svg"
       iconAlt="Discord Logo"
       className="bg-[#5865f2]"

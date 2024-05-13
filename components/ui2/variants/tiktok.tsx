@@ -1,11 +1,19 @@
 import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const TiktokButton: NextPage = () => {
+const YoutubeButton: NextPage<ButtonProps> = ({
+  url,
+  title = "Tiktok Profile",
+  target,
+  external,
+}) => {
   return (
     <SocialButton
-      link="https://www.tiktok.com/@daddytankee"
-      text="Tiktok Profile"
+      link={url}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="tiktok.svg"
       iconAlt="Tiktok Logo"
       className="bg-[#000000]"

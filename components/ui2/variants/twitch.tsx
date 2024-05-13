@@ -1,18 +1,19 @@
 import type { NextPage } from "next";
 import SocialButton from "@/components/ui2/social-button";
+import { ButtonProps } from "@/components/ui2/social-button";
 
-const TwitchButton: NextPage = ({
+const TwitchButton: NextPage<ButtonProps> = ({
   url,
-  text,
-}: {
-  url: string;
-  text: string;
+  title = "Twitch Profile",
+  target,
+  external,
 }) => {
-  text = text || "Twitch Profile";
   return (
     <SocialButton
       link={url}
-      text={text}
+      text={title}
+      target={target}
+      external={external}
       iconSrc="twitch.svg"
       iconAlt="Twitch Logo"
       className="bg-[#9146ff]"
