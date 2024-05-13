@@ -4,8 +4,7 @@ import { HeadingH1 } from "@/components/typography";
 import { links } from "@/lib/links";
 import { Button } from "@/components/ui/button";
 
-import { getStrapi } from "@/lib/getStrapi";
-import siteLinks from "@/lib/siteLinks";
+import { siteConfig, siteLinks } from "@/lib/SSRLayout";
 
 const Privacy: NextPage = (props) => {
   return (
@@ -118,16 +117,7 @@ const Privacy: NextPage = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // CONFIG
-  let siteConfig = null;
-  try {
-    const url = "/site-config";
-    siteConfig = await getStrapi(url);
-  } catch (error) {
-    console.log("siteConfig grab error", error);
-    return false;
-  }
-  const { siteTitle } = siteConfig;
-  const SiteConfigObj = { title: siteTitle };
+  const SiteConfigObj = await siteConfig();
 
   // LINKS -- Header and footer links
   const { headerLinks, footerLinks } = await siteLinks();

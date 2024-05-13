@@ -27,7 +27,7 @@ import RowInstagram from "@/components/front_page/row-instagram";
 // import Facebook from "@/components/front_page/facebook";
 
 import { getStrapi } from "@/lib/getStrapi";
-import siteLinks from "@/lib/siteLinks";
+import { siteConfig, siteLinks } from "@/lib/SSRLayout";
 
 const Home: NextPage = (props) => {
   return (
@@ -107,16 +107,7 @@ const Home: NextPage = (props) => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // CONFIG
-  let siteConfig = null;
-  try {
-    const url = "/site-config";
-    siteConfig = await getStrapi(url);
-  } catch (error) {
-    console.log("siteConfig grab error", error);
-    return false;
-  }
-  const { siteTitle } = siteConfig;
-  const SiteConfigObj = { title: siteTitle };
+  const SiteConfigObj = await siteConfig();
 
   // LINKS -- Header and footer links
   const { headerLinks, footerLinks } = await siteLinks();
