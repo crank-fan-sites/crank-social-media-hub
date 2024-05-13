@@ -1,14 +1,14 @@
 import type { NextPage } from "next";
 
-import {
-  HeadingH1,
-  HeadingH2,
-} from "@/components/typography";
+import { HeadingH1, HeadingH2 } from "@/components/typography";
 
 import TiktokVideo from "@/components/components/tiktok/tiktok-video";
 import TiktokProfile from "@/components/components/tiktok/tiktok-profile";
 
 const RowTiktok: NextPage = ({ profile, videoCreator, videoId }) => {
+  if (!profile || !videoCreator || !videoId) {
+    return null;
+  }
   return (
     <>
       <div className="grid grid-cols-1 border-t bg-primary lg:grid-cols-2 border-stone-400 dark:border-stone-600">

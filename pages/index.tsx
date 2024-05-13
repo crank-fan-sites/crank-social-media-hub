@@ -174,16 +174,25 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const redditPosts = await fetchRedditPosts(baseUrl, reddit.subreddit);
 
   // Tiktok
-  const tiktokObj = {
-    profile: tiktok.profile,
-    videoCreator: tiktok.video_creator,
-    videoId: tiktok.video_id,
-  };
+  const tiktokObj = tiktok
+    ? {
+        profile: tiktok.profile,
+        videoCreator: tiktok.video_creator,
+        videoId: tiktok.video_id,
+        buttons: tiktok.buttonLink,
+      }
+    : {
+        profile: null,
+        videoCreator: null,
+        videoId: null,
+        buttons: [],
+      };
 
   // Twitch
   const twitchObj = {
     channel: twitch.channel_handle,
     highlighted: twitch.highlighted_playlist,
+    buttons: twitch.buttonLink,
   };
 
   // Twitter
@@ -213,7 +222,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       instagram: { media: igMedia, buttons: instagram.buttonLink },
       patreon: { posts: patreonPosts, buttons: patreon.buttonLink },
       reddit: { posts: redditPosts, buttons: reddit.buttonLink },
-      tiktok: { ...tiktokObj, buttons: tiktok.buttonLink },
+      tiktok: { ...tiktokObj },
       twitch: { ...twitchObj, buttons: twitch.buttonLink },
       twitter: { ...twitterObj, buttons: twitter.buttonLink },
       youtube: { ...youtubeObj, buttons: youtube.buttonLink },
