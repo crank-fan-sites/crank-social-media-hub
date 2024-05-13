@@ -40,7 +40,7 @@ const TiktokVideo: NextPage = ({ videoCreator, videoId }) => {
       return;
     }
     start(videoCreator, videoId);
-  }, [videoCreator, videoId]);
+  }, [videoCreator, videoId, start]);
 
   return videoCreator && <div id="content" ref={contentRef} />;
 };

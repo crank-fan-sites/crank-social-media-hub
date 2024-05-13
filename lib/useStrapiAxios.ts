@@ -51,6 +51,7 @@ const useStrapiAxios = ({ path, method, body = null }: StrapiAxiosParams) => {
       // For non-GET requests, always attempt to fetch
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [method, path, hasBodyChanged]); // Depend on hasBodyChanged to trigger effect
 
   return { response, error, loading };
