@@ -1,10 +1,9 @@
 import { getStrapi } from "@/lib/getStrapi";
 
 const siteLinks = async () => {
-  let links = null;
   try {
     const url = "/main-link?populate=*";
-    links = await getStrapi(url);
+    const links = await getStrapi(url);
     const { top_links: headerLinks, bottom_links: footerLinks } = links;
     return { headerLinks, footerLinks };
   } catch (error) {
@@ -25,4 +24,12 @@ const siteConfig = async () => {
   }
 };
 
-export { siteConfig, siteLinks };
+function getBaseUrl(req: {
+  headers: { [key: string]: string | undefined };
+}): string {
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const host = req.headers.host;
+  return `${protocol}://${host}`;
+}
+
+export { siteConfig, siteLinks, getBaseUrl };

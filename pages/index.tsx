@@ -27,7 +27,7 @@ import RowInstagram from "@/components/front_page/row-instagram";
 // import Facebook from "@/components/front_page/facebook";
 
 import { getStrapi } from "@/lib/getStrapi";
-import { siteConfig, siteLinks } from "@/lib/SSRLayout";
+import { siteConfig, siteLinks, getBaseUrl } from "@/lib/SSRLayout";
 
 const Home: NextPage = (props) => {
   return (
@@ -113,19 +113,24 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { headerLinks, footerLinks } = await siteLinks();
 
   // INTEGRATIONS
+
   // Get base url for Next.JS api calls. Same base url
-  const { req } = context;
-  const protocol = req.headers["x-forwarded-proto"] || "http";
-  const host = req.headers.host;
-  const baseUrl = `${protocol}://${host}`;
+  const baseUrl = getBaseUrl(context.req);
 
   let result = null;
   try {
     const url = "/front-page?populate=deep";
     result = await getStrapi(url);
   } catch (error) {
-    console.log("front-page grab error", error);
-    return false;
+    console.error("front-page grab error", error);
+    return {
+      props: {
+        siteConfig: { ...SiteConfigObj },
+        headerLinks,
+        footerLinks,
+      },
+      notFound: true,
+    };
   }
 
   const {
