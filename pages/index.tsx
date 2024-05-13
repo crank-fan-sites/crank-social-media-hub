@@ -95,7 +95,6 @@ const Home: NextPage = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // Header and footer links
   // CONFIG
   let siteConfig = null;
   try {
@@ -107,6 +106,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const { siteTitle } = siteConfig;
   const SiteConfigObj = { title: siteTitle };
+
+  // LINKS -- Header and footer links
   const { headerLinks, footerLinks } = await siteLinks();
 
   // INTEGRATIONS
@@ -118,10 +119,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   let result = null;
   try {
-    const url = "/front-page?populate=*";
+    const url = "/front-page?populate=deep";
     result = await getStrapi(url);
   } catch (error) {
-    console.log("grab error", error);
+    console.log("front-page grab error", error);
     return false;
   }
 
