@@ -28,6 +28,12 @@ import RowInstagram from "@/components/front_page/row-instagram";
 
 import { getStrapi } from "@/lib/getStrapi";
 import { siteConfig, siteLinks, getBaseUrl } from "@/lib/SSRLayout";
+import {
+  fetchInstagramMedia,
+  fetchDiscordMessages,
+  fetchPatreonPosts,
+  fetchRedditPosts,
+} from "@/lib/socialMediaIntegrations";
 
 const Home: NextPage = (props) => {
   return (
@@ -146,73 +152,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   } = result;
 
   // Instagram
-  let igMedia = [];
-  try {
-    const igResponse = await fetch(
-      baseUrl + "/api/instagram/media" + "?token=" + instagram.api_access_token
-    );
-    if (!igResponse.ok) {
-      console.log("bad IG call");
-    } else {
-      igMedia = await igResponse.json();
-    }
-  } catch (error) {
-    console.log("bad IG wont be able to get json", error);
-  }
+  const igMedia = await fetchInstagramMedia(
+    baseUrl,
+    instagram.api_access_token
+  );
 
   // Discord
-  let discordMessages = []; // Default to an empty array
-  try {
-    const response = await fetch(
-      baseUrl + "/api/discord/messages" + "?channelId=" + discord.channel_id
-    );
-    if (!response.ok) {
-      console.error(
-        "Failed to load Discord messages: Server responded with status",
-        response.status
-      );
-    } else {
-      discordMessages = await response.json();
-    }
-  } catch (error) {
-    console.error("Failed to load Discord messages", error);
-  }
+  const discordMessages = await fetchDiscordMessages(
+    baseUrl,
+    discord.channel_id
+  );
 
   // Patreon
-  let patreonPosts = [];
-  try {
-    const patreonResponse = await fetch(
-      `${baseUrl}/api/patreon/posts?campaignId=${patreon.campaign_id}&accessToken=${patreon.access_token}`
-    );
-    if (!patreonResponse.ok) {
-      console.error(
-        `Failed to fetch Patreon posts: Server responded with status ${patreonResponse.status}`
-      );
-    } else {
-      const patreonPostsResponse = await patreonResponse.json();
-      patreonPosts = patreonPostsResponse.data || [];
-    }
-  } catch (error) {
-    console.error("Error fetching Patreon posts:", error);
-  }
+  const patreonPosts = await fetchPatreonPosts(
+    baseUrl,
+    patreon.campaign_id,
+    patreon.access_token
+  );
 
   // Reddit
-  let redditPosts = [];
-  try {
-    const redditResponse = await fetch(
-      `${baseUrl}/api/reddit/posts?subreddit=${reddit.subreddit}`
-    );
-    if (!redditResponse.ok) {
-      console.error(
-        "Failed to fetch Reddit posts: Server responded with status",
-        redditResponse.status
-      );
-    } else {
-      redditPosts = await redditResponse.json();
-    }
-  } catch (error) {
-    console.error("Error fetching Reddit posts:", error);
-  }
+  const redditPosts = await fetchRedditPosts(baseUrl, reddit.subreddit);
 
   // Tiktok
   const tiktokObj = {
