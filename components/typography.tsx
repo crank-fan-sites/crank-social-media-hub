@@ -80,7 +80,7 @@ export function HeadingH5({
 }) {
   return (
     <h5
-      className={`scroll-m-20 mb-4 text-base font-light tracking-tight ${className}`}
+      className={`scroll-m-20 mb-4 font-light tracking-tight ${className}`}
       {...props}
     >
       {children}

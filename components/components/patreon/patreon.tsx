@@ -43,7 +43,7 @@ const PatreonLatestPosts: NextPage<PatreonLatestPostsProps> = ({
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
-    <div className="px-2 py-6 group md:p-1 lg:p-2">
+    <div className="px-2 py-6 group md:p-1 lg:p-2 hover:bg-scanlines">
       {buttons &&
         buttons.length > 0 &&
         buttons.map((button: any) => (

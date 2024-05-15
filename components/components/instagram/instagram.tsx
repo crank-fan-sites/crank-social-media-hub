@@ -50,7 +50,7 @@ const InstagramPosts: NextPage<InstagramPostsProps> = ({
         buttons.map((button: any) => (
           <CTAButton key={button.id} {...button.link} />
         ))}
-      <div className="flex flex-wrap -m-2">
+      <div className="flex flex-wrap -m-2 hover:bg-scanlines">
         {media.length > 0 &&
           media.map((item, index) => (
             <div key={index} className="w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/4">

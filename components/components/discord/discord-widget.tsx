@@ -19,9 +19,7 @@ const Widget: NextPage = ({
 }) => {
   return (
     <>
-      <HeadingH3 className="text-base group-hover:font-bold">
-        Discord Widget
-      </HeadingH3>
+      <HeadingH3 className="group-hover:font-bold">Discord Widget</HeadingH3>
 
       {buttons &&
         buttons.length > 0 &&

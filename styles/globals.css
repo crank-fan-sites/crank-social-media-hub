@@ -169,3 +169,8 @@
   width: 95%;
   height: 95%;
 }
+
+/* hover from parent */
+/* .parent:hover .child {
+  hover: bg-scanlines;
+} */

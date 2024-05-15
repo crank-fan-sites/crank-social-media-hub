@@ -77,5 +77,14 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwindcss/plugin")(function ({ addVariant, e }) {
+      addVariant("hover-parent", ({ container }) => {
+        container.walkRules((rule) => {
+          rule.selector = `:hover .${e(rule.selector.slice(1))}`;
+        });
+      });
+    }),
+  ],
 };
