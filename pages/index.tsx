@@ -53,9 +53,13 @@ const Home: NextPage = (props) => {
             quality={10}
           />
         </div>
-
+        {props.siteConfig.description && (
+          <div
+            className="grid grid-cols-1 p-5 border-t bg-primary place-items-center border-stone-400 dark:border-stone-600"
+            dangerouslySetInnerHTML={{ __html: props.siteConfig.description }}
+          ></div>
+        )}
         <RowTwitchPlayer channel={props.twitch.channel} />
-
         {/* content */}
         <div className="mx-auto max-w-7xl">
           <RowTwitchAndImage

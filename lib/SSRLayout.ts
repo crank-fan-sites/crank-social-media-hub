@@ -16,11 +16,11 @@ const siteConfig = async () => {
   try {
     const url = "/site-config";
     const siteConfig = await getStrapi(url);
-    const { siteTitle } = siteConfig;
-    return { title: siteTitle };
+    const { siteTitle, description } = siteConfig;
+    return { title: siteTitle, description };
   } catch (error) {
     console.log("siteConfig grab error", error);
-    return { title: "The Site" };
+    return { title: "The Site", description: "" };
   }
 };
 
