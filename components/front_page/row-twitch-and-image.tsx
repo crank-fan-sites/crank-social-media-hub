@@ -34,7 +34,7 @@ const RowTwitchAndImage: NextPage = ({
       </div>
       <div className="items-center justify-center hidden p-0 lg:flex hover:bg-scanlines">
         <Image
-          src="/screenshots-vertical/Twitch-unelectable-text-600x720_vertical.png"
+          src="/page-images/twitch-side-image.png"
           width={480}
           height={576}
           alt="UnelectableAirwaves Alien"

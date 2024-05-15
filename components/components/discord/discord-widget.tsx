@@ -27,7 +27,7 @@ const Widget: NextPage = ({
           <CTAButton key={button.id} {...button.link} />
         ))}
 
-      <div className="patreon-container">
+      <div className="patreon-container mt-10">
         <iframe
           src={widget}
           width="350"
@@ -36,7 +36,7 @@ const Widget: NextPage = ({
         ></iframe>
       </div>
 
-      <div className="items-center justify-center hidden p-0 lg:flex">
+      <div className="items-center justify-center hidden p-0 lg:flex mt-20">
         <Image
           src={imageSrc}
           width={350}

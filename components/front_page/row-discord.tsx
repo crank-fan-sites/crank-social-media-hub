@@ -21,7 +21,7 @@ const DiscordRow: NextPage = ({ name, widget, messages, buttons }) => {
       <div className="col-span-5 px-2 py-6 border-b lg:col-span-2 group md:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 md:border-r hover:bg-scanlines">
         <DiscordWidget
           widget={widget}
-          imageSrc="/screenshots-vertical/UnelectableAirwaves_Twitch-bird-silhouette-350x720.png"
+          imageSrc="/page-images/discord-widget-image.png"
           alt="UnelectableAirwaves Alien"
           buttons={buttons}
         />
