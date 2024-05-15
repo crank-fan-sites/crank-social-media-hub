@@ -45,14 +45,15 @@ const Home: NextPage = (props) => {
       <div>
         <div className="relative -z-20 before:block before:absolute before:inset-0 before:bg-scanlines before:-z-10">
           <Image
-            src="/screenshots/UnelectableAirwaves_banner-title-2-thin.png"
-            alt=""
+            src={props.siteConfig.bannerImage.url}
+            alt={props.siteConfig.bannerImage.alternativeText}
             height={856}
             width={2295}
             className="w-full h-[428px] object-cover relative -z-40 mix-blend-luminosity"
             quality={10}
           />
         </div>
+
         {props.siteConfig.description && (
           <div
             className="grid grid-cols-1 p-5 border-t bg-primary place-items-center border-stone-400 dark:border-stone-600"

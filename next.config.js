@@ -10,7 +10,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ["scontent-lga3-2.cdninstagram.com"],
+    domains: ["scontent-lga3-2.cdninstagram.com", "res.cloudinary.com"],
     remotePatterns: [
       {
         protocol: "http",

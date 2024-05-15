@@ -2,8 +2,8 @@ import { getStrapi } from "@/lib/getStrapi";
 
 const siteLinks = async () => {
   try {
-    const url = "/main-link?populate=*";
-    const links = await getStrapi(url);
+    const urlPath = "/main-link?populate=*";
+    const links = await getStrapi(urlPath);
     const { top_links: headerLinks, bottom_links: footerLinks } = links;
     return { headerLinks, footerLinks };
   } catch (error) {
@@ -14,13 +14,26 @@ const siteLinks = async () => {
 
 const siteConfig = async () => {
   try {
-    const url = "/site-config";
-    const siteConfig = await getStrapi(url);
-    const { siteTitle, description } = siteConfig;
-    return { title: siteTitle, description };
+    const urlPath = "/site-config?populate=*";
+    const siteConfig = await getStrapi(urlPath);
+    const { siteTitle, description, banner } = siteConfig;
+    const { alternativeText, caption, url, width, height } =
+      banner.data.attributes;
+    const bannerImage = { alternativeText, caption, url, width, height };
+    return { title: siteTitle, description, bannerImage };
   } catch (error) {
     console.log("siteConfig grab error", error);
-    return { title: "The Site", description: "" };
+    return {
+      title: "The Site",
+      description: "",
+      bannerImage: {
+        url: "",
+        alternativeText: "",
+        caption: "",
+        width: 0,
+        height: 0,
+      },
+    };
   }
 };
 
