@@ -66,6 +66,7 @@ const Home: NextPage = (props) => {
           <RowTwitchAndImage
             highlighted={props.twitch.highlighted}
             buttons={props.twitch.buttons}
+            sideImage={props.twitch.sideImage}
           />
           {/* end one row */}
           {/* content after top header parts */}
@@ -93,6 +94,7 @@ const Home: NextPage = (props) => {
             widget={props.discord.widget}
             messages={props.discord.messages}
             buttons={props.discord.buttons}
+            sideImage={props.discord.sideImage}
           />
           {/* end one row */}
           <RowPatreon
@@ -194,11 +196,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
 
   // Twitch
-  const twitchObj = {
-    channel: twitch.channel_handle,
-    highlighted: twitch.highlighted_playlist,
-    buttons: twitch.buttonLink,
-  };
+  const twitchObj = twitchObject(twitch);
 
   // Twitter
   const twitterObj = {
@@ -213,28 +211,62 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     playlistId: youtube.playlist_id,
   };
 
+  console.log(discordObject(discord, []));
   // Props
   return {
     props: {
       siteConfig: { ...SiteConfigObj },
 
-      discord: {
-        name: discord.channel_name,
-        widget: discord.widget_url,
-        messages: discordMessages,
-        buttons: discord.buttonLink,
-      },
+      discord: discordObject(discord, discordMessages),
       instagram: { media: igMedia, buttons: instagram.buttonLink },
       patreon: { posts: patreonPosts, buttons: patreon.buttonLink },
       reddit: { posts: redditPosts, buttons: reddit.buttonLink },
       tiktok: { ...tiktokObj },
-      twitch: { ...twitchObj, buttons: twitch.buttonLink },
+      twitch: { ...twitchObj },
       twitter: { ...twitterObj, buttons: twitter.buttonLink },
       youtube: { ...youtubeObj, buttons: youtube.buttonLink },
       soundcloud: { tracks: soundcloud },
 
       headerLinks,
       footerLinks,
+    },
+  };
+};
+
+const twitchObject = (twitch: any) => {
+  const { channel_handle, highlighted_playlist, buttonLink, sideImage } =
+    twitch;
+  const { alternativeText, caption, url, width, height } =
+    sideImage.data.attributes;
+  return {
+    channel: channel_handle,
+    highlighted: highlighted_playlist,
+    buttons: buttonLink,
+    sideImage: {
+      url,
+      alternativeText,
+      caption,
+      width,
+      height,
+    },
+  };
+};
+
+const discordObject = (discord: any, messages) => {
+  const { channel_name, widget_url, buttonLink, sideImage } = discord;
+  const { alternativeText, caption, url, width, height } =
+    sideImage.data.attributes;
+  return {
+    name: channel_name,
+    widget: widget_url,
+    buttons: buttonLink,
+    messages,
+    sideImage: {
+      url,
+      alternativeText,
+      caption,
+      width,
+      height,
     },
   };
 };

@@ -12,6 +12,7 @@ const RowTwitchAndImage: NextPage = ({
   width,
   height,
   buttons,
+  sideImage,
 }) => {
   return (
     <div className="grid grid-cols-1 border-t bg-primary lg:grid-cols-2 border-stone-400 dark:border-stone-600">
@@ -34,10 +35,10 @@ const RowTwitchAndImage: NextPage = ({
       </div>
       <div className="items-center justify-center hidden p-0 lg:flex hover:bg-scanlines">
         <Image
-          src="/page-images/twitch-side-image.png"
+          src={sideImage.url || ""}
           width={480}
           height={576}
-          alt="UnelectableAirwaves Alien"
+          alt={sideImage.alternativeText || ""}
         />
       </div>
     </div>
