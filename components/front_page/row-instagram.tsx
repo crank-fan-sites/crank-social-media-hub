@@ -2,10 +2,7 @@ import type { NextPage } from "next";
 
 import InstagramPosts from "@/components/components/instagram/instagram";
 
-import SocialButton from "@/components/ui2/social-button";
 import { HeadingH3, Paragraph } from "@/components/typography";
-
-import styles from "./button.module.css";
 
 interface InstagramRowProps {
   data?: any;

@@ -16,13 +16,18 @@ const siteConfig = async () => {
   try {
     const urlPath = "/site-config?populate=*";
     const siteConfig = await getStrapi(urlPath);
+    if (!siteConfig || typeof siteConfig !== "object") {
+      console.error("Invalid response from getStrapi siteConfig");
+      throw new Error("Invalid response from getStrapi");
+    }
     const { siteTitle, description, banner } = siteConfig;
-    const { alternativeText, caption, url, width, height } =
-      banner.data.attributes;
-    const bannerImage = { alternativeText, caption, url, width, height };
-    return { title: siteTitle, description, bannerImage };
+    return {
+      title: siteTitle,
+      description,
+      bannerImage: banner.data.attributes,
+    };
   } catch (error) {
-    console.log("siteConfig grab error", error);
+    console.error("siteConfig grab error", error);
     return {
       title: "The Site",
       description: "",
