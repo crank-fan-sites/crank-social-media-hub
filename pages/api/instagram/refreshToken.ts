@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import axios from "axios";
 import strapiAxios from "@/lib/strapiAxios";
+import { getStrapi } from "@/lib/getStrapi";
 
 const REFRESH_URL = "https://graph.instagram.com/refresh_access_token";
 
@@ -21,15 +22,6 @@ export default async function handler(
     } else {
       res.status(500).json({ msg: error.message });
     }
-  }
-}
-
-async function getStrapi(path) {
-  try {
-    const result = await strapiAxios().get(path);
-    return result.data.data.attributes;
-  } catch (error) {
-    return { status: false };
   }
 }
 
