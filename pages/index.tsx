@@ -217,15 +217,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     playlistId: youtube.playlist_id,
   };
 
-  const fourthWallObj = fourthwall
-    ? {
-        title: fourthwall.title,
-        image: fourthwall.imageUrl,
-        price: fourthwall.price,
-        link: fourthwall.link,
-        description: fourthwall.description,
-      }
-    : null;
+  // const fourthWallObj = fourthwall
+  //   ? {
+  //       title: fourthwall.title,
+  //       image: fourthwall.imageUrl,
+  //       price: fourthwall.price,
+  //       link: fourthwall.link,
+  //       description: fourthwall.description,
+  //     }
+  //   : null;
 
   // Props
   return {
