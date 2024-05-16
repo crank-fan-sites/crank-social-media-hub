@@ -17,7 +17,7 @@ const siteConfig = async () => {
     const urlPath = "/site-config?populate=*";
     const siteConfig = await getStrapi(urlPath);
     if (!siteConfig || typeof siteConfig !== "object") {
-      console.error("Invalid response from getStrapi siteConfig");
+      console.error("Invalid response from getStrapi", { siteConfig });
       throw new Error("Invalid response from getStrapi");
     }
     const { siteTitle, description, banner } = siteConfig;
@@ -27,7 +27,10 @@ const siteConfig = async () => {
       bannerImage: banner.data.attributes,
     };
   } catch (error) {
-    console.error("siteConfig grab error", error);
+    console.error("siteConfig grab error", {
+      message: error.message,
+      stack: error.stack,
+    });
     return {
       title: "The Site",
       description: "",
