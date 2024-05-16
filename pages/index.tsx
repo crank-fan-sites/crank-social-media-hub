@@ -24,6 +24,7 @@ import RowPatreon from "@/components/front_page/row-patreon";
 import RowDiscord from "@/components/front_page/row-discord";
 import RowReddit from "@/components/front_page/row-reddit";
 import RowInstagram from "@/components/front_page/row-instagram";
+// import FourthwallRow from "@/components/front_page/row-fourthwall";
 // import Facebook from "@/components/front_page/facebook";
 
 import { getStrapi } from "@/lib/getStrapi";
@@ -60,6 +61,9 @@ const Home: NextPage = (props) => {
             dangerouslySetInnerHTML={{ __html: props.siteConfig.description }}
           ></div>
         )}
+
+        {/* {props.fourthwall && <FourthwallRow {...props.fourthwall} />} */}
+
         <RowTwitchPlayer channel={props.twitch.channel} />
         {/* content */}
         <div className="mx-auto max-w-7xl">
@@ -156,6 +160,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     twitter,
     youtube,
     soundcloud,
+    // fourthwall,
   } = result;
 
   // Instagram
@@ -203,6 +208,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     profile: twitter.profile,
     darkMode: twitter.dark_mode,
     height: twitter.widget_height,
+    buttons: twitter.buttonLink,
   };
 
   // Youtube
@@ -211,7 +217,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     playlistId: youtube.playlist_id,
   };
 
-  console.log(discordObject(discord, []));
+  const fourthWallObj = fourthwall
+    ? {
+        title: fourthwall.title,
+        image: fourthwall.imageUrl,
+        price: fourthwall.price,
+        link: fourthwall.link,
+        description: fourthwall.description,
+      }
+    : null;
+
   // Props
   return {
     props: {
@@ -223,9 +238,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       reddit: { posts: redditPosts, buttons: reddit.buttonLink },
       tiktok: { ...tiktokObj },
       twitch: { ...twitchObj },
-      twitter: { ...twitterObj, buttons: twitter.buttonLink },
+      twitter: twitterObj,
       youtube: { ...youtubeObj, buttons: youtube.buttonLink },
       soundcloud: { tracks: soundcloud },
+
+      // fourthwall: fourthWallObj,
 
       headerLinks,
       footerLinks,

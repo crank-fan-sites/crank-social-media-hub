@@ -16,6 +16,9 @@ const siteConfig = async () => {
   try {
     const urlPath = "/site-config?populate=*";
     const siteConfig = await getStrapi(urlPath);
+    if (!siteConfig || typeof siteConfig !== "object") {
+      throw new Error("Invalid response from getStrapi");
+    }
     const { siteTitle, description, banner } = siteConfig;
     const { alternativeText, caption, url, width, height } =
       banner.data.attributes;
