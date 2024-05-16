@@ -12,7 +12,6 @@ export default async function handler(
   if (!subreddit) {
     try {
       ({ subreddit } = await getStrapi("/social-media-reddit"));
-      // res.status(200).json({ subreddit });
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
@@ -23,8 +22,6 @@ export default async function handler(
     res.status(400).json({ msg: "Invalid subreddit value" });
     return;
   }
-
-  // res.status(200).json({ subreddit });
 
   try {
     const data = await fetchRedditData(subreddit);
@@ -49,6 +46,7 @@ interface RedditResponse {
       kind: string;
       data: object;
     }>;
+    before: string | null;
   };
 }
 
