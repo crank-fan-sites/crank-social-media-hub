@@ -3,12 +3,15 @@ async function fetchInstagramMedia(
   accessToken: string
 ): Promise<any[]> {
   let igMedia = [];
+  const url = `${baseUrl}/api/instagram/media?token=${accessToken}`;
+  console.log("instagram", url);
   try {
-    const igResponse = await fetch(
-      `${baseUrl}/api/instagram/media?token=${accessToken}`
-    );
+    const igResponse = await fetch(url);
     if (!igResponse.ok) {
-      console.error("Failed Instagram API call");
+      console.error(
+        "Failed Instagram API call. Server responded with status",
+        igResponse.status
+      );
       return igMedia;
     }
     igMedia = await igResponse.json();
@@ -23,10 +26,10 @@ async function fetchDiscordMessages(
   channelId: string
 ): Promise<any[]> {
   let discordMessages = [];
+  const url = `${baseUrl}/api/discord/messages?channelId=${channelId}`;
+  console.log("discord", url);
   try {
-    const response = await fetch(
-      `${baseUrl}/api/discord/messages?channelId=${channelId}`
-    );
+    const response = await fetch(url);
     if (!response.ok) {
       console.error(
         "Failed to load Discord messages: Server responded with status",
@@ -47,10 +50,10 @@ async function fetchPatreonPosts(
   accessToken: string
 ): Promise<any[]> {
   let patreonPosts = [];
+  const url = `${baseUrl}/api/patreon/posts?campaignId=${campaignId}&accessToken=${accessToken}`;
+  console.log("patreon", url);
   try {
-    const patreonResponse = await fetch(
-      `${baseUrl}/api/patreon/posts?campaignId=${campaignId}&accessToken=${accessToken}`
-    );
+    const patreonResponse = await fetch(url);
     if (!patreonResponse.ok) {
       console.error(
         `Failed to fetch Patreon posts: Server responded with status ${patreonResponse.status}`
@@ -70,10 +73,10 @@ async function fetchRedditPosts(
   subreddit: string
 ): Promise<any[]> {
   let redditPosts = [];
+  const url = `${baseUrl}/api/reddit/posts?subreddit=${subreddit}`;
+  console.log("reddit", url);
   try {
-    const redditResponse = await fetch(
-      `${baseUrl}/api/reddit/posts?subreddit=${subreddit}`
-    );
+    const redditResponse = await fetch(url);
     if (!redditResponse.ok) {
       console.error(
         "Failed to fetch Reddit posts: Server responded with status",
