@@ -106,7 +106,11 @@ const Home: NextPage = (props) => {
             buttons={props.patreon.buttons}
           />
           {/* end one row */}
-          <RowReddit data={props.reddit.posts} buttons={props.reddit.buttons} />
+          <RowReddit
+            subreddit={props.reddit.subreddit}
+            data={props.reddit.posts}
+            buttons={props.reddit.buttons}
+          />
           {/* end one row */}
           <RowInstagram
             data={props.instagram.media}
@@ -235,7 +239,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       discord: discordObject(discord, discordMessages),
       instagram: { media: igMedia, buttons: instagram.buttonLink },
       patreon: { posts: patreonPosts, buttons: patreon.buttonLink },
-      reddit: { posts: redditPosts, buttons: reddit.buttonLink },
+      reddit: {
+        subreddit: reddit.subreddit,
+        posts: redditPosts,
+        buttons: reddit.buttonLink,
+      },
       tiktok: { ...tiktokObj },
       twitch: { ...twitchObj },
       twitter: twitterObj,
