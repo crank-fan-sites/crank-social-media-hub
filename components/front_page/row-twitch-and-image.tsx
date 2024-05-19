@@ -16,7 +16,7 @@ const RowTwitchAndImage: NextPage = ({
 }) => {
   return (
     <div className="grid grid-cols-1 border-t bg-primary lg:grid-cols-2 border-stone-400 dark:border-stone-600">
-      <div className="px-2 py-6 border-b group lg:p-4 border-stone-400 dark:border-stone-600 md:border-b-0 hover:bg-scanlines">
+      <div className="px-2 py-6 border-b group lg:p-4 border-stone-400 dark:border-stone-600 md:border-b-0 bg-scanlines">
         <HeadingH3 className="group-hover:font-bold">
           Highlighted Twitch Clips
         </HeadingH3>
@@ -31,7 +31,7 @@ const RowTwitchAndImage: NextPage = ({
           height={height}
         />
       </div>
-      <div className="items-center justify-center hidden p-0 lg:flex hover:bg-scanlines">
+      <div className="items-center justify-center hidden p-0 lg:flex bg-scanlines">
         <Image
           src={sideImage.url || ""}
           width={480}

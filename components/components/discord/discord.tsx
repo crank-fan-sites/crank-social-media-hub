@@ -28,7 +28,7 @@ const Discord: NextPage<DiscordProps> = ({
   }, [initialMessages]);
 
   return (
-    <div className="hover:bg-scanlines">
+    <div className="bg-scanlines">
       {buttons &&
         buttons.length > 0 &&
         buttons.map((button: any) => (
