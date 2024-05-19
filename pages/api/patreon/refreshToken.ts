@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   try {
     const result = await ensureAuth();
-    res.status(200).json(result.attributes);
+    res.status(200).json(result);
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
@@ -26,47 +26,48 @@ export default async function handler(
 }
 
 const ensureAuth = async () => {
-  const { client_id, client_secret, refresh_token, last_updated } =
-    await getStrapi("/social-media-patreon");
+  const data = await getStrapi("/front-page?populate=patreon");
+  const { last_updated } = data.patreon;
 
   const now = Math.floor(Date.now() / 1000);
   const deltaSeconds = now - last_updated;
-  // 5 days = 432000, 1 day = 86400
-  // if (deltaSeconds < 432000) {
+  // 10 days = 864000, 5 days = 432000, 1 day = 86400
   if (deltaSeconds < 86400) {
-    return;
+    return { status: false, data: data.patreon };
   }
 
   // If the access token is expiring in under 5-10 days
-  return await updateAuth(client_id, client_secret, refresh_token);
+  return await updateAuth(data.patreon);
 };
 
-const updateAuth = async (
-  clientId: string,
-  clientSecret: string,
-  refreshToken: string
-) => {
+const updateAuth = async (data: any) => {
   try {
-    const params = {
+    const params = new URLSearchParams({
       grant_type: "refresh_token",
-      refresh_token: refreshToken,
-      client_id: clientId,
-      client_secret: clientSecret,
-    };
+      refresh_token: data.refresh_token,
+      client_id: data.client_id,
+      client_secret: data.client_secret,
+    });
 
-    const tokenResponse = await axios.get(REFRESH_URL, { params });
+    const tokenResponse = await axios.post(REFRESH_URL, params.toString(), {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
     const result = tokenResponse.data;
 
     if (result.access_token) {
       // const updated = formatISO(new Date());
       // return { success: true, newToken: newToken };
       const updated = Math.floor(Date.now() / 1000);
-      const response = await strapiAxios().put("/social-media-patreon", {
+      const response = await strapiAxios().put("/front-page", {
         data: {
-          access_token: result.access_token,
-          refresh_token: result.refresh_token,
-          token_expiry: result.expires_in,
-          last_updated: updated,
+          patreon: {
+            ...data,
+            access_token: result.access_token,
+            refresh_token: result.refresh_token,
+            last_updated: updated,
+          },
         },
       });
       return response.data.data;
@@ -74,11 +75,11 @@ const updateAuth = async (
       // @TODO Save to Strapi: access_token, expires_in after getting refreshed token
     } else {
       // If the response does not contain an access token, consider it a failure.
-      throw new Error("No access token returned from Instagram.");
+      throw new Error("No access token returned from Patreon.");
     }
   } catch (error) {
     // Log the error or handle it as needed
-    console.error("Error refreshing Instagram token:", error.message);
+    console.error("Error refreshing Patreon token:", error.message);
     // Return or throw the error as needed
     throw error;
   }
