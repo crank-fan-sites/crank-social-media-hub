@@ -10,7 +10,8 @@ export default async function handler(
   let channelId = req.query.channelId as string | undefined;
   if (!channelId) {
     try {
-      const { channel_id } = await getStrapi("/social-media-discord");
+      const data = await getStrapi("/front-page?populate=discord");
+      const { channel_id } = data.discord;
       channelId = channel_id;
     } catch (error) {
       console.error("Failed to retrieve channel ID from Strapi:", error);

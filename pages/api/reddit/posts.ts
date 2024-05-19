@@ -11,7 +11,8 @@ export default async function handler(
 
   if (!subreddit) {
     try {
-      ({ subreddit } = await getStrapi("/social-media-reddit"));
+      const reddit = await getStrapi("/front-page?populate=reddit");
+      subreddit = reddit.reddit.subreddit;
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }

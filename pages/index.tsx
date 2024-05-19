@@ -170,7 +170,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // Instagram
   const igMedia = await fetchInstagramMedia(
     baseUrl,
-    instagram.api_access_token
+    instagram.api_access_token,
+    instagram.last_updated
   );
 
   // Discord
@@ -183,7 +184,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const patreonPosts = await fetchPatreonPosts(
     baseUrl,
     patreon.campaign_id,
-    patreon.access_token
+    patreon.access_token,
+    patreon.last_updated
   );
 
   // Reddit

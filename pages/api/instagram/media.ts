@@ -15,7 +15,8 @@ export default async function handler(
 
   if (!apiAccessToken) {
     try {
-      const { api_access_token } = await getStrapi("/social-media-instagram");
+      const data = await getStrapi("/front-page?populate=instagram");
+      const { api_access_token } = data.instagram;
       apiAccessToken = api_access_token;
     } catch (error) {
       console.error(

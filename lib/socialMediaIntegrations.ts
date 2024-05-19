@@ -1,11 +1,20 @@
+// Fetching social media data that is outside the CMS. Using APIs usually
+
+// lastUpdated isn't used. Can push values when available to refreshToken API
 async function fetchInstagramMedia(
   baseUrl: string,
-  accessToken: string
+  accessToken: string,
+  lastUpdated: any
 ): Promise<any[]> {
   let igMedia = [];
   const url = `${baseUrl}/api/instagram/media?token=${accessToken}`;
-  console.log("instagram", url);
   try {
+    const now = Math.floor(Date.now() / 1000);
+    const deltaSeconds = now - lastUpdated;
+    // 10 days = 864000, 5 days = 432000, 1 day = 86400
+    if (deltaSeconds < 86400) {
+      fetch(`${baseUrl}/api/instagram/refreshToken`);
+    }
     const igResponse = await fetch(url);
     if (!igResponse.ok) {
       console.error(
@@ -27,7 +36,6 @@ async function fetchDiscordMessages(
 ): Promise<any[]> {
   let discordMessages = [];
   const url = `${baseUrl}/api/discord/messages?channelId=${channelId}`;
-  console.log("discord", url);
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -47,12 +55,18 @@ async function fetchDiscordMessages(
 async function fetchPatreonPosts(
   baseUrl: string,
   campaignId: string,
-  accessToken: string
+  accessToken: string,
+  lastUpdated: any
 ): Promise<any[]> {
   let patreonPosts = [];
   const url = `${baseUrl}/api/patreon/posts?campaignId=${campaignId}&accessToken=${accessToken}`;
-  console.log("patreon", url);
   try {
+    const now = Math.floor(Date.now() / 1000);
+    const deltaSeconds = now - lastUpdated;
+    // 10 days = 864000, 5 days = 432000, 1 day = 86400
+    if (deltaSeconds < 86400) {
+      fetch(`${baseUrl}/api/patreon/refreshToken`);
+    }
     const patreonResponse = await fetch(url);
     if (!patreonResponse.ok) {
       console.error(
@@ -74,7 +88,6 @@ async function fetchRedditPosts(
 ): Promise<any[]> {
   let redditPosts = [];
   const url = `${baseUrl}/api/reddit/posts?subreddit=${subreddit}`;
-  console.log("reddit", url);
   try {
     const redditResponse = await fetch(url);
     if (!redditResponse.ok) {
