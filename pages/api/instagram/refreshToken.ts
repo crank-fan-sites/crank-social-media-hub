@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   try {
     const result = await ensureAuth();
-    res.status(200).json(result.attributes);
+    res.status(200).json(result);
   } catch (error) {
     if (error.response) {
       res.status(error.response.status).json({
@@ -26,42 +26,42 @@ export default async function handler(
 }
 
 const ensureAuth = async () => {
-  const { api_access_token, last_updated } = await getStrapi(
-    "/social-media-instagram"
-  );
+  const data = await getStrapi("/front-page?populate=instagram");
+  const { last_updated } = data.instagram;
 
   const now = Math.floor(Date.now() / 1000);
   const deltaSeconds = now - last_updated;
-  // 5 days = 432000, 1 day = 86400
-  // if (deltaSeconds < 432000) {
+  // 10 days = 864000, 5 days = 432000, 1 day = 86400
   if (deltaSeconds < 86400) {
-    return;
+    return data.instagram;
   }
-
-  // If the access token is expiring in under 10 days
-  return await updateAuth(api_access_token);
+  // If the access token is expiring in under 1-10 days
+  return await updateAuth(data.instagram);
 };
 
-const updateAuth = async (accessToken: string) => {
+const updateAuth = async (data: any) => {
   try {
     const params = {
       grant_type: "ig_refresh_token",
-      access_token: accessToken,
+      access_token: data.api_access_token,
     };
 
     const tokenResponse = await axios.get(REFRESH_URL, { params });
     const result = tokenResponse.data;
+    console.log("IG updateAuth is running 3", result);
 
     if (result.access_token) {
       const newToken = result.access_token;
       // const updated = formatISO(new Date());
       // return { success: true, newToken: newToken };
       const updated = Math.floor(Date.now() / 1000);
-      const response = await strapiAxios().put("/social-media-instagram", {
+      const response = await strapiAxios().put("/front-page", {
         data: {
-          api_access_token: result.access_token,
-          api_token_expiry: result.expires_in,
-          last_updated: updated,
+          instagram: {
+            ...data,
+            api_access_token: newToken,
+            last_updated: updated,
+          },
         },
       });
       return response.data.data;

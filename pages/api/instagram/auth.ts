@@ -2,13 +2,14 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 import axios from "axios";
 import { getStrapi } from "@/lib/getStrapi";
+import strapiAxios from "@/lib/strapiAxios";
 
 const AUTH_URL = "https://api.instagram.com/oauth/authorize";
 const TOKEN_URL = "https://api.instagram.com/oauth/access_token";
 const LONG_LIVED_TOKEN_URL = "https://graph.instagram.com/access_token";
 
-function firstOAuthStep(api_client_id, api_redirect_uri) {
-  return `${AUTH_URL}?client_id=${api_client_id}&redirect_uri=${api_redirect_uri}&scope=user_profile,user_media&response_type=code`;
+function firstOAuthStep(clientId: string, redirectUri: string) {
+  return `${AUTH_URL}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user_profile,user_media&response_type=code`;
 }
 
 async function secondOAuthAccessTokenStep(
@@ -48,16 +49,18 @@ async function secondOAuthAccessTokenStep(
 
 // This doesnt have to be saved or used. Getting the long lived access token. Can put user id then if need be
 // @TODO make this the one after getting the long lived
-async function postLongtLivedToken(userId, accessToken, expiresIn) {
+async function postLongLivedToken(userId, accessToken, expiresIn, pkg) {
   try {
     const updated = Math.floor(Date.now() / 1000);
 
-    const response = await strapiAxios().put("/social-media-instagram", {
+    const response = await strapiAxios().put("/front-page", {
       data: {
-        user_id: String(userId),
-        api_access_token: accessToken,
-        api_token_expiry: expiresIn,
-        last_updated: updated,
+        instagram: {
+          ...pkg,
+          // user_id: String(userId),
+          api_access_token: accessToken,
+          last_updated: updated,
+        },
       },
     });
     // things worked out.
@@ -121,8 +124,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    const result = await getStrapi("/front-page?populate=instagram");
     const { api_client_id, api_client_secret, api_redirect_uri } =
-      await getStrapi("/social-media-instagram");
+      result.instagram;
+    const pkg = result.instagram;
+
     const code = req.query.code;
     if (code) {
       const tokenResponse = await secondOAuthAccessTokenStep(
@@ -137,13 +143,14 @@ export default async function handler(
         tokenResponse.access_token
       );
 
-      const shortLivedRes = await postLongtLivedToken(
+      const shortLivedRes = await postLongLivedToken(
         tokenResponse.user_id,
         firstLongLiveTokenRes.longLivedToken,
-        firstLongLiveTokenRes.expiresIn
+        firstLongLiveTokenRes.expiresIn,
+        pkg
       );
 
-      res.status(200).json(shortLivedRes.attributes);
+      res.status(200).json(shortLivedRes);
       return;
     } else {
       res.redirect(firstOAuthStep(api_client_id, api_redirect_uri));
