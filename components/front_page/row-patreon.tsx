@@ -6,15 +6,15 @@ import SocialButton from "@/components/ui2/social-button";
 import { HeadingH3, Paragraph } from "@/components/typography";
 import Image from "next/image";
 
-const PatreonRow: NextPage = ({ posts = null, buttons }) => {
+const PatreonRow: NextPage = ({ posts = null, buttons, sideImage }) => {
   return (
     <div className="grid grid-cols-1 border-t xl:grid-cols-5 bg-primary border-stone-4000 dark:border-stone-600">
       <div className="items-center justify-center hidden col-span-1 p-0 border-b xl:flex xl:col-span-2 group lg:p-8 lg:p-12 border-stone-400 dark:border-stone-600 md:border-b-0 bg-scanlines">
         <Image
-          src="/screenshots-vertical/Unelectable-unele-smoke-normans-vertical-365x720.png"
+          src={sideImage.url || ""}
           width={365}
           height={720}
-          alt="UnelectableAirwaves Alien"
+          alt={sideImage.alternativeText || ""}
           className="items-center justify-center w-full"
         />
       </div>

@@ -104,6 +104,7 @@ const Home: NextPage = (props) => {
           <RowPatreon
             posts={props.patreon.posts}
             buttons={props.patreon.buttons}
+            sideImage={props.patreon.sideImage}
           />
           {/* end one row */}
           <RowReddit
@@ -223,6 +224,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     playlistId: youtube.playlist_id,
   };
 
+  const patreonImageObj = patreonSideImage(patreon);
+
   // const fourthWallObj = fourthwall
   //   ? {
   //       title: fourthwall.title,
@@ -240,7 +243,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
       discord: discordObject(discord, discordMessages),
       instagram: { media: igMedia, buttons: instagram.buttonLink },
-      patreon: { posts: patreonPosts, buttons: patreon.buttonLink },
+      patreon: {
+        posts: patreonPosts,
+        buttons: patreon.buttonLink,
+        sideImage: patreonImageObj,
+      },
       reddit: {
         subreddit: reddit.subreddit,
         posts: redditPosts,
@@ -260,42 +267,78 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const twitchObject = (twitch: any) => {
-  const { channel_handle, highlighted_playlist, buttonLink, sideImage } =
-    twitch;
-  const { alternativeText, caption, url, width, height } =
-    sideImage.data.attributes;
-  return {
-    channel: channel_handle,
-    highlighted: highlighted_playlist,
-    buttons: buttonLink,
-    sideImage: {
+const patreonSideImage = (patreon: any) => {
+  const { sideImage } = patreon;
+  if (sideImage && sideImage.data && sideImage.data.attributes) {
+    const { alternativeText, caption, url, width, height } =
+      sideImage.data.attributes;
+    return {
       url,
       alternativeText,
       caption,
       width,
       height,
-    },
-  };
+    };
+  } else {
+    return null; // Return null if sideImage or its nested properties do not exist
+  }
+};
+
+const twitchObject = (twitch: any) => {
+  const { channel_handle, highlighted_playlist, buttonLink, sideImage } =
+    twitch;
+  if (sideImage && sideImage.data && sideImage.data.attributes) {
+    const { alternativeText, caption, url, width, height } =
+      sideImage.data.attributes;
+    return {
+      channel: channel_handle,
+      highlighted: highlighted_playlist,
+      buttons: buttonLink,
+      sideImage: {
+        url,
+        alternativeText,
+        caption,
+        width,
+        height,
+      },
+    };
+  } else {
+    return {
+      channel: channel_handle,
+      highlighted: highlighted_playlist,
+      buttons: buttonLink,
+      sideImage: null,
+    };
+  }
 };
 
 const discordObject = (discord: any, messages) => {
   const { channel_name, widget_url, buttonLink, sideImage } = discord;
-  const { alternativeText, caption, url, width, height } =
-    sideImage.data.attributes;
-  return {
-    name: channel_name,
-    widget: widget_url,
-    buttons: buttonLink,
-    messages,
-    sideImage: {
-      url,
-      alternativeText,
-      caption,
-      width,
-      height,
-    },
-  };
+  if (sideImage && sideImage.data && sideImage.data.attributes) {
+    const { alternativeText, caption, url, width, height } =
+      sideImage.data.attributes;
+    return {
+      name: channel_name,
+      widget: widget_url,
+      buttons: buttonLink,
+      messages,
+      sideImage: {
+        url,
+        alternativeText,
+        caption,
+        width,
+        height,
+      },
+    };
+  } else {
+    return {
+      name: channel_name,
+      widget: widget_url,
+      buttons: buttonLink,
+      messages,
+      sideImage: null,
+    };
+  }
 };
 
 export default Home;
