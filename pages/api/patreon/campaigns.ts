@@ -7,7 +7,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const accessToken = (await getStrapi("/social-media-patreon")).access_token;
+  const patreonAPI = await getStrapi("/front-page?populate=patreon");
+  const { access_token: accessToken } = patreonAPI.patreon;
+
   const url = `https://www.patreon.com/api/oauth2/api/current_user/campaigns?include=campaigns&fields${encodeURIComponent(
     "["
   )}post${encodeURIComponent("]")}=id`;

@@ -6,7 +6,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { guild_id } = await getStrapi("/social-media-discord");
+  const discordAPI = await getStrapi("/front-page?populate=discord");
+  const { guild_id } = discordAPI.discord;
   const client = new Client({
     intents: [
       GatewayIntentBits.Guilds,
