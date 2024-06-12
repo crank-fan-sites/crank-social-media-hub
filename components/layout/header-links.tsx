@@ -33,9 +33,11 @@ const Links: NextPage = () => {
 
   return (
     <div className="">
-      {links.map((link) => {
-        return <Alink key={link.id} title={link.title} url={link.url} />;
-      })}
+      {links &&
+        links.length > 0 &&
+        links.map((link) => {
+          return <Alink key={link.id} title={link.title} url={link.url} />;
+        })}
     </div>
   );
 };

@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 const Links: NextPage = ({ links }: { links: any[] }) => {
   return (
     <div className="">
-      {links.map((link) => {
-        return <Alink key={link.id} title={link.title} url={link.url} />;
-      })}
+      {links &&
+        links.length > 0 &&
+        links.map((link) => {
+          return <Alink key={link.id} title={link.title} url={link.url} />;
+        })}
     </div>
   );
 };
