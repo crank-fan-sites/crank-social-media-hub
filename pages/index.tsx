@@ -67,11 +67,11 @@ const Home: NextPage = (props) => {
         <RowTwitchPlayer channel={props.twitch.channel} />
         {/* content */}
         <div className="mx-auto max-w-7xl">
-          <RowTwitchAndImage
+          {/* <RowTwitchAndImage
             highlighted={props.twitch.highlighted}
             buttons={props.twitch.buttons}
             sideImage={props.twitch.sideImage}
-          />
+          /> */}
           {/* end one row */}
           {/* content after top header parts */}
           <RowYt
