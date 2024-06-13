@@ -39,7 +39,7 @@ const RedditPost: NextPage = (props: any) => {
         </p>
         <p className="text-gray-400 italic">
           <a
-            href={`https://reddit.com/r${permalink}`}
+            href={`https://reddit.com${permalink}`}
             className="text-blue-400 hover:text-blue-300"
           >
             Go to reddit post
