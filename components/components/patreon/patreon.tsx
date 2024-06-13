@@ -51,19 +51,21 @@ const PatreonLatestPosts: NextPage<PatreonLatestPostsProps> = ({
         ))}
       {posts &&
         posts.length > 0 &&
-        posts.map((post, index) => (
-          <PatreonPost
-            key={index}
-            title={post.attributes.title}
-            content={post.attributes.content}
-            embed_data={post.attributes.embed_data}
-            embed_url={post.attributes.embed_url}
-            published_at={post.attributes.published_at}
-            url={post.attributes.url}
-            is_paid={post.attributes.is_paid}
-            is_public={post.attributes.is_public}
-          />
-        ))}
+        posts
+          .slice(0, 10)
+          .map((post, index) => (
+            <PatreonPost
+              key={index}
+              title={post.attributes.title}
+              content={post.attributes.content}
+              embed_data={post.attributes.embed_data}
+              embed_url={post.attributes.embed_url}
+              published_at={post.attributes.published_at}
+              url={post.attributes.url}
+              is_paid={post.attributes.is_paid}
+              is_public={post.attributes.is_public}
+            />
+          ))}
     </div>
   );
 };
