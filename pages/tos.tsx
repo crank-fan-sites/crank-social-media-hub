@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import type { NextPage, GetStaticProps } from "next";
 import { MainLayout } from "@/layouts/layout";
 import { HeadingH1 } from "@/components/typography";
 import { links } from "@/lib/links";
@@ -93,7 +93,7 @@ const TOS: NextPage = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   // CONFIG
   const SiteConfigObj = await siteConfig();
 

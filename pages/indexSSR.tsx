@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextPage, GetStaticProps } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import Head from "next/head";
 
 import { MainLayout } from "@/layouts/layout";
@@ -127,7 +127,7 @@ const Home: NextPage = (props) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   // CONFIG
   const SiteConfigObj = await siteConfig();
 
