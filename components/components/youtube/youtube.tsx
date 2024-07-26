@@ -1,45 +1,20 @@
 import type { NextPage } from "next";
 import { useEffect, useRef, useState } from "react";
 
+import YoutubePost from "@/components/components/youtube/youtube-post";
+
 import CTAButton from "@/components/ui2/variants/youtube";
 
-const YouTube: NextPage = ({ channel, buttons }) => {
-  const yt = useRef(null);
+const YouTube: NextPage = ({ videos, stats, buttons }) => {
+  const yt = useRef<HTMLIFrameElement>(null);
+  const [selectedUrl, setSelectedUrl] = useState<string | null>(null);
 
-  async function getYTJson(channelId) {
-    try {
-      const reqURL = "https://www.youtube.com/feeds/videos.xml?channel_id=";
-      const finalUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(
-        reqURL + channelId
-      )}&api_key=${process.env.NEXT_PUBLIC_RSS2JSON_API_KEY}`;
-      const response = await fetch(finalUrl);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const responseJson = await response.json();
-
-      if (responseJson.items && responseJson.items.length > 0) {
-        const link = responseJson.items[0].link;
-        const id = link.substr(link.indexOf("=") + 1);
-
-        if (yt.current) {
-          yt.current.src = `https://youtube.com/embed/${id}?controls=0&showinfo=0&rel=0`;
-        }
-      } else {
-        console.error("No items found in the response");
-      }
-    } catch (error) {
-      console.error("getYTJson error:", error);
+  const handleVideoClick = (url: string) => {
+    setSelectedUrl(url);
+    if (yt.current) {
+      yt.current.src = url;
     }
-  }
-
-  // Call getYTJson when the component mounts
-  useEffect(() => {
-    if (channel && yt.current) {
-      getYTJson(channel);
-    }
-  }, [channel]);
+  };
 
   return (
     <>
@@ -48,7 +23,15 @@ const YouTube: NextPage = ({ channel, buttons }) => {
         buttons.map((button: any) => (
           <CTAButton key={button.id} {...button.link} />
         ))}
-      {channel && (
+      {stats && (
+        <div className="text-center text-white">
+          <h2 className="text-2xl font-bold">YouTube Stats</h2>
+          <p>Views: {stats.views}</p>
+          <p>Subscribers: {stats.subs}</p>
+          <p>Count: {stats.count}</p>
+        </div>
+      )}
+      {selectedUrl && (
         <iframe
           ref={yt} // Assign the ref to the iframe
           id="youtube_video"
@@ -56,9 +39,28 @@ const YouTube: NextPage = ({ channel, buttons }) => {
           height="340"
           frameBorder="0"
           allowFullScreen
-          title="Unelectable Latest YouTube Video"
+          title="Selected YouTube Video"
         ></iframe>
       )}
+      <div className="flex flex-wrap -m-2 bg-scanlines">
+        {videos &&
+          videos.length > 0 &&
+          videos.map((item, index) => (
+            <div
+              key={index}
+              className="w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/4"
+              onClick={() => handleVideoClick(item.url)}
+            >
+              <YoutubePost
+                publishedAt={item.publishedAt}
+                title={item.title}
+                thumbnail={item.thumbnail}
+                description={item.description}
+                url={item.url}
+              />
+            </div>
+          ))}
+      </div>
     </>
   );
 };

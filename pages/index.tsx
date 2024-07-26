@@ -75,8 +75,8 @@ const Home: NextPage = (props) => {
           {/* end one row */}
           {/* content after top header parts */}
           <RowYt
-            channel={props.youtube.channel}
-            playlistId={props.youtube.playlistId}
+            videos={props.youtube.videos}
+            stats={props.youtube.stats}
             buttons={props.youtube.buttons}
           />
           {/* end one row */}
@@ -220,11 +220,46 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 
   // Youtube
-  const youtubeObj = {
-    channel: youtube.channel_id,
-    playlistId: youtube.playlist_id,
-  };
 
+  // youtube.channel_id;
+  const youtubeApiKey = process.env.NEXT_PUBLIC_YT_API_KEY;
+
+  // do try catch
+  const ytChannelUrl = `https://www.googleapis.com/youtube/v3/channels?part=statistics,contentDetails&forHandle=${"@HasansProducer"}&key=${youtubeApiKey}`;
+  const ytChannelResponse = await fetch(ytChannelUrl);
+  const ytChannelData = await ytChannelResponse.json();
+  const uploadsPlaylist =
+    ytChannelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+  const ytStatistics = ytChannelData.items[0].statistics;
+  const ytStats = {
+    views: ytStatistics.viewCount,
+    subs: ytStatistics.subscriberCount,
+    count: ytStatistics.videoCount,
+  };
+  // console.log(uploadsPlaylist);
+  // console.log(ytStats);
+
+  // do try catch
+  // check to see if the video is public to include it
+  const ytUploadsUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails,status&playlistId=${uploadsPlaylist}&key=${youtubeApiKey}`;
+  const ytUploadsResponse = await fetch(ytUploadsUrl);
+  const ytUploadsData = await ytUploadsResponse.json();
+  // do try catch if sepearate from above
+
+  const ytVideos = ytUploadsData.items.map((item) => {
+    if (item.status.privacyStatus === "public") {
+      return {
+        publishedAt: item.snippet.publishedAt,
+        title: item.snippet.title,
+        thumbnail: item.snippet.thumbnails.medium.url,
+        description: item.snippet.description,
+        url: `https://youtube.com/embed/${item.contentDetails.videoId}?controls=0&showinfo=0&rel=0`,
+      };
+    }
+  });
+
+  // Patreon
   const patreonImageObj = patreonSideImage(patreon);
 
   // Props
@@ -247,7 +282,11 @@ export const getStaticProps: GetStaticProps = async () => {
       tiktok: { ...tiktokObj },
       twitch: { ...twitchObj },
       twitter: twitterObj,
-      youtube: { ...youtubeObj, buttons: youtube.buttonLink },
+      youtube: {
+        videos: ytVideos,
+        stats: ytStats,
+        buttons: youtube.buttonLink,
+      },
       soundcloud: { tracks: soundcloud },
 
       // fourthwall: fourthWallObj,
