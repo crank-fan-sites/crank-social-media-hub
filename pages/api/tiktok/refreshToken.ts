@@ -1,47 +1,55 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import axios from "axios";
-const formatISO = require("date-fns/formatISO");
-// const parseISO = require("date-fns/parseISO");
+import strapiAxios from "@/lib/strapiAxios";
+import { getStrapi } from "@/lib/getStrapi";
 
-const TOKEN_URL = "https://open.tiktokapis.com/v2/oauth/token/";
+const REFRESH_URL = "https://open.tiktokapis.com/v2/oauth/token/";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const result = await ensureAuth();
-  res.status(200).json(result);
+  try {
+    const result = await ensureAuth();
+    res.status(200).json(result);
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.status).json({
+        msg: error.message,
+        ...error.response.data,
+      });
+    } else {
+      res.status(500).json({ msg: error.message });
+    }
+  }
 }
 
 const ensureAuth = async () => {
-  // @TODO grab updated from pg database
-  // if (updated) {
-  //   const updated = parseISO(updated);
-  //   const now = new Date();
-  //   const deltaSeconds = (now.getTime() - updated.getTime()) / 1000;
-  //   //5 days
-  //   if (deltaSeconds < 432000) {
-  //     return;
-  //   }
-  // }
-  return await updateAuth();
+  const data = await getStrapi("/front-page?populate=tiktok");
+  const { lastUpdated } = data.tiktok;
+
+  const now = Math.floor(Date.now() / 1000);
+  const deltaSeconds = now - lastUpdated;
+  // 10 days = 864000, 5 days = 432000, 1 day = 86400
+  if (deltaSeconds < 432000) {
+    return data.tiktok;
+  }
+  // If the access token is expiring in under 1-10 days
+  return await updateAuth(data.tiktok);
 };
 
-const updateAuth = async () => {
-  const clientKey = process.env.NEXT_PUBLIC_TIKTOK_CLIENT_KEY;
-  const clientSecret = process.env.NEXT_PUBLIC_TIKTOK_CLIENT_SECRET;
+const updateAuth = async (data: any) => {
   try {
-    const token = process.env.NEXT_PUBLIC_IG;
     const params = {
-      client_key: clientKey,
-      client_secret: clientSecret,
+      client_key: process.env.NEXT_PUBLIC_TIKTOK_CLIENT_KEY,
+      client_secret: process.env.NEXT_PUBLIC_TIKTOK_CLIENT_SECRET,
       grant_type: "refresh_token",
-      access_token: token,
+      refresh_token: data.refreshToken,
     };
 
     const tokenResponse = await axios.post(
-      TOKEN_URL,
+      REFRESH_URL,
       new URLSearchParams(params).toString(),
       {
         headers: {
@@ -50,23 +58,34 @@ const updateAuth = async () => {
       }
     );
     const result = tokenResponse.data;
+    // console.log("Tiktok updateAuth is running 3", result);
 
     if (result.access_token) {
-      // result keys that matter
-      // result = { open_id (user id), scope (that user agreed to), access_token, expires_in, refresh_token, refresh_expires_in}
+      const newToken = result.access_token;
       // const updated = formatISO(new Date());
-      return { success: true, ...result };
+      // return { success: true, newToken: newToken };
+      const updated = Math.floor(Date.now() / 1000);
+      const response = await strapiAxios().put("/front-page", {
+        data: {
+          tiktok: {
+            ...data,
+            accessToken: result.access_token,
+            refreshToken: result.refresh_token,
+            lastUpdated: updated,
+          },
+        },
+      });
+      return response.data.data;
+
+      // @TODO Save to Strapi: access_token, expires_in after getting refreshed token
     } else {
       // If the response does not contain an access token, consider it a failure.
-      return {
-        success: false,
-        error: "No access token returned from Instagram.",
-      };
+      throw new Error("No access token returned from Instagram.");
     }
   } catch (error) {
     // Log the error or handle it as needed
-    console.error("Error refreshing Instagram token:", error);
+    console.error("Error refreshing Instagram token:", error.message);
     // Return or throw the error as needed
-    return { success: false, error: error.message };
+    throw error;
   }
 };
